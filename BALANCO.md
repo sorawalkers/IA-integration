@@ -1,0 +1,86 @@
+# OSR Battler — Relatório de Balanceamento
+
+> Página viva: atualizada a cada teste ou mudança de regra.
+> Markdown puro (para agentes): `https://osr.valiran.party/relatorio.md` · Página: `https://osr.valiran.party/`
+> Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
+> Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
+
+**Última atualização:** 2026-11-18 · Rodada 9 (seis ajustes de escalonamento) + diagnóstico de duração das lutas.
+
+## Como os testes são feitos
+
+- Ferramenta: `npm run balance -- --rooms 3,9,18 --fights 320` (simulação determinística por seed).
+- **Classes:** todas as **512 composições** (8 classes x 3 posições, posição livre). Mostramos a **melhor posição** de cada classe
+  e a taxa de vitória nela; "Diferença" = melhor classe − pior classe (em pontos percentuais).
+- Jogador **e** ghost são montados pelo mesmo gerador de progressão (`progressParty`):
+
+| Sala | Itens extras | Fusão | Encantamentos |
+|---|---|---|---|
+| 3 | 2 | +0 | 0 |
+| 9 | 6 | +1 | 1 |
+| 18 | 12 | +2 (25% dos itens +3) | 3 |
+
+- Números absolutos sobem quando o jogador evolui junto; compare a **diferença entre classes**, não o valor isolado.
+
+## Resultado atual (rodada 9)
+
+Melhor posição de cada classe · taxa de vitória nela · (média geral nas 512 composições)
+
+| Classe | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Guerreiro | Vang 41% (26%) | Vang 48% (36%) | Vang 56% (48%) |
+| Paladino | Vang 39% (23%) | Vang 39% (26%) | Vang 44% (34%) |
+| Bárbaro | Vang 40% (30%) | Vang 43% (34%) | Vang 52% (48%) |
+| Bardo | Meio 41% (32%) | Meio 57% (51%) | Meio 57% (49%) |
+| Ladino | Meio 42% (30%) | Meio 40% (32%) | Meio 41% (35%) |
+| Patrulheiro | Ret 32% (23%) | Ret 39% (35%) | Meio 57% (52%) |
+| Mago | Ret 40% (30%) | Meio 54% (43%) | Meio 40% (35%) |
+| Alquimista | Ret 40% (35%) | Ret 42% (38%) | Ret 35% (33%) |
+| **Diferença** | **11 pp** | **18 pp** | **22 pp** |
+
+### Ajustes aplicados nesta rodada
+
+| Classe | Ajuste | Efeito medido |
+|---|---|---|
+| Mago | Sobrecarga com mais de **65% da mana máxima** (era 80 fixo); cajados geram mana +50% por nível de fusão (3 → 4.5 → 6 → 7.5) | Sala 18: 39% → 40% (sem efeito relevante) |
+| Alquimista | Poções curam **base + 12% do HP máximo** do alvo; Bomba aplica **Ácido** (−20% de escudo ganho por stack, máx. 3, −1 stack a cada 4s) | Sala 18: 36% → 35% (sem efeito) |
+| Guerreiro | Escudo por ataque (+4) no máximo **1x por segundo** (o +4 já era fixo) | Sala 18: 56% → 56% (sem efeito) |
+| Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
+| Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
+| Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Diagnóstico principal: as lutas encurtam demais no fim da run
+
+| Sala | Duração média de uma luta |
+|---|---|
+| 3 | 21.3 s |
+| 9 | 7.1 s |
+| 18 | **2.3 s** |
+
+O dano das armas multiplica com a fusão (x2.2 por nível → x4.84 no +2) e as mochilas cheias têm mais armas,
+mas **a vida dos heróis não cresce**. Na sala 18 a luta acaba no primeiro ataque. Consequências:
+
+- **Perdem:** mecânicas que precisam de tempo — poções (disparam abaixo de 40% de HP), mana do Mago
+  (tomo recarrega em 3s), Veneno do Ladino, Égide do Paladino (a cada 4s), Grito de Guerra (6s).
+- **Ganham:** quem tem HP/escudo inicial alto (Guerreiro, Bárbaro) e quem ataca rápido (mascotes, corte do Bardo).
+
+Por isso os ajustes de classe para o fim da run quase não mexeram nos números: o problema é de **ritmo**, não de classe.
+
+Ocupação das mochilas na sala 18 (itens por herói e % dos slots usados): Guerreiro 8.6 (80%), Paladino 7.9 (90%),
+Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Mago 8.5 (84%), Alquimista 8.4 (84%).
+
+## Próximo passo (pendente de decisão)
+
+- **Vida crescendo com a profundidade** (ex.: HP x(1 + 0.4 por duelo vencido) → x2.2 na sala 9, x3.4 na sala 18),
+  e/ou fusão de armas mais fraca. Meta: lutas de ~15–20s em todas as salas. *Teste ainda não executado.*
+
+## Histórico de rodadas
+
+| Rodada | Mudança | Diferença entre classes (melhor posição) |
+|---|---|---|
+| 1 | Posições fixas, passivas do GDD | 30 pp (sala 3) |
+| 5 | Posição livre + passivas do CLAUDE.md | ~9 pp (sala 3) |
+| 6 | Alquimista, Flanco no Meio, Guerreiro +4 escudo/ataque, Paladino 35% | 14 pp (sala 3) |
+| 7 | Grito de Guerra (Bárbaro), Ataque Coordenado (Patrulheiro) | 4 pp (sala 3, sem progressão do jogador) |
+| 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
+| 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
