@@ -7,5 +7,6 @@ Atualizado automaticamente a cada teste de balanceamento.
 |---|---|
 | [`BALANCO.md`](BALANCO.md) | Resumo das rodadas: regras atuais, ajustes, efeito medido, diagnóstico e histórico |
 | [`relatorio.md`](relatorio.md) | Resultado completo da última simulação (`npm run balance`) |
+| [`PENDENCIAS.md`](PENDENCIAS.md) | Dúvidas e questões em aberto (decisões pendentes, problemas, interpretações a validar) |
 
-Também publicado em https://osr.valiran.party (`/relatorio.md` e `/simulacao.md`).
+Também publicado em https://osr.valiran.party (`/relatorio.md`, `/simulacao.md` e `/pendencias.md`).
