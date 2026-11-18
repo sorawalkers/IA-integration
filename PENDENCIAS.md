@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · após a rodada 14 (respostas Q-12 a Q-14 + diagnóstico da sala 18).
+**Última atualização:** 2026-11-18 · após a rodada 15 (respostas Q-15 a Q-17 aplicadas).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -16,9 +16,9 @@ Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplic
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-15 | P-03 | **Efeitos com valor fixo não acompanham o HP. Escalar com a profundidade?** | O HP cresce x0.86 / x1.73 / x4.39 (salas 3 / 9 / 18), mas Veneno e Queimadura são 1 dano/s por stack, o fogo do Flamejante é +2 e o escudo da relíquia do Paladino é 6, sempre. Diagnóstico da sala 18: o Ladino quase nunca morre (4% morre primeiro, vivo 78% da luta), é quem mais aplica Veneno (18.7 golpes com DOT por luta), mas tem o 2º pior dano direto (75/s; Mago 326, Bárbaro 179, Patrulheiro 165). Ladino 46% → 38% → 35% nas salas 3 / 9 / 18 | (a) dano de Veneno/Queimadura por stack x(fator de HP do alvo sem a base 0.70): 1.23 / 2.47 / 6.28 → na prática, DOT escala como o HP · (b) só o Veneno escala (Queimadura e Flamejante ficam) · (c) DOT por stack +1 por duelo jogado (1 / 2 / 4 / 7 nas salas 0 / 3 / 9 / 18) · (d) também escalar o escudo da relíquia do Paladino e o escudo por golpe do Guerreiro do mesmo jeito |
-| Q-16 | P-03 | **O gerador de builds (`progressParty`) sorteia itens sem olhar a classe** | Mochilas na sala 18 (média): Paladino 1.0 arma, 2.1 armaduras, 3.2 catalisadores (dano 53/s, 19% do dano da party); Ladino 2.6 armas corpo a corpo, 0.4 armadura; Mago 2.6 armas mágicas; Patrulheiro 2.2 mascotes, 1.2 armas à distância, 0.5 corpo a corpo na Retaguarda (−20%). Jogador e ghost usam o mesmo gerador, então o resultado das classes depende do sorteio, não só das passivas | (a) gerador com afinidade: 60% dos itens sorteados entre os que a passiva da classe usa (ex.: Paladino relíquias/armaduras **e** armas; Ladino armas pequenas e itens diferentes; Patrulheiro arcos, flechas, comida) · (b) manter aleatório (simula jogador ruim) e corrigir só as passivas · (c) gerador garante no mínimo 2 armas por herói |
-| Q-17 | P-03 | **Patrulheiro causa muito dano mas perde** | Sala 18: 165 de dano/s vivo, 44% do dano da party (2º maior), mas vitória 34%. A party dele gera 163 de cura por luta (Guerreiro 941, Alquimista 1796, Paladino 849), as lutas acabam em 10.9s e ele morre primeiro em 21% das vezes (HP 90, o 3º menor) | (a) HP 90 → 105 · (b) mascotes com provocação leve (atraem 1 em cada 3 ataques à distância) · (c) comida encostada em mascote também cura o Patrulheiro (2 HP por ativação do mascote) · (d) esperar o Q-16 (gerador) antes de mexer |
+| Q-18 | P-03 | **Com o gerador com afinidade, o Mago domina a sala 18** | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
+| Q-19 | P-03 | **Paladino e Patrulheiro não respondem aos buffs** | Sala 18 (rodada 14 → 15): Paladino 40 → 41%, Patrulheiro 39 → 38%. **Paladino:** escudo/luta subiu 222 → 1003 com o fator, mas o dano continua 54/s; a mochila (cruz de 11 casas) já começa com 6 itens, então o gerador consegue pôr só ~1 arma. **Patrulheiro:** é quem mais causa dano depois do Mago (190/s, **50% do dano da party**), mas vence 32%; morre primeiro em 20% das lutas e a party dele cura pouco | Paladino: (a) kit inicial menor (tirar Pedra de Amolar e Gibão; abre 3 casas) · (b) Égide da Fé também dá +10% de dano às armas por armadura encostada. Patrulheiro: (c) HP 90 → 110 · (d) mascote alimentado também dá 3 de escudo (x fator) ao Patrulheiro |
+| Q-20 | P-04 / P-31 | **Resíduos depois da afinidade** | A linha de base da sala 3 caiu de 30% para 25% (ghosts mais fortes), e todos os deltas de encantamento subiram: Flamejante e Armazenador +40.7 (no teto), Vorpal **+19.3** e Vampírico **+17.7** (abaixo da faixa). Fusão no mesmo herói: Maça +1 **−6.0**, Cajado de Aprendiz +1 **−7.7** (o Cajado dá mana ao Mago por ativação: 2 cópias = 2 ativações; o +1 dá 1.5x de mana com 13% menos recarga ≈ 1.72x). Erro da medição ±2.2 a ±2.8pp | (a) Vorpal 12% → 14% e Vampírico 25% → 30% · (b) mana do Cajado por ativação x1.75 por nível de fusão (em vez de +50%) · (c) esperar a próxima rodada: a linha de base vai mudar de novo com o Q-18 |
 
 ### Respostas recebidas
 
@@ -41,6 +41,9 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-12** · 2026-11-18 · (a) comparar no mesmo herói + (b) só 1 instrumento por herói toca · aplicado na rodada 14 → Tambor +9.0, fusão empatada ou melhor em todos (negativos dentro do erro). Correção: as 2 cópias já iam para o mesmo herói; o +1 é que podia ir para outro
 - **Q-13** · 2026-11-18 · (c) Sobrecarga 70% + (a) diagnóstico da sala 18 · aplicado na rodada 14 → diagnóstico em `relatorio.md`, novas perguntas Q-15 a Q-17
 - **Q-14** · 2026-11-18 · (c) HP x0.70 e 0.13·d² · aplicado na rodada 14 → 18.6 / 15.3 / 13.3s
+- **Q-15** · 2026-11-18 · (a) DOT x fator de profundidade + (d) escudo da relíquia e do Guerreiro x fator · aplicado na rodada 15 → Ladino 35 → 41% na sala 18
+- **Q-16** · 2026-11-18 · (a) gerador com 60% de afinidade de classe · aplicado na rodada 15 → Mago 59 → 68% na sala 18 (ver Q-18)
+- **Q-17** · 2026-11-18 · (c) mascote alimentado cura o Patrulheiro (2 HP x fator) + (d) esperar o Q-16 · aplicado na rodada 15 → Patrulheiro 39 → 38% (ver Q-19)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
@@ -48,7 +51,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 | Código | Status | Questão | Dados | Proposta / próximo passo |
 |---|---|---|---|---|
 | P-01 | 🔵 | Ritmo das lutas | Rodada 14: **18.6 / 15.3 / 13.3s** (salas 3 / 9 / 18); meta 14–18s; as pontas estão a <1s da faixa | Remedir a cada rodada |
-| P-03 | 🔴 | Classes por sala | Rodada 14: diferença **16 / 17 / 24 pp**. Sala 18: Ladino 35%, Patrulheiro 39%, Paladino 40% (fracos); Mago 59%, Alquimista 56% (fortes). Diagnóstico feito | Aguardando **Q-15, Q-16, Q-17** |
+| P-03 | 🔴 | Classes por sala | Rodada 15: diferença **17 / 19 / 31 pp**. Sala 18: Mago 68% (forte); Patrulheiro 38%, Paladino 41%, Bardo 41%, Ladino 41% (fracos) | Aguardando **Q-18, Q-19** |
 | P-05 | 🔵 | Itens avançados que não compensam na sala 9 | Rodada 11: Lobo Cinzento +2.0 (−4.3 com Ladino; só cabe tirando o Arco Longo), Gema de Mana +2.7, Rubi Ígneo +10.0 | Lobo: resolvido pelas Bolsas (P-20) ou 2 slots extras no gerador (observação do agente). Remedir depois de Q-07 |
 | P-06 | 🔵 | Alaúde dos Ventos só cabe trocando um item | O kit inicial do Bardo não deixa espaço 2x2 livre | Aceitável enquanto não existir a Bolsa de expansão (P-20); rever com ela |
 
@@ -84,6 +87,8 @@ _Nenhuma pendente._ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
 | Código | Resolvido em | Questão | Solução |
 |---|---|---|---|
+| R-14 | Rodada 15 | Veneno/Queimadura e escudos fixos não escalavam com o HP (Q-15) | Fator de profundidade 1.23 / 2.47 / 6.28 |
+| R-15 | Rodada 15 | Gerador sorteava itens sem olhar a classe (Q-16) | 60% dos itens com afinidade de classe |
 | R-12 | Rodada 14 | Encantamentos desiguais (P-04) | 10 de 10 na faixa +20 a +40pp (Vampírico +19.7, no limite) |
 | R-13 | Rodada 14 | Fundir pior que 2 cópias (P-31) | Teste no mesmo herói + 1 instrumento por herói: fusão empatada ou melhor |
 | R-10 | Rodada 13 | Afiado abaixo da faixa (Q-11) | +30% de crítico e cada crítico adianta 0.3s → +23.3pp |

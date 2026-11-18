@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 14 (respostas Q-12 a Q-14 + diagnóstico da sala 18).
+**Última atualização:** 2026-11-18 · Rodada 15 (respostas Q-15 a Q-17 aplicadas).
 
 ## Como os testes são feitos
 
@@ -48,6 +48,64 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Rodada 15 — respostas Q-15, Q-16 e Q-17
+
+| Mudança | Antes | Agora |
+|---|---|---|
+| Fator de profundidade (Q-15) | — | `depthFactor` = 1 + 0.10·d + 0.13·d² → 1.23 / 2.47 / 6.28 nas salas 3 / 9 / 18 |
+| Veneno e Queimadura (Q-15a) | 1 dano/s por stack | 1 dano/s por stack **x fator de profundidade do alvo** |
+| Escudos fixos (Q-15d) | relíquia do Paladino 6; Guerreiro +4 por golpe | **x fator de profundidade** (sala 18: 38 e 25) |
+| Gerador de builds (Q-16) | itens sorteados sem olhar a classe | **60% dos itens entre os que a classe aproveita** (`AFFINITY` em `ghost.ts`) |
+| Patrulheiro (Q-17) | — | mascote com comida/erva encostada **cura 2 HP x fator** do Patrulheiro a cada ataque (13 na sala 18) |
+
+### Classes por sala (512 composições, 80 lutas cada)
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** (meta 14–18s) | 18.8s | 14.9s | 13.0s |
+| Guerreiro | Vang 44% | Vang 44% | Vang 45% (era 52) |
+| Paladino | Vang 38% | Vang 35% | Vang 41% |
+| Bárbaro | Vang 39% | Vang 37% | Vang 43% (era 50) |
+| Bardo | Meio 31% | Meio 34% | **Vang** 41% (era Meio 49) |
+| Ladino | Meio 48% | Meio 46% | Meio **41%** (era 35) |
+| Patrulheiro | Ret 39% | Ret 33% | Ret 38% |
+| Mago | Ret 38% | Meio 52% | Meio **68%** (era 59) |
+| Alquimista | Ret 35% | Ret 42% | Ret 51% |
+| **Diferença** | 17 pp | 19 pp | **31 pp** (era 24) |
+
+- O **Ladino subiu** na sala 18 (35 → 41%) com o Veneno escalando.
+- O **gerador com afinidade fortaleceu demais o Mago**: com 3.6 armas mágicas na mochila (era 2.6) ele causa 434 de dano/s vivo e
+  64% do dano da party; as lutas dele acabam em 6.5s. Por tabela, as classes de frente caíram (Guerreiro 52 → 45%, Bárbaro 50 → 43%).
+- **Paladino e Patrulheiro não mudaram** (41% e 38%), mesmo com o escudo do Paladino subindo de 222 para 1003 por luta.
+
+### Diagnóstico da sala 18 (rodada 15)
+
+| Classe | Vitória | Morre primeiro | Dano direto/s vivo | % do dano da party | Escudo/luta | Cura/luta |
+|---|---|---|---|---|---|---|
+| Mago (Meio) | 63% | 14% | **434** | **64%** | 6 | 16 |
+| Alquimista (Ret) | 49% | 28% | 47 | 18% | 8 | **2251** |
+| Guerreiro (Vang) | 46% | 36% | 108 | 31% | 14 | 814 |
+| Paladino (Vang) | 43% | 28% | **54** | 20% | **1003** | 763 |
+| Bárbaro (Vang) | 41% | 47% | 192 | 39% | 15 | 93 |
+| Bardo (Meio) | 37% | 5% | 58 | 19% | 27 | 676 |
+| Ladino (Meio) | 37% | 5% | 85 | 33% | 22 | 552 |
+| Patrulheiro (Ret) | 32% | 20% | 190 | **50%** | 14 | 74* |
+
+\* A cura do mascote alimentado não aparece nessa coluna (não gera evento no registro).
+Mochilas: Mago 3.6 armas mágicas; Paladino ainda **1.0 arma** (o kit inicial já ocupa 6 das 11 casas da cruz e sobra pouco espaço);
+Patrulheiro 2.6 mascotes, 1.5 arcos, 4.5 catalisadores.
+
+### Encantamentos e fusão (sala 3)
+
+A linha de base caiu para 25% (os ghosts da sala 3 agora têm itens com afinidade), então todos os deltas subiram:
+Flamejante +40.7 · Armazenador +40.7 · Gélido +38.7 · Trovejante +37.7 · Afiado +31.0 · Mortal +27.7 · Defensor +27.0 ·
+Veloz +25.0 · **Vorpal +19.3** · **Vampírico +17.7**.
+
+Fusão (+1 contra 2 cópias no mesmo herói): Tambor +13.3 · Arco Curto +8.7 · Poção de Vida +2.3 · ... · Adaga −0.3 ·
+Gema Bruta −3.7 · **Maça −6.0** · **Cajado de Aprendiz −7.7**.
+
+→ Perguntas **Q-18** (Mago), **Q-19** (Paladino e Patrulheiro) e **Q-20** (resíduos de encantamentos e fusão).
 
 ## Rodada 14 — respostas Q-12, Q-13 e Q-14 + diagnóstico da sala 18
 
@@ -349,6 +407,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| 15 | Q-15 a Q-17 (fator de profundidade, gerador com afinidade, cura do mascote) | 17 / 19 / 31 pp · lutas 18.8 / 14.9 / 13.0s |
 | 14 | Q-12 a Q-14 (1 instrumento por herói, fusão no mesmo herói, Sobrecarga 70%, HP x0.70 e 0.13·d²) | 16 / 17 / 24 pp · lutas 18.6 / 15.3 / 13.3s |
 | 13 | Q-09 a Q-11 (fusão −13%, instrumentos +75%, Ladino/Mago/Patrulheiro/Paladino, Afiado) | 16 / 16 / 23 pp · lutas 19.4 / 14.9 / 11.6s |
 | 12 | Q-07 (curva de HP, fusão x1.7), Q-08 (encantamentos), fusão −8% recarga, Tambor +2 | 12 / 17 / 26 pp · lutas 19.5 / 15.7 / 13.6s |
