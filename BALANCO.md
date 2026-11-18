@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 12 (respostas Q-07 e Q-08 + observações do agente de análise aplicadas).
+**Última atualização:** 2026-11-18 · Rodada 13 (respostas Q-09 a Q-11 aplicadas).
 
 ## Como os testes são feitos
 
@@ -48,6 +48,51 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Rodada 13 — respostas Q-09, Q-10 e Q-11
+
+| Mudança | Antes | Agora |
+|---|---|---|
+| Fusão de armas (Q-09) | recarga −8%/nível | **−13%/nível** (+1 ≈ x1.95 de DPS) |
+| Instrumentos fundidos (Q-09) | aceleração +50%/nível | **+75%/nível**; inspiração do Tambor +2 / +3 / +4 / +5 |
+| Ladino (Q-10) | Veneno máx. 10, 2 por crítico, excedente máx. +60% | máx. **15**, **3** por crítico, excedente máx. **+80%** |
+| Mago (Q-10) | Sobrecarga acima de 65% da mana | acima de **78%** |
+| Patrulheiro (Q-10) | Ataque Coordenado 0.4s | **0.6s** |
+| Paladino (Q-10) | relíquia gera 4 de escudo | **6** |
+| Afiado (Q-11) | +30% de crítico | +30% de crítico **e cada crítico adianta 0.3s a recarga da arma** |
+
+Também atualizei os textos das passivas na interface (estavam desatualizados desde rodadas antigas).
+
+### Classes por sala (512 composições, 80 lutas cada)
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** (meta 14–18s) | 19.4s | **14.9s** ✅ | **11.6s** (era 13.6) |
+| Guerreiro | Vang 41% | Vang 46% | Vang 53% |
+| Paladino | Vang 38% | Vang 38% | Vang **41%** (igual) |
+| Bárbaro | Vang 38% | Vang 41% | Vang 50% |
+| Bardo | Meio 34% | Meio 47% | Meio 54% |
+| Ladino | Meio **47%** (era 42) | Meio 38% | Meio **35%** (igual) |
+| Patrulheiro | Ret 31% | Ret 33% | Ret **39%** (igual) |
+| Mago | Ret 35% (era 43) | Ret 45% | Meio 59% (era 61) |
+| Alquimista | Ret 36% | Ret 49% | Ret 56% |
+| **Diferença** | 16 pp (era 12) | 16 pp | **23 pp** (era 26) |
+
+- Os buffs do Q-10 **não moveram** Ladino, Patrulheiro e Paladino na sala 18; o Ladino subiu só na sala 3 (47%).
+- A Sobrecarga a 78% derrubou o Mago mais nas salas 3 e 9 (−8 e −6pp) do que na 18 (−2pp).
+- A sala 18 encurtou para 11.6s: armas +2 com −26% de recarga disparam mais rápido.
+
+### Encantamentos (sala 3; meta +20 a +40pp)
+
+Armazenador +38.7 · Gélido +35.7 · Trovejante +35.3 · Flamejante +31.7 · Veloz +25.3 · Defensor +25.0 ·
+**Afiado +23.3** (era +13.7) ✅ · Vorpal +23.0 · Mortal +22.0 · **Vampírico +17.7** (era +21.3).
+A linha de base caiu de 38% para 28% (o Mago da party de referência perdeu a Sobrecarga cedo), o que mexe um pouco em todos os deltas.
+
+### Fusão: +1 contra 2 cópias (sala 3)
+
+Arco Curto +4.0 · Espada Curta +2.7 · Cajado +2.3 · Maça −1.0 · **Adaga −5.3** · **Gema Bruta −7.0** · **Tambor de Guerra −14.7**.
+A causa agora não é o número da fusão: no teste, as **2 cópias podem ir para heróis diferentes** (cada um com sua estamina,
+seu limite de escudo por golpe do Guerreiro etc.), e **2 Tambores** dão o adiantamento e a inspiração duas vezes para o grupo todo → **Q-12**.
 
 ## Rodada 12 — respostas Q-07, Q-08 e observações do agente de análise
 
@@ -235,5 +280,6 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| 13 | Q-09 a Q-11 (fusão −13%, instrumentos +75%, Ladino/Mago/Patrulheiro/Paladino, Afiado) | 16 / 16 / 23 pp · lutas 19.4 / 14.9 / 11.6s |
 | 12 | Q-07 (curva de HP, fusão x1.7), Q-08 (encantamentos), fusão −8% recarga, Tambor +2 | 12 / 17 / 26 pp · lutas 19.5 / 15.7 / 13.6s |
 | 11 | Respostas Q-01 a Q-06 (HP por duelo, fusão x1.85, catalisadores somam, tetos, encantamentos, Bardo) | 14 / 16 / 21 pp · lutas 26.1 / 15.8 / 7.5s |
