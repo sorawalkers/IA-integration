@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Fase 1, passo 1 (nível/XP, economia, mochila expansível, gerador realista).
+**Última atualização:** 2026-11-18 · Fase 1, passo 2 (HP 0.80 x 1.30^nível, 8 receitas, painel de metas).
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -54,6 +54,29 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Fase 1, passo 2 — HP x1.30 por nível, 8 receitas mágicas, painel de metas (checagem de absurdos)
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** | 20.9s | 13.6s | **7.8s** ⚠ |
+| Guerreiro | Vang 40% | Vang 45% | Vang 54% |
+| Paladino | Vang 39% | Vang 43% | Vang 52% |
+| Bárbaro | Vang 38% | Vang 41% | Vang 50% |
+| Bardo | Meio 31% | Meio 39% | Meio 48% |
+| Ladino | Meio 48% | Meio 42% | Meio 40% |
+| Patrulheiro | Ret 36% | Ret 31% | Ret 43% |
+| Mago | Ret 33% | Meio 49% | Meio **70%** ⚠ |
+| Alquimista | Ret 35% | Ret 43% | Ret 55% |
+| **Diferença** | 17 pp | 18 pp | 29 pp |
+
+**Painel de metas (Q-27):** classes na faixa 44–56%: 1/8 · 2/8 · 5/8; diferença 17 / 18 / 29pp; duração ❌ nas três salas.
+Absurdos: **luta da sala 18 < 8s** e **Mago no limite (70%)** → **Q-34**.
+
+**Receitas** (item de receita somado à party de referência, sala 9, item +1): Cajado do Arquimago +57.0 · Égide do Cruzado +54.3 ·
+Lobo Alfa +41.0 · Machado Trovejante +39.7 · Língua de Fogo +35.3 · Presa de Víbora +30.3 · Elixir +24.3 · Harpa +23.7pp.
+São fortes como esperado de um item épico; o teste **soma** o item sem tirar os 2 ingredientes, então superestima o ganho real.
+Fica para a Fase 3 (medir receita contra os 2 ingredientes).
 
 ## Fase 1, passo 1 — nível, economia, mochila expansível e gerador realista (checagem de absurdos)
 
@@ -441,6 +464,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F1.2 | HP 0.80 x 1.30^nível (Q-32), 8 receitas (Q-29), painel de metas (Q-27) | 17 / 18 / 29 pp · lutas 20.9 / 13.6 / 7.8s |
 | F1.1 | Nível/XP (HP x1.25 por nível), economia, mochila expansível, gerador funde/vende | 21 / 18 / 30 pp · lutas 25.1 / 15.9 / 8.0s |
 | — | **Pausa:** início da fase de construção de mecânicas; Q-18 a Q-20 pausadas | — |
 | 15 | Q-15 a Q-17 (fator de profundidade, gerador com afinidade, cura do mascote) | 17 / 19 / 31 pp · lutas 18.8 / 14.9 / 13.0s |

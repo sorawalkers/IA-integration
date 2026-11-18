@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · Fase 1, passo 1 (nível/XP, economia, mochila expansível e gerador realista implementados; Q-21 a Q-26 respondidas).
+**Última atualização:** 2026-11-18 · Fase 1, passo 2 (HP Q-32, receitas Q-29, painel de metas Q-27; Q-28/Q-30/Q-31 registradas).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -24,7 +24,8 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 **Roteiro da Fase 1** (✅ feito · ⏳ em andamento · ⏸ esperando dados):
 ✅ Nível e XP (HP x1.25 por nível) · ✅ Economia e venda · ✅ Mochila expansível (níveis 3/6/9 + Bolsa de Couro) ·
 ✅ Gerador realista (casas extras, funde e vende quando enche) · ✅ Botão [FUNDIR] entre itens idênticos encostados (o arraste sobre o item igual continua valendo) ·
-⏸ Feats (Q-28) · ⏸ 8 receitas (Q-29) · ⏸ 12 eventos (Q-30) · ⏸ Emboscada PvE (Q-31).
+✅ HP 0.80 x 1.30^(nível − 1) (Q-32) · ✅ 8 receitas mágicas (Q-29) · ✅ Painel de metas no relatório (Q-27) ·
+⏳ Emboscada PvE com monstros (Q-31) · ⏳ 12 eventos (Q-30) · ⏸ Feats: 10 genéricos recebidos (`docs/FEATS.md`), faltam os 32 de classe (Q-33).
 
 **Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
 de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resultado delas muda com bolsa, venda e economia).
@@ -37,12 +38,8 @@ de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resul
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-28 | Q-26 | **Tabela de Feats (talentos) — não chegou até mim** | A decisão do Q-26 cita "a tabela de 4 Feats por classe + 6 genéricos" para o modal de subida de nível (3 opções: 2 da classe + 1 genérico), mas a tabela não veio na mensagem. O nível já está implementado (XP, HP, casas extras); o modal está esperando a tabela | Mandar a tabela: para cada um dos 38 Feats (8 classes x 4 + 6 genéricos), nome, efeito e números. Se preferir, eu escrevo uma proposta e vocês aprovam |
-| Q-29 | Q-24 | **Receitas mágicas: ingredientes e efeitos** | Recebi só os nomes das 8 receitas: Língua de Fogo, Presa de Víbora, Égide do Cruzado, Cajado do Arquimago, Elixir da Restauração, Harpa da Fortuna, Machado Trovejante, Lobo Alfa Espiritual. O exemplo antigo do `CLAUDE.md` é Espada Longa + Rubi → Língua de Fogo | Para cada receita: os 2 ingredientes (itens do catálogo atual), tamanho do item novo, efeito e números, se é exclusivo de classe. O encantamento dos ingredientes passa para o resultado (já decidido). Se um ingrediente estiver fundido (+1/+2), o resultado herda o nível? |
-| Q-30 | Q-25 | **Os 12 eventos: lista e efeitos** | Recebi 9 nomes novos: Mestre de Armas, Alquimista Louco, Santuário da Purificação, Baú Trancado, Forja Rúnica, Feira 2-por-1, Emboscada de Elite, Fonte de Mana, Bibliotecário Fantasma. Hoje existem 4: Mercador, Fogueira & Bigorna, Corredor Armadilhado, Emboscada (2 variações) | Os 12 nomes finais (os 4 atuais entram na conta?) e, para cada um: o que faz, risco, recompensa, custo em PO, se tem combate. Ex.: o que o Santuário "purifica"? o Baú Trancado precisa de Gazuas? |
-| Q-31 | Q-25 | **Monstros da Emboscada PvE** | Decidido: combate real contra monstros pré-montados escalando com a profundidade; vitória +8 PO e escolha de 1 entre 3 itens; derrota +3 PO, sem perder tocha nem ouro. Falta definir os monstros | Opção (a): monstro = party de 3 "heróis-monstro" com mochila fixa (ex.: Cubo Gelatinoso, Esqueletos, Goblins), HP x fator de nível · (b) 1 monstro grande com vários ataques · (c) usar o gerador de builds com 80% da força de um ghost da mesma sala. E a Emboscada de Elite: mais forte com recompensa maior? Dá +2 XP como a emboscada normal? |
-| Q-32 | Q-26 | **HP por nível: os números do enunciado não batem com "+25% cumulativo", e as lutas saíram do ritmo** | Implementei x1.25 por nível composto: Nv6 = **305%**, Nv10 = **745%** (o enunciado diz ~290% e 640%; isso daria x1.23 por nível). Com XP típico (1 por sala + 1.5 por duelo) o herói está no Nv2 na sala 3, Nv4 na 9 e Nv6 na 18. Duração das lutas: **25.1s / 15.9s / 8.0s** (antes 18.8 / 14.9 / 13.0; meta 14–18s). Na sala 3 o HP subiu (x1.25 contra x0.86 antes) e na sala 18 caiu (x3.05 contra x4.39) | (a) manter x1.25 · (b) x1.23 (bate com 290% / 640%) · (c) Nv1 começa em 80% do HP da classe e x1.30 por nível (estimativa 20 / 16 / 13s, a medir) · (d) aceitar agora e ajustar só na Fase 2 |
-| Q-27 | P-03 | **Critério final de "balanceado" (para a Fase 2)** | Até aqui todas as classes foram julgadas só por vitória; o Paladino foi apontado como fraco por causar pouco dano, mas tanque não precisa causar dano | (a) faixa de vitória por classe na melhor posição: 44–56% nas salas 3, 9 e 18 · (b) tanques julgados também por dano absorvido, escudo dado e aliados vivos no fim · (c) duração 14–18s; encantamentos +20 a +40pp; fusão ≥ 2 cópias · (d) a diferença entre a melhor e a pior classe ≤ 12pp |
+| Q-33 | Q-28 | **Feats de classe: a tabela dos 32 não chegou** | Recebi a tabela nova dos **10 Feats genéricos** (registrada em `docs/FEATS.md`), mas os **4 Feats por classe** (32 no total) não vieram em nenhuma mensagem. O modal de subida de nível mostra 2 de classe + 1 genérico, então depende deles | Mandar a tabela (nome, efeito e números, 4 por classe). Se preferirem, eu escrevo uma proposta com base nas passivas atuais e vocês aprovam |
+| Q-34 | P-01 | **A curva do Q-32 não segurou a sala 18 (7.8s)** | Com HP = 0.80 x 1.30^(nível − 1): lutas **20.9s / 13.6s / 7.8s** (salas 3 / 9 / 18); a previsão era ~19 / 16 / ~14s. O HP na sala 18 (Nv6 = x2.97) ficou quase igual ao da curva anterior (x3.05, que deu 8.0s); o que encurta a sala 18 é o dano: armas +2/+3, 3 encantamentos e agora as receitas nos ghosts. **Mago 70%** na sala 18 (no limite de absurdo). Painel: sala 3 1/8 classes na faixa, sala 9 2/8, sala 18 5/8 | (a) crescimento 1.30 → 1.40 por nível (Nv2 1.12 · Nv4 2.20 · Nv6 4.30; a medir) · (b) XP mais rápido para o nível acompanhar o dano · (c) aceitar na Fase 1 e resolver na Fase 3 junto com o Q-18 (Mago) |
 
 **Pausadas até o fim da fase de mecânicas** (o resultado muda com bolsa, venda e economia):
 
@@ -82,6 +79,12 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-24** · 2026-11-18 · fusão manual com botão [FUNDIR] entre itens idênticos (ou ingredientes de receita) encostados; 8 receitas mágicas que herdam o encantamento · botão [FUNDIR] implementado; **receitas pendentes** (faltam os dados, Q-29)
 - **Q-25** · 2026-11-18 · Emboscada com combate real (vitória +8 PO e 1 de 3 itens; derrota +3 PO, sem perder tocha nem ouro); 12 eventos estilo The Bazaar · **pendente**: faltam os monstros (Q-31) e os efeitos dos eventos (Q-30)
 - **Q-26** · 2026-11-18 · nível 1 a 10 (XP 0, 3, 7, 12, 18, 25, 33, 42, 52, 63; +1 XP por sala, +2 vitória / +1 derrota em duelo ou emboscada), HP base +25% por nível no lugar do HP por duelo; Feats na subida de nível · nível/XP/HP implementados; **Feats pendentes** (falta a tabela, Q-28; números do HP em Q-32)
+- **Q-27** · 2026-11-18 · critério oficial: classes 44–56% na melhor posição nas salas 3/9/18; diferença ≤ 12pp; tanques também por dano absorvido + escudo, suportes por cura + aceleração; lutas 14–18s; encantamentos +20 a +40pp; fusão ≥ 2 cópias · painel ✅/❌ no relatório das salas (métricas de papel: ainda não, entram com o diagnóstico na Fase 2)
+- **Q-28** · 2026-11-18 · tabela de 10 Feats genéricos (substitui a anterior) · registrada em `docs/FEATS.md`; faltam os 32 de classe (Q-33)
+- **Q-29** · 2026-11-18 · 8 receitas com ingredientes, tamanhos e efeitos; herdam encantamento (o do 1º ingrediente) e o maior nível de fusão; universais · implementado
+- **Q-30** · 2026-11-18 · 12 eventos (3 atuais + 9 novos) com efeitos definidos · registrado; implementação no próximo passo
+- **Q-31** · 2026-11-18 · (a) 3 encontros fixos (Goblins, Esqueletos, Cubos Gelatinosos) escalando com o nível; Elite = +35% HP e +1 fusão; recompensas definidas · registrado; implementação no próximo passo
+- **Q-32** · 2026-11-18 · (c) HP 0.80 x 1.30^(nível − 1) · implementado → lutas 20.9 / 13.6 / 7.8s (ver Q-34)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
@@ -101,7 +104,14 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 
 ## 3. Interpretações feitas sem definição exata (validar)
 
-_Nenhuma pendente._ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
+| Código | Status | Interpretação | Validar |
+|---|---|---|---|
+| P-34 | 🟡 | **Égide do Cruzado** "limpa 2 stacks": limpa 2 de Veneno **e** 2 de Queimadura do portador e dos 2 aliados a cada ativação; o escudo também escala com a fusão do item | Confirmar |
+| P-35 | 🟡 | **Itens de receita** com dano fixo (26, 12, 22, 38, 24), sem faixa mín.–máx. como os outros itens | Confirmar ou dar a faixa |
+| P-36 | 🟡 | **Elixir da Restauração** no Alquimista é arremessado no aliado que precisa (como as outras poções dele); cura 35% do HP máximo **do alvo** | Confirmar |
+| P-37 | 🟡 | **Harpa da Fortuna**: +2 PO por harpa ao vencer o **duelo** (emboscada ainda não tem combate) | Confirmar |
+
+P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
 ## 4. Funcionalidades não implementadas
 
