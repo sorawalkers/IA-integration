@@ -60,6 +60,10 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Q-05 | Relatório de itens com colunas "Com Ladino" e "Sem Ladino" |
 | Q-06 | Interpretações confirmadas; Bardo começa com 1 Tambor + Adaga + Poção |
 
+> **Correção de design (usuário):** o HP cresce por duelo **jogado** (vitória ou derrota), não por duelo vencido —
+> senão quem vence fica mais forte e quem perde não se recupera (bola de neve). As simulações já usavam duelos jogados
+> (`floor(sala/3)`), então os números abaixo não mudam.
+
 ### Duração das lutas e classes por sala (512 composições, 320 lutas)
 
 | | Sala 3 | Sala 9 | Sala 18 |
