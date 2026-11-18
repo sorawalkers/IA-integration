@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · Fase 1, passo 2 (HP Q-32, receitas Q-29, painel de metas Q-27; Q-28/Q-30/Q-31 registradas).
+**Última atualização:** 2026-11-18 · Fase 1, passo 3 (42 Feats implementados).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -25,7 +25,7 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 ✅ Nível e XP (HP x1.25 por nível) · ✅ Economia e venda · ✅ Mochila expansível (níveis 3/6/9 + Bolsa de Couro) ·
 ✅ Gerador realista (casas extras, funde e vende quando enche) · ✅ Botão [FUNDIR] entre itens idênticos encostados (o arraste sobre o item igual continua valendo) ·
 ✅ HP 0.80 x 1.30^(nível − 1) (Q-32) · ✅ 8 receitas mágicas (Q-29) · ✅ Painel de metas no relatório (Q-27) ·
-⏳ Emboscada PvE com monstros (Q-31) · ⏳ 12 eventos (Q-30) · ⏸ Feats: 10 genéricos recebidos (`docs/FEATS.md`), faltam os 32 de classe (Q-33).
+⏳ Emboscada PvE com monstros (Q-31) · ⏳ 12 eventos (Q-30) · ✅ 42 Feats (10 genéricos + 32 de classe) com modal de subida de nível e no gerador de builds.
 
 **Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
 de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resultado delas muda com bolsa, venda e economia).
@@ -38,7 +38,6 @@ de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resul
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-33 | Q-28 | **Feats de classe: a tabela dos 32 não chegou** | Recebi a tabela nova dos **10 Feats genéricos** (registrada em `docs/FEATS.md`), mas os **4 Feats por classe** (32 no total) não vieram em nenhuma mensagem. O modal de subida de nível mostra 2 de classe + 1 genérico, então depende deles | Mandar a tabela (nome, efeito e números, 4 por classe). Se preferirem, eu escrevo uma proposta com base nas passivas atuais e vocês aprovam |
 | Q-34 | P-01 | **A curva do Q-32 não segurou a sala 18 (7.8s)** | Com HP = 0.80 x 1.30^(nível − 1): lutas **20.9s / 13.6s / 7.8s** (salas 3 / 9 / 18); a previsão era ~19 / 16 / ~14s. O HP na sala 18 (Nv6 = x2.97) ficou quase igual ao da curva anterior (x3.05, que deu 8.0s); o que encurta a sala 18 é o dano: armas +2/+3, 3 encantamentos e agora as receitas nos ghosts. **Mago 70%** na sala 18 (no limite de absurdo). Painel: sala 3 1/8 classes na faixa, sala 9 2/8, sala 18 5/8 | (a) crescimento 1.30 → 1.40 por nível (Nv2 1.12 · Nv4 2.20 · Nv6 4.30; a medir) · (b) XP mais rápido para o nível acompanhar o dano · (c) aceitar na Fase 1 e resolver na Fase 3 junto com o Q-18 (Mago) |
 
 **Pausadas até o fim da fase de mecânicas** (o resultado muda com bolsa, venda e economia):
@@ -85,6 +84,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-30** · 2026-11-18 · 12 eventos (3 atuais + 9 novos) com efeitos definidos · registrado; implementação no próximo passo
 - **Q-31** · 2026-11-18 · (a) 3 encontros fixos (Goblins, Esqueletos, Cubos Gelatinosos) escalando com o nível; Elite = +35% HP e +1 fusão; recompensas definidas · registrado; implementação no próximo passo
 - **Q-32** · 2026-11-18 · (c) HP 0.80 x 1.30^(nível − 1) · implementado → lutas 20.9 / 13.6 / 7.8s (ver Q-34)
+- **Q-33** · 2026-11-18 · tabela dos 32 Feats de classe (4 por classe) · implementado junto com os 10 genéricos; ver interpretações P-38 a P-48
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
@@ -110,6 +110,17 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 | P-35 | 🟡 | **Itens de receita** com dano fixo (26, 12, 22, 38, 24), sem faixa mín.–máx. como os outros itens | Confirmar ou dar a faixa |
 | P-36 | 🟡 | **Elixir da Restauração** no Alquimista é arremessado no aliado que precisa (como as outras poções dele); cura 35% do HP máximo **do alvo** | Confirmar |
 | P-37 | 🟡 | **Harpa da Fortuna**: +2 PO por harpa ao vencer o **duelo** (emboscada ainda não tem combate) | Confirmar |
+| P-38 | 🟡 | **Bastião da Cruz**: dá +15 de escudo (x nível) ao time a cada 4s **sem exigir item** na casa central da cruz (a casa central nem sempre existe com as casas extras) | Confirmar ou definir a condição |
+| P-39 | 🟡 | **Destilaria**: poções não têm recarga (disparam por limite de HP/mana). Implementado como "age mais cedo": poção encostada em erva dispara abaixo de 50% de HP (em vez de 40%) e 60% de mana (em vez de 50%) | Confirmar ou definir outro efeito |
+| P-40 | 🟡 | **Artesão Improvisado**: +1 encantamento por visita à Fogueira & Bigorna **por herói com o Feat** (2 heróis com o Feat = 3 encantamentos) | Confirmar |
+| P-41 | 🟡 | **Luz Cegante**: "velocidade de ataque −20%" = todas as recargas do herói da frente inimigo andam 20% mais devagar por 2s | Confirmar |
+| P-42 | 🟡 | **Imortal**: também salva de um golpe letal (fica com 1 HP e entra nos 2s de invulnerabilidade); invulnerável = golpes não causam dano (Veneno/Queimadura continuam) | Confirmar |
+| P-43 | 🟡 | **Sinergia de Borda**: o Elo que sai do herói com o Feat corta 30% da recarga (em vez de 15%) **dos dois itens** ligados | Confirmar |
+| P-44 | 🟡 | **Líder da Matilha**: mascotes são itens (não morrem); conta cada mascote na mochila do Patrulheiro | Confirmar |
+| P-45 | 🟡 | **Prontidão**: o item de menor recarga começa a luta com metade da recarga cumprida | Confirmar |
+| P-46 | 🟡 | **Palco Expandido**: itens encostados no Palco espalham os **efeitos próprios** aos aliados com metade da força do Palco; o corte de recarga do instrumento continua só no Palco | Confirmar |
+| P-47 | 🟡 | **Reserva Arcana**: todos já começam a luta com mana cheia, então o Feat vale +40 de mana máxima | Confirmar |
+| P-48 | 🟡 | **Mente Tática**: +15% de dano e de cura nos itens que recebem algum bônus de catalisador | Confirmar |
 
 P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 

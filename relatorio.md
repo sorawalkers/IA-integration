@@ -1,22 +1,22 @@
 # OSR Battler — Relatório da simulação
 
-> Gerado por `npm run balance --fights 300 --out relatorio.md` em 2026-11-18T20:42:29.617Z · commit `8121dc4`
+> Gerado por `npm run balance --fights 300 --out relatorio.md` em 2026-11-18T21:02:39.752Z · commit `eef7969`
 > Resumo e histórico das rodadas: `docs/BALANCO.md` (https://osr.valiran.party).
 
-Linha de base **[Mago, Bardo, Guerreiro]** contra ghosts da **sala 3**: 18.0% de vitória, 17.4s por luta (300 lutas por variante).
+Linha de base **[Mago, Bardo, Guerreiro]** contra ghosts da **sala 3**: 20.0% de vitória, 17.0s por luta (300 lutas por variante).
 
 ## Classes (média nas 512 composições; delta = diferença para a média geral)
 
 | Variante | Grupo | Vitória | Delta | ± | Veredito | Nota |
 |---|---|---|---|---|---|---|
-| Ladino | sug. Meio | 34.5% | +6.6pp | 0.7 | ▲ forte | melhor: Meio · Retaguarda 34% · Meio 48% · Vanguarda 22% |
-| Bárbaro | sug. Vanguarda | 30.7% | +2.8pp | 0.7 |  | melhor: Vanguarda · Retaguarda 26% · Meio 28% · Vanguarda 39% |
-| Alquimista | sug. Retaguarda | 30.4% | +2.5pp | 0.7 |  | melhor: Retaguarda · Retaguarda 35% · Meio 27% · Vanguarda 30% |
-| Patrulheiro | sug. Retaguarda | 27.1% | -0.8pp | 0.6 |  | melhor: Retaguarda · Retaguarda 37% · Meio 26% · Vanguarda 19% |
-| Bardo | sug. Meio | 25.9% | -2.0pp | 0.6 |  | melhor: Meio · Retaguarda 26% · Meio 31% · Vanguarda 21% |
-| Guerreiro | sug. Vanguarda | 25.4% | -2.5pp | 0.6 |  | melhor: Vanguarda · Retaguarda 17% · Meio 19% · Vanguarda 40% |
-| Paladino | sug. Vanguarda | 24.6% | -3.3pp | 0.6 | ▼ fraco | melhor: Vanguarda · Retaguarda 17% · Meio 17% · Vanguarda 39% |
-| Mago | sug. Retaguarda | 24.5% | -3.4pp | 0.6 | ▼ fraco | melhor: Retaguarda · Retaguarda 32% · Meio 28% · Vanguarda 13% |
+| Ladino | sug. Meio | 34.9% | +6.2pp | 0.7 | ▲ forte | melhor: Meio · Retaguarda 34% · Meio 47% · Vanguarda 23% |
+| Bárbaro | sug. Vanguarda | 32.3% | +3.6pp | 0.7 | ▲ forte | melhor: Vanguarda · Retaguarda 26% · Meio 28% · Vanguarda 43% |
+| Alquimista | sug. Retaguarda | 31.2% | +2.5pp | 0.7 |  | melhor: Retaguarda · Retaguarda 36% · Meio 28% · Vanguarda 29% |
+| Bardo | sug. Meio | 27.7% | -1.0pp | 0.6 |  | melhor: Meio · Retaguarda 27% · Meio 33% · Vanguarda 23% |
+| Patrulheiro | sug. Retaguarda | 27.4% | -1.3pp | 0.6 |  | melhor: Retaguarda · Retaguarda 36% · Meio 26% · Vanguarda 20% |
+| Paladino | sug. Vanguarda | 26.3% | -2.4pp | 0.6 |  | melhor: Vanguarda · Retaguarda 20% · Meio 19% · Vanguarda 39% |
+| Mago | sug. Retaguarda | 25.1% | -3.6pp | 0.6 | ▼ fraco | melhor: Retaguarda · Retaguarda 32% · Meio 30% · Vanguarda 14% |
+| Guerreiro | sug. Vanguarda | 24.7% | -4.0pp | 0.6 | ▼ fraco | melhor: Vanguarda · Retaguarda 17% · Meio 19% · Vanguarda 38% |
 
 ## Itens (+1 cópia na party, no melhor herói e posição)
 
@@ -26,84 +26,84 @@ a utilidade própria do item.
 
 | Variante | Grupo | Vitória | Delta | ± | Com Ladino | Sem Ladino | pp/PO | Veredito | Nota |
 |---|---|---|---|---|---|---|---|---|---|
-| Cajado do Arquimago | advanced | 98.0% | +57.0pp | 2.9 | +43.3pp | +57.0pp | 4.1 (14 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
-| Égide do Cruzado | advanced | 95.3% | +54.3pp | 2.9 | +33.0pp | +54.3pp | 3.6 (15 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
-| Lobo Alfa Espiritual | advanced | 82.0% | +41.0pp | 2.9 | +25.7pp | +41.0pp | 3.4 (12 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Machado Trovejante | advanced | 80.7% | +39.7pp | 2.9 | +28.7pp | +39.7pp | 3.1 (13 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Língua de Fogo | advanced | 76.3% | +35.3pp | 2.8 | +23.7pp | +35.3pp | 2.7 (13 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Adaga | basic | 70.3% | +32.7pp | 2.7 | +7.7pp | +32.7pp | 10.9 (3 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
-| Maça | basic | 70.3% | +32.7pp | 2.7 | +12.3pp | +32.7pp | 8.2 (4 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
-| Espada Curta | basic | 69.7% | +32.0pp | 2.7 | +12.7pp | +32.0pp | 8.0 (4 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
-| Bomba Alquímica | basic | 51.0% | +31.0pp | 2.7 | +14.7pp | +31.0pp | 10.3 (3 PO) | ▲ forte | com Alquimista · party Alquimista/Bardo/Guerreiro · sala 3 · melhor em: Alquimista |
-| Rubi Ígneo | advanced | 90.7% | +31.0pp | 2.7 | +0.0pp | +31.0pp | 6.2 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
-| Presa de Víbora | advanced | 71.3% | +30.3pp | 2.7 | +14.3pp | +30.3pp | 6.1 (5 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Escudo Torre | advanced | 89.7% | +30.0pp | 2.8 | — | +30.0pp | 3.3 (9 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro |
-| Grimório | advanced | 83.0% | +29.3pp | 2.7 | +16.3pp | +29.3pp | 2.7 (11 PO) | ▲ forte | com Mago · party Mago/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Mago |
-| Cajado Runado | advanced | 69.7% | +28.7pp | 2.6 | +20.3pp | +28.7pp | 3.2 (9 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
-| Cajado de Aprendiz | basic | 51.0% | +28.3pp | 2.7 | +21.7pp | +28.3pp | 7.1 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Bardo |
-| Ração de Viagem | basic | 65.0% | +27.3pp | 2.6 | +12.7pp | +27.3pp | 13.7 (2 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Patrulheiro |
-| Poção de Vida Menor | basic | 49.3% | +26.7pp | 2.6 | +16.0pp | +26.7pp | 8.9 (3 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Alquimista |
-| Arco Longo | advanced | 67.3% | +26.3pp | 2.7 | +16.3pp | +26.3pp | 3.8 (7 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Pergaminho de Fogo | advanced | 65.7% | +24.7pp | 2.6 | +14.7pp | +24.7pp | 6.2 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
-| Tomo Menor | basic | 42.3% | +24.3pp | 2.7 | +18.3pp | +24.3pp | 6.1 (4 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 3 · melhor em: Mago |
-| Símbolo Sagrado | advanced | 65.3% | +24.3pp | 2.5 | +18.7pp | +24.3pp | 4.1 (6 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Paladino |
-| Elixir da Restauração | advanced | 84.0% | +24.3pp | 2.5 | +13.3pp | +24.3pp | 3.0 (8 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
-| Arco Curto | basic | 46.7% | +24.0pp | 2.5 | +12.3pp | +24.0pp | 6.0 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Alquimista |
-| Harpa da Fortuna | advanced | 64.7% | +23.7pp | 2.6 | +19.7pp | +23.7pp | 1.6 (15 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Tambor de Guerra | basic | 44.3% | +21.7pp | 2.5 | +19.0pp | +21.7pp | 5.4 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Alquimista |
-| Machado Grande | advanced | 59.3% | +20.7pp | 2.6 | +14.3pp | +20.7pp | 2.1 (10 PO) | ▲ forte | com Bárbaro · party Patrulheiro/Bardo/Bárbaro · sala 9 (item +1, party evoluída) · melhor em: Bárbaro (no lugar de Adaga) |
-| Poção de Vida Maior | advanced | 80.0% | +20.3pp | 2.3 | +17.0pp | +20.3pp | 4.1 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
-| Espada Longa | advanced | 60.7% | +19.7pp | 2.5 | +12.3pp | +19.7pp | 2.5 (8 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
-| Pedra de Amolar | basic | 86.0% | +16.3pp | 2.1 | +16.3pp | +8.7pp | 5.4 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
-| Elmo de Ferro | advanced | 56.7% | +15.7pp | 2.2 | +6.0pp | +15.7pp | 3.1 (5 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
-| Amuleto de Madeira | basic | 36.7% | +14.0pp | 2.1 | +10.0pp | +14.0pp | 4.7 (3 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Paladino |
-| Gazuas | basic | 81.7% | +12.0pp | 1.9 | +12.0pp | — | 4.0 (3 PO) | ▲ forte | com Ladino · party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
-| Lobo Cinzento | advanced | 48.7% | +10.7pp | 2.1 | +6.0pp | +10.7pp | 1.1 (10 PO) | ▲ forte | com Patrulheiro · party Patrulheiro/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Patrulheiro |
-| Broquel | basic | 80.0% | +10.3pp | 1.9 | +10.3pp | +7.3pp | 3.4 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
-| Poção de Mana Menor | basic | 80.0% | +10.3pp | 1.9 | +10.3pp | +0.0pp | 3.4 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
-| Gema Bruta | basic | 28.3% | +10.3pp | 1.8 | +10.3pp | +10.3pp | 3.4 (3 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 3 · melhor em: Mago |
-| Aljava | basic | 80.0% | +10.3pp | 1.9 | +10.3pp | +0.0pp | 3.4 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
-| Erva Curativa | basic | 46.0% | +8.3pp | 1.6 | +6.0pp | +8.3pp | 4.2 (2 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
-| Gibão de Couro | basic | 76.0% | +6.3pp | 1.6 | +6.3pp | +4.7pp | 2.1 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
-| Rato de Cripta | basic | 67.0% | +6.0pp | 2.4 | +6.0pp | +0.7pp | 2.0 (3 PO) | ▲ forte | com Patrulheiro · party Patrulheiro/Ladino/Paladino · sala 3 · melhor em: Patrulheiro |
-| Alaúde dos Ventos | advanced | 45.7% | +4.7pp | 2.1 | — | +4.7pp | 0.4 (12 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
-| Gema de Mana | advanced | 64.0% | +4.3pp | 1.4 | +0.7pp | +4.3pp | 0.9 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Cajado do Arquimago | advanced | 87.0% | +58.7pp | 2.8 | +43.3pp | +58.7pp | 4.2 (14 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Égide do Cruzado | advanced | 86.0% | +57.7pp | 2.9 | +43.3pp | +57.7pp | 3.8 (15 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Machado Trovejante | advanced | 78.7% | +50.3pp | 2.9 | +21.7pp | +50.3pp | 3.9 (13 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo (no lugar de Adaga) |
+| Grimório | advanced | 75.0% | +49.0pp | 2.9 | +31.0pp | +49.0pp | 4.5 (11 PO) | ▲ forte | com Mago · party Mago/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Escudo Torre | advanced | 79.7% | +44.7pp | 3.2 | — | +44.7pp | 5.0 (9 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro (no lugar de Espada Curta) |
+| Rubi Ígneo | advanced | 74.0% | +39.0pp | 2.9 | +5.0pp | +39.0pp | 7.8 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Lobo Alfa Espiritual | advanced | 62.7% | +34.3pp | 2.8 | +31.7pp | +34.3pp | 2.9 (12 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Alquimista |
+| Harpa da Fortuna | advanced | 67.7% | +29.7pp | 2.6 | +29.7pp | +20.0pp | 2.0 (15 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 9 (item +1, party evoluída) · melhor em: Ladino |
+| Espada Curta | basic | 57.3% | +28.0pp | 2.7 | +9.0pp | +28.0pp | 7.0 (4 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
+| Adaga | basic | 56.7% | +27.3pp | 2.6 | +1.0pp | +27.3pp | 9.1 (3 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
+| Maça | basic | 56.7% | +27.3pp | 2.6 | +8.3pp | +27.3pp | 6.8 (4 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
+| Língua de Fogo | advanced | 55.7% | +27.3pp | 2.7 | +17.7pp | +27.3pp | 2.1 (13 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Cajado de Aprendiz | basic | 50.3% | +27.0pp | 2.6 | +22.3pp | +27.0pp | 6.8 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Bardo |
+| Bomba Alquímica | basic | 43.3% | +26.3pp | 2.6 | +9.7pp | +26.3pp | 8.8 (3 PO) | ▲ forte | com Alquimista · party Alquimista/Bardo/Guerreiro · sala 3 · melhor em: Alquimista |
+| Poção de Vida Maior | advanced | 60.3% | +25.3pp | 2.5 | +23.3pp | +25.3pp | 5.1 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Ração de Viagem | basic | 53.3% | +24.0pp | 2.5 | +12.3pp | +24.0pp | 12.0 (2 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Patrulheiro |
+| Cajado Runado | advanced | 58.7% | +23.7pp | 3.0 | +16.0pp | +23.7pp | 2.6 (9 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Poção de Vida Menor | basic | 46.3% | +23.0pp | 2.4 | +17.3pp | +23.0pp | 7.7 (3 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Alquimista |
+| Presa de Víbora | advanced | 63.0% | +22.3pp | 2.5 | +17.0pp | +22.3pp | 4.5 (5 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro |
+| Tambor de Guerra | basic | 44.0% | +20.7pp | 2.4 | +17.0pp | +20.7pp | 5.2 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Alquimista |
+| Arco Curto | basic | 42.7% | +19.3pp | 2.5 | +6.7pp | +19.3pp | 4.8 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Alquimista |
+| Tomo Menor | basic | 82.7% | +19.0pp | 2.5 | +19.0pp | +13.7pp | 4.8 (4 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Gema de Mana | advanced | 53.0% | +18.0pp | 2.8 | +5.0pp | +18.0pp | 3.6 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Elixir da Restauração | advanced | 52.3% | +17.3pp | 2.4 | +16.3pp | +17.3pp | 2.2 (8 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Pedra de Amolar | basic | 80.0% | +16.3pp | 2.4 | +16.3pp | +6.7pp | 5.4 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Elmo de Ferro | advanced | 46.7% | +11.7pp | 1.9 | +6.7pp | +11.7pp | 2.3 (5 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Espada Longa | advanced | 39.7% | +11.3pp | 2.1 | +4.7pp | +11.3pp | 1.4 (8 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Arco Longo | advanced | 46.0% | +11.0pp | 2.8 | +6.7pp | +11.0pp | 1.6 (7 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Amuleto de Madeira | basic | 33.3% | +10.0pp | 1.8 | +8.7pp | +10.0pp | 3.3 (3 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 3 · melhor em: Paladino |
+| Broquel | basic | 73.3% | +9.7pp | 2.0 | +9.7pp | +4.0pp | 3.2 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Gazuas | basic | 73.3% | +9.7pp | 1.9 | +9.7pp | — | 3.2 (3 PO) | ▲ forte | com Ladino · party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Pergaminho de Fogo | advanced | 37.7% | +9.3pp | 1.8 | +9.0pp | +9.3pp | 2.3 (4 PO) | ▲ forte | party Alquimista/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Poção de Mana Menor | basic | 72.3% | +8.7pp | 1.9 | +8.7pp | +1.0pp | 2.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Gema Bruta | basic | 72.3% | +8.7pp | 1.9 | +8.7pp | +0.0pp | 2.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Aljava | basic | 72.3% | +8.7pp | 1.9 | +8.7pp | +0.0pp | 2.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Lobo Cinzento | advanced | 26.0% | +7.7pp | 2.2 | +7.7pp | +1.0pp | 0.8 (10 PO) | ▲ forte | com Patrulheiro · party Patrulheiro/Ladino/Paladino · sala 9 (item +1, party evoluída) · melhor em: Patrulheiro |
+| Erva Curativa | basic | 36.7% | +7.3pp | 1.5 | +1.7pp | +7.3pp | 3.7 (2 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
+| Rato de Cripta | basic | 57.3% | +6.0pp | 2.4 | +6.0pp | +4.0pp | 2.0 (3 PO) | ▲ forte | com Patrulheiro · party Patrulheiro/Ladino/Paladino · sala 3 · melhor em: Patrulheiro |
+| Gibão de Couro | basic | 69.0% | +5.3pp | 1.7 | +5.3pp | +2.3pp | 1.8 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Símbolo Sagrado | advanced | 31.0% | +5.0pp | 1.4 | +4.7pp | +5.0pp | 0.8 (6 PO) | ▲ forte | com Paladino · party Mago/Bardo/Paladino · sala 9 (item +1, party evoluída) · melhor em: Paladino |
+| Alaúde dos Ventos | advanced | 32.7% | -2.3pp | 2.4 | — | -2.3pp | -0.2 (12 PO) |  | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo |
+| Machado Grande | advanced | — | — | — | — | — | — |  | sem espaço |
 
 ## Encantamentos (em todas as armas)
 
 | Variante | Grupo | Vitória | Delta | ± | Veredito | Nota |
 |---|---|---|---|---|---|---|
-| Flamejante | encantamento | 60.3% | +42.3pp | 2.9 | ▲ forte | em todas as armas |
-| Gélido | encantamento | 58.7% | +40.7pp | 2.9 | ▲ forte | em todas as armas |
-| Armazenador | encantamento | 54.3% | +36.3pp | 2.8 | ▲ forte | em todas as armas |
-| Trovejante | encantamento | 53.3% | +35.3pp | 2.8 | ▲ forte | em todas as armas |
-| Mortal | encantamento | 47.7% | +29.7pp | 2.6 | ▲ forte | em todas as armas |
-| Veloz | encantamento | 45.0% | +27.0pp | 2.7 | ▲ forte | em todas as armas |
-| Defensor | encantamento | 44.3% | +26.3pp | 2.5 | ▲ forte | em todas as armas |
-| Afiado | encantamento | 43.7% | +25.7pp | 2.6 | ▲ forte | em todas as armas |
-| Vorpal | encantamento | 41.7% | +23.7pp | 2.6 | ▲ forte | em todas as armas |
-| Vampírico | encantamento | 32.3% | +14.3pp | 2.0 | ▲ forte | em todas as armas |
+| Gélido | encantamento | 54.3% | +34.3pp | 2.8 | ▲ forte | em todas as armas |
+| Trovejante | encantamento | 50.7% | +30.7pp | 2.7 | ▲ forte | em todas as armas |
+| Flamejante | encantamento | 49.0% | +29.0pp | 2.7 | ▲ forte | em todas as armas |
+| Armazenador | encantamento | 47.3% | +27.3pp | 2.7 | ▲ forte | em todas as armas |
+| Mortal | encantamento | 46.0% | +26.0pp | 2.6 | ▲ forte | em todas as armas |
+| Vorpal | encantamento | 44.0% | +24.0pp | 2.6 | ▲ forte | em todas as armas |
+| Afiado | encantamento | 37.0% | +17.0pp | 2.3 | ▲ forte | em todas as armas |
+| Veloz | encantamento | 36.7% | +16.7pp | 2.3 | ▲ forte | em todas as armas |
+| Defensor | encantamento | 32.7% | +12.7pp | 1.9 | ▲ forte | em todas as armas |
+| Vampírico | encantamento | 29.0% | +9.0pp | 1.7 | ▲ forte | em todas as armas |
 
 ## Fusão: item +1 contra 2 cópias +0
 
 | Variante | Grupo | Vitória | Delta | ± | Veredito | Nota |
 |---|---|---|---|---|---|---|
-| Tambor de Guerra +1 | Arma/Instrumento | 45.7% | +11.0pp | 1.9 | ▲ forte | vs 2x Tambor de Guerra: 35% · no Guerreiro |
-| Arco Curto +1 | Arma/Instrumento | 66.0% | +7.3pp | 2.1 | ▲ forte | vs 2x Arco Curto: 59% · no Guerreiro |
-| Espada Curta +1 | Arma/Instrumento | 59.7% | +5.7pp | 2.2 | ▲ forte | vs 2x Espada Curta: 54% · no Guerreiro |
-| Poção de Vida Menor +1 | Consumível | 40.3% | +2.7pp | 1.0 |  | vs 2x Poção de Vida Menor: 38% · no Mago |
-| Adaga +1 | Arma/Instrumento | 53.3% | +1.3pp | 1.9 |  | vs 2x Adaga: 52% · no Guerreiro |
-| Broquel +1 | Armadura | 25.7% | +1.3pp | 0.7 |  | vs 2x Broquel: 24% · no Mago |
-| Gibão de Couro +1 | Armadura | 28.3% | +1.3pp | 0.8 |  | vs 2x Gibão de Couro: 27% · no Mago |
-| Maça +1 | Arma/Instrumento | 57.0% | +1.0pp | 2.2 |  | vs 2x Maça: 56% · no Guerreiro |
-| Cajado de Aprendiz +1 | Arma/Instrumento | 53.7% | -2.0pp | 1.9 |  | vs 2x Cajado de Aprendiz: 56% · no Bardo |
-| Gema Bruta +1 | Catalisador | 41.0% | -6.0pp | 1.4 | ▼ fraco | vs 2x Gema Bruta: 47% · no Mago |
-| Poção de Mana Menor +1 | Consumível | 18.0% | +0.0pp | 0.0 |  | vs 2x Poção de Mana Menor: 18% · no Mago |
-| Pedra de Amolar +1 | Catalisador | 22.3% | +0.0pp | 0.0 |  | vs 2x Pedra de Amolar: 22% · no Bardo |
-| Erva Curativa +1 | Catalisador | 24.0% | +0.0pp | 0.0 |  | vs 2x Erva Curativa: 24% · no Mago |
-| Amuleto de Madeira +1 | Catalisador | 21.0% | +0.0pp | 0.0 |  | vs 2x Amuleto de Madeira: 21% · no Mago |
+| Tambor de Guerra +1 | Arma/Instrumento | 30.0% | +4.3pp | 1.8 | ▲ forte | vs 2x Tambor de Guerra: 26% · no Guerreiro |
+| Maça +1 | Arma/Instrumento | 47.7% | +2.0pp | 2.0 |  | vs 2x Maça: 46% · no Guerreiro |
+| Poção de Vida Menor +1 | Consumível | 38.0% | +2.0pp | 1.1 |  | vs 2x Poção de Vida Menor: 36% · no Mago |
+| Adaga +1 | Arma/Instrumento | 45.0% | +1.3pp | 2.2 |  | vs 2x Adaga: 44% · no Guerreiro |
+| Pedra de Amolar +1 | Catalisador | 23.0% | +0.7pp | 0.5 |  | vs 2x Pedra de Amolar: 22% · no Bardo |
+| Broquel +1 | Armadura | 24.3% | +0.3pp | 0.3 |  | vs 2x Broquel: 24% · no Mago |
+| Amuleto de Madeira +1 | Catalisador | 22.0% | +0.3pp | 0.3 |  | vs 2x Amuleto de Madeira: 22% · no Guerreiro |
+| Gibão de Couro +1 | Armadura | 24.3% | -0.3pp | 0.6 |  | vs 2x Gibão de Couro: 25% · no Mago |
+| Poção de Mana Menor +1 | Consumível | 21.0% | -0.7pp | 0.5 |  | vs 2x Poção de Mana Menor: 22% · no Mago |
+| Espada Curta +1 | Arma/Instrumento | 44.0% | -3.3pp | 2.0 |  | vs 2x Espada Curta: 47% · no Guerreiro |
+| Gema Bruta +1 | Catalisador | 36.0% | -3.3pp | 1.1 | ▼ fraco | vs 2x Gema Bruta: 39% · no Mago |
+| Cajado de Aprendiz +1 | Arma/Instrumento | 48.7% | -4.0pp | 1.9 | ▼ fraco | vs 2x Cajado de Aprendiz: 53% · no Bardo |
+| Arco Curto +1 | Arma/Instrumento | 55.0% | +0.0pp | 1.8 |  | vs 2x Arco Curto: 55% · no Guerreiro |
+| Erva Curativa +1 | Catalisador | 23.7% | +0.0pp | 0.0 |  | vs 2x Erva Curativa: 24% · no Guerreiro |
 
-_Tempo de simulação: 129.1s._
+_Tempo de simulação: 163.8s._
 
 ---
 
@@ -121,24 +121,72 @@ Melhor posição de cada classe · vitória nela · (média geral nas 512 compos
 
 | Classe | Sala 3 | Sala 9 | Sala 18 |
 |---|---|---|---|
-| Guerreiro | Vanguarda 40% (25%) | Vanguarda 45% (32%) | Vanguarda 54% (44%) |
-| Paladino | Vanguarda 39% (24%) | Vanguarda 43% (30%) | Vanguarda 52% (42%) |
-| Bárbaro | Vanguarda 38% (30%) | Vanguarda 41% (33%) | Vanguarda 50% (43%) |
-| Bardo | Meio 31% (26%) | Meio 39% (35%) | Meio 48% (46%) |
-| Ladino | Meio 48% (34%) | Meio 42% (34%) | Meio 40% (38%) |
-| Patrulheiro | Retaguarda 36% (27%) | Retaguarda 31% (25%) | Retaguarda 43% (39%) |
-| Mago | Retaguarda 33% (25%) | Meio 49% (40%) | Meio 70% (58%) |
-| Alquimista | Retaguarda 35% (30%) | Retaguarda 43% (39%) | Retaguarda 55% (51%) |
-| **Diferença** | **17 pp** | **18 pp** | **29 pp** |
-| **Duração média da luta** | 20.9s | 13.6s | 7.8s |
+| Guerreiro | Vanguarda 37% (24%) | Vanguarda 43% (31%) | Vanguarda 44% (36%) |
+| Paladino | Vanguarda 39% (26%) | Vanguarda 42% (32%) | Vanguarda 42% (34%) |
+| Bárbaro | Vanguarda 42% (32%) | Vanguarda 51% (39%) | Vanguarda 58% (47%) |
+| Bardo | Meio 32% (27%) | Meio 42% (38%) | Meio 42% (39%) |
+| Ladino | Meio 47% (34%) | Meio 49% (39%) | Meio 37% (35%) |
+| Patrulheiro | Retaguarda 36% (27%) | Retaguarda 30% (25%) | Retaguarda 35% (31%) |
+| Mago | Retaguarda 32% (25%) | Meio 53% (43%) | Meio 58% (49%) |
+| Alquimista | Retaguarda 36% (31%) | Retaguarda 47% (42%) | Retaguarda 48% (44%) |
+| **Diferença** | **15 pp** | **22 pp** | **23 pp** |
+| **Duração média da luta** | 20.9s | 14.7s | 7.4s |
 
 ### Painel de metas (critério Q-27)
 
 | Meta | Sala 3 | Sala 9 | Sala 18 |
 |---|---|---|---|
-| Classes entre 44% e 56% (melhor posição) | ❌ 1/8 | ❌ 2/8 | ❌ 5/8 |
-| Diferença melhor − pior ≤ 12pp | ❌ 17pp | ❌ 18pp | ❌ 29pp |
-| Duração média 14–18s | ❌ 20.9s | ❌ 13.6s | ❌ 7.8s |
+| Classes entre 44% e 56% (melhor posição) | ❌ 1/8 | ❌ 4/8 | ❌ 2/8 |
+| Diferença melhor − pior ≤ 12pp | ❌ 15pp | ❌ 22pp | ❌ 23pp |
+| Duração média 14–18s | ❌ 20.9s | ✅ 14.7s | ❌ 7.4s |
 | Absurdos da Fase 1 (classe > 70% ou < 25%, luta < 8s) | ✅ nenhum | ✅ nenhum | ⚠ luta < 8s |
 
-_Tempo de simulação: 218.6s._
+_Tempo de simulação: 279.8s._
+
+---
+
+## Diagnóstico das classes — sala 18
+
+300 lutas por classe, na melhor posição; os outros 2 heróis são sorteados entre as 8 classes.
+
+### Desempenho do herói da classe
+
+Dano = dano direto dos golpes (sem Veneno/Queimadura, que não têm dono no registro). "Golpes com DOT" = golpes que aplicaram Veneno ou Queimadura. Escudo e cura = gerados pelos itens do herói (para qualquer aliado).
+
+| Classe | Posição | Vitória | Tempo vivo | Morre primeiro | Dano/luta | % do dano da party | Dano/s vivo | Golpes/luta | Golpes com DOT | Escudo/luta | Cura/luta |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Guerreiro | Vanguarda | 47% | 5.8s de 8.2s (70%) | 40% | 724 | 28% | 125.8 | 24.5 | 0.2 | 7 | 441 |
+| Paladino | Vanguarda | 40% | 6.2s de 8.8s (70%) | 33% | 567 | 24% | 91.9 | 9.1 | 0.2 | 291 | 406 |
+| Bárbaro | Vanguarda | 59% | 4.7s de 6.6s (72%) | 31% | 1197 | 44% | 254.1 | 17.1 | 0.6 | 12 | 44 |
+| Bardo | Meio | 38% | 5.1s de 6.5s (78%) | 6% | 469 | 20% | 92.1 | 15.3 | 0.5 | 8 | 294 |
+| Ladino | Meio | 37% | 5.8s de 7.9s (73%) | 4% | 682 | 34% | 118.0 | 18.4 | 12.3 | 14 | 237 |
+| Patrulheiro | Retaguarda | 38% | 5.2s de 6.4s (81%) | 19% | 961 | 43% | 183.4 | 20.8 | 0.3 | 9 | 40 |
+| Mago | Meio | 57% | 2.6s de 4.2s (63%) | 16% | 1249 | 60% | 473.8 | 8.1 | 0.2 | 4 | 15 |
+| Alquimista | Retaguarda | 52% | 9.4s de 10.8s (87%) | 19% | 431 | 16% | 45.9 | 12.5 | 0.5 | 8 | 1867 |
+
+### Mochila montada pelo gerador (média de itens por tipo)
+
+| Classe | arma corpo a corpo | arma à distância | arma mágica | mascote | instrumento | armadura | poção | catalisador/outro | Corpo a corpo na Retaguarda (-20%) |
+|---|---|---|---|---|---|---|---|---|---|
+| Guerreiro | 2.3 | 0.1 | 0.2 | 0.0 | 0.1 | 3.1 | 1.1 | 1.7 | — |
+| Paladino | 2.0 | 0.1 | 0.2 | 0.0 | 0.0 | 2.7 | 0.9 | 2.8 | — |
+| Bárbaro | 3.7 | 0.1 | 0.2 | 0.0 | 0.1 | 0.2 | 0.2 | 2.8 | — |
+| Bardo | 1.2 | 0.1 | 0.3 | 0.0 | 1.6 | 0.2 | 2.1 | 0.9 | — |
+| Ladino | 2.6 | 0.3 | 0.7 | 0.0 | 0.0 | 0.3 | 1.5 | 2.4 | — |
+| Patrulheiro | 0.2 | 1.9 | 0.2 | 2.7 | 0.1 | 0.2 | 0.2 | 4.1 | 0.2 |
+| Mago | 0.2 | 0.1 | 3.8 | 0.0 | 0.0 | 0.2 | 1.1 | 3.2 | — |
+| Alquimista | 0.2 | 1.6 | 0.2 | 0.0 | 0.1 | 1.2 | 3.1 | 2.2 | 0.2 |
+
+### Fusão no mesmo herói (sala 3, linha de base Mago/Bardo/Guerreiro, 300 lutas)
+
+| Item | Herói | 2 cópias +0 | 1 cópia +1 | Delta (pp) |
+|---|---|---|---|---|
+| Adaga | Mago | 25.3% | 21.0% | -4.3 |
+| Adaga | Bardo | 23.0% | 28.7% | +5.7 |
+| Adaga | Guerreiro | 38.0% | 36.7% | -1.3 |
+| Gema Bruta | Mago | 33.3% | 28.0% | -5.3 |
+| Gema Bruta | Bardo | 12.0% | 12.0% | +0.0 |
+| Gema Bruta | Guerreiro | 12.0% | 12.0% | +0.0 |
+| Tambor de Guerra | Mago | 22.0% | 27.3% | +5.3 |
+| Tambor de Guerra | Bardo | 12.0% | 17.3% | +5.3 |
+| Tambor de Guerra | Guerreiro | 21.0% | 30.3% | +9.3 |

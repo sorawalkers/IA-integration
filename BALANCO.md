@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Fase 1, passo 2 (HP 0.80 x 1.30^nível, 8 receitas, painel de metas).
+**Última atualização:** 2026-11-18 · Fase 1, passo 3 (42 Feats).
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -54,6 +54,30 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Fase 1, passo 3 — 42 Feats (checagem de absurdos)
+
+Gerador e party de referência escolhem 1 Feat por nível (ao acaso entre as 3 opções): ~1 Feat na sala 3, ~3 na 9, ~5 na 18.
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** | 20.9s | 14.7s ✅ | **7.4s** ⚠ |
+| Guerreiro | Vang 37% | Vang 43% | Vang 44% |
+| Paladino | Vang 39% | Vang 42% | Vang 42% |
+| Bárbaro | Vang 42% | Vang 51% | Vang **58%** |
+| Bardo | Meio 32% | Meio 42% | Meio 42% |
+| Ladino | Meio 47% | Meio 49% | Meio 37% |
+| Patrulheiro | Ret 36% | Ret 30% | Ret 35% |
+| Mago | Ret 32% | Meio 53% | Meio 58% (era 70) |
+| Alquimista | Ret 36% | Ret 47% | Ret 48% |
+| **Diferença** | 15 pp | 22 pp | 23 pp |
+
+**Painel (Q-27):** classes na faixa 44–56%: 1/8 · 4/8 · 2/8. **Absurdos:** só a **luta da sala 18 (7.4s)**, já no Q-34. O Mago saiu do limite (70 → 58%).
+Diagnóstico da sala 18: o Bárbaro com Feats chega a 254 de dano/s vivo (era 195) e o Mago 474.
+Encantamentos (sala 3): Gélido +34.3 a Vampírico +9.0; fusão: todos entre −4.0 e +4.3pp (dentro do erro). Corrigido nesta rodada:
+a party de referência dos testes de itens não tinha Feats (linha de base caiu para 12%); agora tem os mesmos que os ghosts.
+
+Bug corrigido: uma luta quebrava quando o reflexo da Muralha Viva matava o atacante no meio do próprio golpe.
 
 ## Fase 1, passo 2 — HP x1.30 por nível, 8 receitas mágicas, painel de metas (checagem de absurdos)
 
@@ -464,6 +488,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F1.3 | 42 Feats (modal, gerador, referência) | 15 / 22 / 23 pp · lutas 20.9 / 14.7 / 7.4s |
 | F1.2 | HP 0.80 x 1.30^nível (Q-32), 8 receitas (Q-29), painel de metas (Q-27) | 17 / 18 / 29 pp · lutas 20.9 / 13.6 / 7.8s |
 | F1.1 | Nível/XP (HP x1.25 por nível), economia, mochila expansível, gerador funde/vende | 21 / 18 / 30 pp · lutas 25.1 / 15.9 / 8.0s |
 | — | **Pausa:** início da fase de construção de mecânicas; Q-18 a Q-20 pausadas | — |
