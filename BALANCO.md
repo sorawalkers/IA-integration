@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 13 (respostas Q-09 a Q-11 aplicadas).
+**Última atualização:** 2026-11-18 · Rodada 14 (respostas Q-12 a Q-14 + diagnóstico da sala 18).
 
 ## Como os testes são feitos
 
@@ -48,6 +48,75 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Rodada 14 — respostas Q-12, Q-13 e Q-14 + diagnóstico da sala 18
+
+| Mudança | Antes | Agora |
+|---|---|---|
+| Instrumentos (Q-12) | todos os instrumentos do herói tocavam | **só um instrumento por herói toca** (o de maior aceleração); os outros ficam em silêncio |
+| Teste de fusão (Q-12) | melhor herói para as 2 cópias e melhor herói para o +1 (podiam ser diferentes) | o +1 é testado **no mesmo herói** onde as 2 cópias renderam mais |
+| Mago (Q-13) | Sobrecarga acima de 78% | **70%** |
+| HP (Q-14) | x0.75·(1 + 0.10·d + 0.10·d²) | **x0.70·(1 + 0.10·d + 0.13·d²)** → x0.86 / x1.73 / x4.39 nas salas 3 / 9 / 18 |
+
+> **Correção minha sobre o Q-12:** eu tinha escrito que as 2 cópias podiam ir para heróis diferentes. Conferindo o código,
+> as 2 cópias já iam sempre para o **mesmo** herói. O que distorcia era o +1 poder ser medido em outro herói, e os 2 Tambores
+> tocando juntos. Com as duas correções, a fusão ficou empatada ou melhor (tabela abaixo).
+
+### Classes por sala (512 composições, 80 lutas cada)
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** (meta 14–18s) | **18.6s** (era 19.4) | **15.3s** ✅ | **13.3s** (era 11.6) |
+| Guerreiro | Vang 41% | Vang 45% | Vang 52% |
+| Paladino | Vang 38% | Vang 38% | Vang 40% |
+| Bárbaro | Vang 38% | Vang 41% | Vang 50% |
+| Bardo | Meio 34% | Meio 44% | Meio 49% (era 54: 1 instrumento só) |
+| Ladino | Meio 46% | Meio 38% | Meio 35% |
+| Patrulheiro | Ret 31% | Ret 32% | Ret 39% |
+| Mago | Ret 37% | Ret 47% | Meio 59% |
+| Alquimista | Ret 35% | Ret 49% | Ret 56% |
+| **Diferença** | 16 pp | 17 pp | **24 pp** |
+
+### Encantamentos (sala 3; meta +20 a +40pp)
+
+Armazenador +38.7 · Flamejante +33.0 · Gélido +32.7 · Trovejante +32.7 · Afiado +25.7 · Defensor +24.7 · Vorpal +22.7 ·
+Veloz +22.0 · Mortal +20.7 · Vampírico +19.7 → **todos na faixa** (Vampírico no limite, dentro do erro de ±2.4).
+
+### Fusão: +1 contra 2 cópias no mesmo herói (sala 3)
+
+Tambor **+9.0** (era −14.7) · Poção de Vida +4.7 · Cajado +4.0 · Arco Curto +3.7 · Espada Curta +2.7 · Amuleto +1.3 · Pedra +0.7 ·
+Adaga −0.3 · Gema Bruta −2.0 · Maça −2.7 · armaduras e Poção de Mana 0.0. Os negativos estão dentro do erro da medição (±2.2pp)
+→ **fundir nunca fica pior que 2 cópias.**
+
+### Diagnóstico da sala 18 (pedido no Q-13) — `scripts/diagnostico.ts`
+
+Herói da classe na melhor posição, outros 2 sorteados, 300 lutas:
+
+| Classe | Vitória | Tempo vivo | Morre primeiro | Dano direto/s vivo | % do dano da party | Escudo/luta | Cura/luta |
+|---|---|---|---|---|---|---|---|
+| Mago (Meio) | 60% | 67% da luta | 21% | **326** | 58% | 6 | 42 |
+| Alquimista (Ret) | 50% | 83% | 26% | 58 | 21% | 16 | **1796** |
+| Bárbaro (Vang) | 48% | 64% | 39% | 179 | 41% | 10 | 242 |
+| Guerreiro (Vang) | 45% | 72% | 34% | 97 | 30% | 13 | 941 |
+| Bardo (Meio) | 42% | 80% | 3% | 88 | 25% | 12 | 414 |
+| Paladino (Vang) | 42% | 73% | 33% | **53** | 19% | 222 | 849 |
+| Patrulheiro (Ret) | 34% | 76% | 21% | 165 | 44% | 16 | **163** |
+| Ladino (Meio) | 31% | **78%** | **4%** | **75** | 33% | 12 | 581 |
+
+Mochila montada pelo gerador (média de itens): Paladino **1.0 arma** e 3.2 catalisadores; Ladino 2.6 armas corpo a corpo;
+Patrulheiro 2.2 mascotes, 1.2 armas à distância e 4.2 catalisadores; Mago 2.6 armas mágicas.
+
+**Leitura:**
+1. **Ladino não morre (4% morre primeiro) mas causa pouco dano direto** (75/s). Ele é o que mais aplica Veneno (18.7 golpes
+   com DOT por luta), mas **Veneno e Queimadura não escalam**: 1 dano/s por stack contra heróis com HP x4.39 na sala 18
+   (na sala 3 o HP é x0.86). O Veneno vale ~5x menos no fim da run.
+2. **Paladino causa pouco dano** (53/s) porque o gerador dá a ele só 1 arma em média; o escudo dele (222 por luta) é pequeno perto
+   de ~650 de HP. O escudo da relíquia (6) também não escala com a profundidade.
+3. **Patrulheiro causa muito dano** (165/s, 44% da party) mas perde: a party dele quase não tem cura (163 por luta, contra 941 do
+   Guerreiro e 1796 do Alquimista) e as lutas acabam rápido (10.9s).
+4. O gerador `progressParty` sorteia itens sem olhar a classe (só respeita os exclusivos).
+
+→ Perguntas **Q-15** (efeitos que não escalam), **Q-16** (gerador) e **Q-17** (Patrulheiro).
 
 ## Rodada 13 — respostas Q-09, Q-10 e Q-11
 
@@ -280,6 +349,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| 14 | Q-12 a Q-14 (1 instrumento por herói, fusão no mesmo herói, Sobrecarga 70%, HP x0.70 e 0.13·d²) | 16 / 17 / 24 pp · lutas 18.6 / 15.3 / 13.3s |
 | 13 | Q-09 a Q-11 (fusão −13%, instrumentos +75%, Ladino/Mago/Patrulheiro/Paladino, Afiado) | 16 / 16 / 23 pp · lutas 19.4 / 14.9 / 11.6s |
 | 12 | Q-07 (curva de HP, fusão x1.7), Q-08 (encantamentos), fusão −8% recarga, Tambor +2 | 12 / 17 / 26 pp · lutas 19.5 / 15.7 / 13.6s |
 | 11 | Respostas Q-01 a Q-06 (HP por duelo, fusão x1.85, catalisadores somam, tetos, encantamentos, Bardo) | 14 / 16 / 21 pp · lutas 26.1 / 15.8 / 7.5s |

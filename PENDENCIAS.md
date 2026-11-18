@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · após a rodada 13 (respostas Q-09 a Q-11 aplicadas).
+**Última atualização:** 2026-11-18 · após a rodada 14 (respostas Q-12 a Q-14 + diagnóstico da sala 18).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -16,9 +16,9 @@ Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplic
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-12 | P-31 | **Fusão: o que ainda perde para 2 cópias é estrutural. Como tratar?** | Rodada 13 (armas x1.7 e −13%/nível; instrumentos +75%, inspiração +1/nível): Arco Curto +4.0 · Espada Curta +2.7 · Cajado +2.3 · Maça −1.0 · **Adaga −5.3** · **Gema Bruta −7.0** · **Tambor −14.7** (pp do +1 contra 2 cópias, sala 3). No teste, cada cópia vai para o melhor herói, então as 2 cópias podem ficar em **heróis diferentes**: cada herói tem sua estamina (armas físicas gastam estamina) e seus limites por segundo. 2 Tambores (em qualquer lugar) dão adiantamento x2 e inspiração 2x por ciclo ao grupo; o Tambor +1 dá x1.75 e +3 uma vez. Para a Gema Bruta, as 2 cópias encostam em 2 armas diferentes; a +1 (bônus x2.2 no vizinho e alcance com diagonais) não compensa | (a) aceitar: em jogo real o espaço é o limite e o teste não mede isso; mudar o teste para comparar no **mesmo herói** · (b) Tambor: só **um instrumento por herói** dispara (2 tambores no mesmo herói não somam) · (c) instrumentos: adiantamento x2 no +1 · (d) Gema Bruta +1: bônus nos vizinhos x2.6 no +1 |
-| Q-13 | P-03 | **Os buffs do Q-10 não moveram Ladino, Patrulheiro e Paladino na sala 18** | Sala 18 (rodada 12 → 13): Ladino 35 → 35% · Patrulheiro 39 → 39% · Paladino 41 → 41% · Mago 61 → 59% · Alquimista 56 → 56% · Bardo 55 → 54% · Guerreiro 53 → 53% · Bárbaro 50 → 50%. Diferença 26 → 23pp. Na sala 3 o Ladino subiu 42 → 47% e o Mago caiu 43 → 35%. Hipótese: na sala 18 as mochilas estão cheias de itens sorteados pelo gerador (12 extras), então a passiva pesa pouco perto dos itens; Mago/Alquimista/Bardo escalam com tempo de luta e com efeitos de grupo | (a) eu investigo onde o Ladino/Patrulheiro/Paladino perdem na sala 18 (dano causado, tempo vivo, item mais usado) antes de mexer em números · (b) buffs maiores só na escala: ex. passiva do Ladino/Patrulheiro/Paladino cresce +10% por duelo jogado · (c) reverter a Sobrecarga do Mago para 70% (o corte pesou nas salas 3/9) |
-| Q-14 | P-01 | **Sala 18 encurtou para 11.6s** (meta 14–18s) | Lutas: 19.4 / 14.9 / **11.6s**. Encurtou porque as armas +2 agora recarregam 26% mais rápido. HP hoje = classe x0.75·(1 + 0.10·d + 0.10·d²) → x3.90 na sala 18 | (a) termo quadrático 0.10 → 0.13 (x0.90 / x1.88 / x4.71; ainda não medido — meço assim que for escolhida) · (b) aceitar ~12s no fim da run · (c) sala 3 também está acima (19.4s): base x0.75 → x0.70 junto com (a) |
+| Q-15 | P-03 | **Efeitos com valor fixo não acompanham o HP. Escalar com a profundidade?** | O HP cresce x0.86 / x1.73 / x4.39 (salas 3 / 9 / 18), mas Veneno e Queimadura são 1 dano/s por stack, o fogo do Flamejante é +2 e o escudo da relíquia do Paladino é 6, sempre. Diagnóstico da sala 18: o Ladino quase nunca morre (4% morre primeiro, vivo 78% da luta), é quem mais aplica Veneno (18.7 golpes com DOT por luta), mas tem o 2º pior dano direto (75/s; Mago 326, Bárbaro 179, Patrulheiro 165). Ladino 46% → 38% → 35% nas salas 3 / 9 / 18 | (a) dano de Veneno/Queimadura por stack x(fator de HP do alvo sem a base 0.70): 1.23 / 2.47 / 6.28 → na prática, DOT escala como o HP · (b) só o Veneno escala (Queimadura e Flamejante ficam) · (c) DOT por stack +1 por duelo jogado (1 / 2 / 4 / 7 nas salas 0 / 3 / 9 / 18) · (d) também escalar o escudo da relíquia do Paladino e o escudo por golpe do Guerreiro do mesmo jeito |
+| Q-16 | P-03 | **O gerador de builds (`progressParty`) sorteia itens sem olhar a classe** | Mochilas na sala 18 (média): Paladino 1.0 arma, 2.1 armaduras, 3.2 catalisadores (dano 53/s, 19% do dano da party); Ladino 2.6 armas corpo a corpo, 0.4 armadura; Mago 2.6 armas mágicas; Patrulheiro 2.2 mascotes, 1.2 armas à distância, 0.5 corpo a corpo na Retaguarda (−20%). Jogador e ghost usam o mesmo gerador, então o resultado das classes depende do sorteio, não só das passivas | (a) gerador com afinidade: 60% dos itens sorteados entre os que a passiva da classe usa (ex.: Paladino relíquias/armaduras **e** armas; Ladino armas pequenas e itens diferentes; Patrulheiro arcos, flechas, comida) · (b) manter aleatório (simula jogador ruim) e corrigir só as passivas · (c) gerador garante no mínimo 2 armas por herói |
+| Q-17 | P-03 | **Patrulheiro causa muito dano mas perde** | Sala 18: 165 de dano/s vivo, 44% do dano da party (2º maior), mas vitória 34%. A party dele gera 163 de cura por luta (Guerreiro 941, Alquimista 1796, Paladino 849), as lutas acabam em 10.9s e ele morre primeiro em 21% das vezes (HP 90, o 3º menor) | (a) HP 90 → 105 · (b) mascotes com provocação leve (atraem 1 em cada 3 ataques à distância) · (c) comida encostada em mascote também cura o Patrulheiro (2 HP por ativação do mascote) · (d) esperar o Q-16 (gerador) antes de mexer |
 
 ### Respostas recebidas
 
@@ -38,16 +38,17 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-10** · 2026-11-18 · Ladino (Veneno 15, 3 por crítico, excedente +80%), Mago (Sobrecarga 78%), Patrulheiro (0.6s), Paladino (relíquia 6) · aplicado na rodada 13 → sala 18 quase não mudou (ver Q-13)
 - **Q-11** · 2026-11-18 · (c) Afiado: +30% de crítico e cada crítico adianta 0.3s a recarga da arma · aplicado na rodada 13 → +23.3pp ✅
 - **P-32 / P-33** · 2026-11-18 · confirmadas (Trovejante +20% de dano; Tambor +2 no próximo golpe, escalando com a fusão)
+- **Q-12** · 2026-11-18 · (a) comparar no mesmo herói + (b) só 1 instrumento por herói toca · aplicado na rodada 14 → Tambor +9.0, fusão empatada ou melhor em todos (negativos dentro do erro). Correção: as 2 cópias já iam para o mesmo herói; o +1 é que podia ir para outro
+- **Q-13** · 2026-11-18 · (c) Sobrecarga 70% + (a) diagnóstico da sala 18 · aplicado na rodada 14 → diagnóstico em `relatorio.md`, novas perguntas Q-15 a Q-17
+- **Q-14** · 2026-11-18 · (c) HP x0.70 e 0.13·d² · aplicado na rodada 14 → 18.6 / 15.3 / 13.3s
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
 
 | Código | Status | Questão | Dados | Proposta / próximo passo |
 |---|---|---|---|---|
-| P-01 | 🟡 | Ritmo das lutas | Rodada 13: **19.4 / 14.9 / 11.6s** (salas 3 / 9 / 18); meta 14–18s | Aguardando **Q-14** |
-| P-03 | 🔴 | Classes por sala | Rodada 13 (melhor posição): diferença **16 / 16 / 23 pp** nas salas 3 / 9 / 18. Sala 18: Ladino 35%, Patrulheiro 39%, Paladino 41% (fracos); Mago 59%, Alquimista 56%, Bardo 54% (fortes) | Aguardando **Q-13** |
-| P-04 | 🔵 | Encantamentos | Rodada 13: 9 de 10 na faixa; Vampírico +17.7 (era +21.3, linha de base mudou) | Remedir na próxima rodada antes de mexer |
-| P-31 | 🟡 | Fundir pior que 2 cópias | Rodada 13: Adaga −5.3, Gema Bruta −7.0, Tambor −14.7pp contra 2 cópias | Aguardando **Q-12** |
+| P-01 | 🔵 | Ritmo das lutas | Rodada 14: **18.6 / 15.3 / 13.3s** (salas 3 / 9 / 18); meta 14–18s; as pontas estão a <1s da faixa | Remedir a cada rodada |
+| P-03 | 🔴 | Classes por sala | Rodada 14: diferença **16 / 17 / 24 pp**. Sala 18: Ladino 35%, Patrulheiro 39%, Paladino 40% (fracos); Mago 59%, Alquimista 56% (fortes). Diagnóstico feito | Aguardando **Q-15, Q-16, Q-17** |
 | P-05 | 🔵 | Itens avançados que não compensam na sala 9 | Rodada 11: Lobo Cinzento +2.0 (−4.3 com Ladino; só cabe tirando o Arco Longo), Gema de Mana +2.7, Rubi Ígneo +10.0 | Lobo: resolvido pelas Bolsas (P-20) ou 2 slots extras no gerador (observação do agente). Remedir depois de Q-07 |
 | P-06 | 🔵 | Alaúde dos Ventos só cabe trocando um item | O kit inicial do Bardo não deixa espaço 2x2 livre | Aceitável enquanto não existir a Bolsa de expansão (P-20); rever com ela |
 
@@ -83,6 +84,8 @@ _Nenhuma pendente._ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
 | Código | Resolvido em | Questão | Solução |
 |---|---|---|---|
+| R-12 | Rodada 14 | Encantamentos desiguais (P-04) | 10 de 10 na faixa +20 a +40pp (Vampírico +19.7, no limite) |
+| R-13 | Rodada 14 | Fundir pior que 2 cópias (P-31) | Teste no mesmo herói + 1 instrumento por herói: fusão empatada ou melhor |
 | R-10 | Rodada 13 | Afiado abaixo da faixa (Q-11) | +30% de crítico e cada crítico adianta 0.3s → +23.3pp |
 | R-11 | Rodada 13 | Interpretações P-32 (Trovejante) e P-33 (Tambor) | Confirmadas; inspiração escala com a fusão |
 | R-09 | Rodada 11 | HP por duelo vencido viraria bola de neve | HP cresce por duelo **jogado** (vitória ou derrota); herói recrutado entra com os duelos do grupo |
