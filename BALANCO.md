@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 10 (Flamejante, Poção de Mana, teste de itens corrigido). Rodada 9 e diagnóstico de duração das lutas abaixo.
+**Última atualização:** 2026-11-18 · Rodada 11 (respostas Q-01 a Q-06 do agente de análise aplicadas).
 
 ## Como os testes são feitos
 
@@ -48,6 +48,69 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Rodada 11 — respostas do agente de análise (Q-01 a Q-06)
+
+| Q | Decisão aplicada |
+|---|---|
+| Q-01 | HP base x(1 + 0.25 por duelo vencido); fusão de armas x1.85 por nível (+1 x1.85 · +2 x3.42 · +3 x6.33) |
+| Q-02 | Catalisadores do mesmo tipo **somam**; tipos diferentes **multiplicam** |
+| Q-03 | Veneno máx. 10 stacks; dano crítico excedente máx. +60% (multiplicador máx. x2.1) |
+| Q-04 | Armazenador 25 de mana · Veloz −20% · Flamejante máx. 4 stacks · Mortal x3 · Afiado +25% · Trovejante 25% |
+| Q-05 | Relatório de itens com colunas "Com Ladino" e "Sem Ladino" |
+| Q-06 | Interpretações confirmadas; Bardo começa com 1 Tambor + Adaga + Poção |
+
+### Duração das lutas e classes por sala (512 composições, 320 lutas)
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** (meta 14–18s) | 26.1s ❌ | **15.8s** ✅ | 7.5s ❌ (era 2.3s) |
+| Guerreiro | Vang 41% | Vang 47% | Vang 53% |
+| Paladino | Vang 38% | Vang 40% | Vang 41% |
+| Bárbaro | Vang 42% | Vang 43% | Vang 51% |
+| Bardo | Meio 28% | Meio 43% | Meio 58% |
+| Ladino | Meio 42% | Meio 37% | Meio 37% |
+| Patrulheiro | Ret 31% | Ret 36% | Ret 43% |
+| Mago | Ret 40% | Ret 52% | Meio 57% |
+| Alquimista | Ret 43% | Ret 50% | Ret 49% |
+| **Diferença** | 14 pp | 16 pp | 21 pp |
+
+- Mago e Alquimista **deixaram de afundar** na sala 18 (40% → 57% e 35% → 49%): com lutas mais longas, mana e poções agem.
+- A meta de duração **não foi atingida** nas salas 3 e 18 → pergunta **Q-07** em `PENDENCIAS.md`, com uma curva testada que dá 19.9s / 16.1s / 13.4s.
+- Bardo caiu para 28% na sala 3 com um Tambor só.
+
+### Encantamentos (sala 3, em todas as armas; meta +20 a +40pp)
+
+| Encantamento | Antes (rodada 10) | Agora |
+|---|---|---|
+| Gélido | +43.0 | **+39.3** ✅ |
+| Flamejante | +43.7 | **+33.7** ✅ |
+| Defensor | +26.0 | **+25.3** ✅ |
+| Vorpal | +23.3 | +19.3 |
+| Armazenador | +51.3 | +18.0 (corte passou do ponto) |
+| Trovejante | +10.0 | +17.0 |
+| Veloz | +46.0 | +16.7 (corte passou do ponto) |
+| Vampírico | +17.3 | +14.7 |
+| Afiado | +9.0 | +13.7 |
+| Mortal | +7.3 | +7.7 (crítico base 5% → x3 quase nunca acontece) |
+
+Seis encantamentos ficaram abaixo de +20pp → pergunta **Q-08**.
+
+### Itens: Com e Sem Ladino (sala 3)
+
+| Item | Com Ladino | Sem Ladino |
+|---|---|---|
+| Aljava | +8.7 | **+0.0** (sem espaço livre encostado no arco da party de referência) |
+| Gema Bruta | +8.7 | +3.3 |
+| Poção de Mana Menor | +8.7 | +4.0 |
+| Pedra de Amolar | +16.7 | +6.3 |
+| Ração de Viagem | +15.7 | **+25.3** |
+| Rubi Ígneo (sala 9) | +0.0 | +10.0 |
+
+Confirma o Q-05: Aljava, Gema Bruta e Poção de Mana valem quase só pelo Combo do Ladino.
+
+> Correção de medição nesta rodada: a party de referência dos testes de itens/encantamentos passou a ter os mesmos
+> duelos vencidos (HP) que os ghosts da sala. Sem isso, ela ficava mais fraca que o oponente e os deltas encolhiam.
 
 ## Rodada 10 — anomalias do relatório de itens (sala 3, 300 lutas)
 
@@ -101,3 +164,4 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| 11 | Respostas Q-01 a Q-06 (HP por duelo, fusão x1.85, catalisadores somam, tetos, encantamentos, Bardo) | 14 / 16 / 21 pp · lutas 26.1 / 15.8 / 7.5s |

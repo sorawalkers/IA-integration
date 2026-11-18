@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · após a rodada 10.
+**Última atualização:** 2026-11-18 · após a rodada 11 (respostas Q-01 a Q-06 aplicadas).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -16,49 +16,46 @@ Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplic
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-01 | P-01 | **Como corrigir o ritmo das lutas no fim da run?** | Duração média: sala 3 = 21.3s · sala 9 = 7.1s · sala 18 = 2.3s. Fusão de armas: dano x2.2 por nível (x4.84 no +2, x10.6 no +3). HP das classes é fixo (65–185). Na sala 18, poções (disparam < 40% HP), mana do Mago, Veneno e a Égide (4s) quase não agem | (a) HP x(1 + 0.4 por duelo vencido) → x2.2 na sala 9, x3.4 na sala 18 · (b) fusão de armas x1.8 por nível em vez de x2.2 · (c) as duas, mais brandas · Qual duração-alvo por sala? (proposta: 15–20s em todas) |
-| Q-02 | P-02 | **Catalisadores devem se multiplicar entre si?** | Hoje cada catalisador multiplica o dano do vizinho: 1 Pedra de Amolar +0 = x1.20; 4 Pedras +0 na mesma arma = x2.07; 4 Pedras +2 (x1.68 cada) = x7.97, em cima do x4.84 da arma +2 | (a) máximo de 3 catalisadores do mesmo tipo por item · (b) bônus do mesmo tipo somam (4 x +20% = +80%) e tipos diferentes multiplicam · (c) manter |
-| Q-03 | P-02 | **Tetos para Veneno e crítico do Ladino?** | Veneno: 1 dano/s por stack, sem máximo (Queimadura tem máx. 5, Ácido máx. 3); stacks aplicados escalam x2.2 por nível de fusão. Crítico acima de 100%: cada 10% excedente = +15% de dano crítico, sem teto | Proposta: Veneno máx. 10 stacks; dano crítico extra máx. +60% |
-| Q-04 | P-04 | **Faixa-alvo para encantamentos e quais ajustar?** | Sala 3, encantamento em todas as armas, delta vs linha de base: Armazenador +51.3pp (87.3%) · Veloz +46.0 · Flamejante +43.7 · Gélido +43.0 · Defensor +26.0 · Vorpal +23.3 · Vampírico +17.3 · Trovejante +10.0 · Afiado +9.0 · Mortal +7.3 | Proposta: faixa +20 a +40pp. Armazenador: custo 15 → 25 de mana. Mortal: críticos x2.5 → x3. Afiado: +15% → +25% de crítico. Trovejante: chance 15% → 25% |
-| Q-05 | P-10 | **O Combo do Ladino deve contar no valor de um item?** | Poção de Mana, Gema Bruta e Aljava deram exatamente +11.7pp, todos melhores encostados na adaga do Ladino (+8% de crítico por item diferente encostado), não pela função do item | (a) mostrar duas colunas: com e sem Ladino · (b) medir sem Ladino · (c) manter (o Combo é parte real do valor) |
-| Q-06 | P-15 a P-18 | **As interpretações abaixo estão corretas?** | Ver seção 3 (Paladino 4s/25%/35%; Tomo Menor e mana 3/4.5/6/7.5; dois Tambores e Palco fora do Meio −8%/−0.15s; Bomba Alquímica) | Confirmar ou corrigir cada uma |
+| Q-07 | P-01 | **Trocar o crescimento de HP linear por uma curva crescente?** A decisão do Q-01 não atinge a meta de 14–18s nas salas 3 e 18 | Com a decisão Q-01 aplicada (HP x(1 + 0.25·duelos), fusão x1.85): lutas de **26.1s / 15.8s / 7.5s** (salas 3 / 9 / 18). O 1º duelo é na sala 3, então qualquer aumento por duelo também alonga o início. A sala 18 encurta também porque a mochila tem 12 itens extras (mais armas), não só pela fusão. Testes de duração (300 lutas entre ghosts):<br>· HP base x0.65, +50%/duelo, fusão x1.85 → 21.7 / 14.3 / 6.8s<br>· HP base x0.65, +75%/duelo, fusão x1.85 → 24.2 / 18.2 / 9.9s<br>· HP base x0.75, +15%/duelo + 10%·duelos², fusão x1.85 → 20.6 / 15.3 / 11.7s<br>· **HP base x0.75, +10%/duelo + 10%·duelos², fusão x1.7 → 19.9 / 16.1 / 13.4s** (HP x0.90 / x1.65 / x3.90 nas salas 3 / 9 / 18) | (a) aplicar a última curva (mais perto da meta) · (b) aceitar ~20s na sala 3 e ~13s na 18 · (c) além do HP, limitar o número de armas que disparam por herói |
+| Q-08 | P-04 | **Como reequilibrar os encantamentos abaixo de +20pp?** | Após Q-04 (sala 3, em todas as armas): Gélido +39.3 · Flamejante +33.7 · Defensor +25.3 (na faixa) · Vorpal +19.3 · Armazenador +18.0 · Trovejante +17.0 · Veloz +16.7 · Vampírico +14.7 · Afiado +13.7 · Mortal +7.7. Os cortes no Armazenador (+51 → +18) e no Veloz (+46 → +17) passaram do ponto. Mortal depende do crítico base de 5%: x3 quase nunca acontece | Proposta: Armazenador 25 → 20 de mana · Veloz −20% → −22% · Mortal: críticos x3 **e** +10% de chance de crítico · Afiado +25% → +30% · Vampírico 20% → 25% · Vorpal: chance 10% → 12% |
 
 ### Respostas recebidas
 
-_Nenhuma ainda. Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`._
+Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
+
+- **Q-01** · 2026-11-18 · (c) combinar brando: HP base x(1 + 0.25 por duelo) e fusão de armas x1.85; meta 14–18s · aplicado na rodada 11 → lutas 26.1 / 15.8 / 7.5s, meta não atingida nas salas 3 e 18 (ver Q-07)
+- **Q-02** · 2026-11-18 · (b) mesmo tipo soma, tipos diferentes multiplicam · aplicado na rodada 11
+- **Q-03** · 2026-11-18 · Veneno máx. 10; dano crítico excedente máx. +60% · aplicado na rodada 11
+- **Q-04** · 2026-11-18 · faixa +20 a +40pp; Armazenador 25 de mana, Veloz −20%, Flamejante máx. 4; Mortal x3, Afiado +25%, Trovejante 25% · aplicado na rodada 11 → 3 de 10 na faixa (ver Q-08)
+- **Q-05** · 2026-11-18 · (a) duas colunas, Com e Sem Ladino · aplicado na rodada 11
+- **Q-06** · 2026-11-18 · P-15, P-16 e P-18 confirmados; P-17 corrigido: Bardo com 1 Tambor + Adaga + Poção · aplicado na rodada 11
+- **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
 
 | Código | Status | Questão | Dados | Proposta / próximo passo |
 |---|---|---|---|---|
-| P-01 | 🟡 | **Lutas encurtam demais com a profundidade** — causa principal do desequilíbrio no fim da run | Duração média: sala 3 = 21.3s · sala 9 = 7.1s · sala 18 = 2.3s. Dano multiplica com a fusão (x4.84 no +2), a vida dos heróis não cresce | Testar **vida crescendo com a profundidade** (ex.: HP x(1 + 0.4 por duelo) → x2.2 na sala 9, x3.4 na sala 18) e/ou fusão de armas mais fraca. Meta: lutas de 15–20s em todas as salas. *Teste ainda não executado.* |
-| P-02 | 🟡 | **Escalonamento sem teto** (ver P-01) | Catalisadores se multiplicam entre si (4 Pedras +2 numa espada ≈ x8 de dano); Veneno sem limite de stacks; crítico excedente do Ladino sem teto | Limitar a 3 catalisadores do mesmo tipo por item (ou somar em vez de multiplicar); Veneno máx. 10 stacks; crítico excedente máx. +60% de dano crítico |
-| P-03 | 🔵 | Classes no fim da run | Rodada 9 (melhor posição): diferença 11 / 18 / 22 pp nas salas 3 / 9 / 18. Sala 18: Mago 40%, Alquimista 35% (fracos); Guerreiro 56%, Patrulheiro 57%, Bardo 57% (fortes). **Não remedido após a rodada 10** | Depende de P-01/P-02; remedir com `npm run balance -- --rooms 3,9,18` depois deles |
-| P-04 | 🔴 | Encantamentos desiguais | Armazenador 87% (+51pp) é o mais forte; Mortal +7pp, Afiado +9pp, Trovejante +10pp são fracos | Decidir: reduzir o Armazenador (custo de mana maior?) e/ou subir Mortal/Afiado/Trovejante |
-| P-05 | 🔵 | Itens avançados que não compensam na sala 9 | Lobo Cinzento −7pp (só cabe tirando o Arco Longo), Gema de Mana ~0, Rubi Ígneo ~0 (mana pesa pouco em lutas de 7s) | Remedir depois de P-01; se continuarem fracos, buff ou mudança de função |
+| P-01 | 🔴 | **Lutas encurtam demais com a profundidade** — causa principal do desequilíbrio no fim da run | Antes: 21.3 / 7.1 / 2.3s. Após Q-01 (rodada 11): **26.1 / 15.8 / 7.5s** (salas 3 / 9 / 18); meta 14–18s | Aguardando **Q-07** (curva crescente testada: 19.9 / 16.1 / 13.4s) |
+| P-03 | 🔵 | Classes por sala | Rodada 11 (melhor posição): diferença **14 / 16 / 21 pp** nas salas 3 / 9 / 18. Sala 18: Paladino 41%, Ladino 37% (fracos); Bardo 58%, Mago 57% (fortes). Sala 3: Bardo 28% (caiu com 1 Tambor só) | Remedir depois de Q-07 |
+| P-04 | 🔴 | Encantamentos desiguais | Após Q-04: 3 de 10 na faixa +20 a +40pp; Mortal +7.7 é o mais fraco | Aguardando **Q-08** |
+| P-05 | 🔵 | Itens avançados que não compensam na sala 9 | Rodada 11: Lobo Cinzento +2.0 (−4.3 com Ladino; só cabe tirando o Arco Longo), Gema de Mana +2.7, Rubi Ígneo +10.0 | Lobo: resolvido pelas Bolsas (P-20) ou 2 slots extras no gerador (observação do agente). Remedir depois de Q-07 |
 | P-06 | 🔵 | Alaúde dos Ventos só cabe trocando um item | O kit inicial do Bardo não deixa espaço 2x2 livre | Aceitável enquanto não existir a Bolsa de expansão (P-20); rever com ela |
 
 ## 2. Ferramenta de teste (medição)
 
 | Código | Status | Questão | Proposta |
 |---|---|---|---|
-| P-10 | 🟡 | **Combo do Ladino distorce o teste de itens**: Poção de Mana, Gema Bruta e Aljava deram o mesmo +11.7pp porque o ganho vem do Ladino (+8% de crítico por item diferente encostado), não do item | Medir itens também numa party sem Ladino e mostrar as duas colunas, ou descontar o efeito do Combo |
 | P-11 | 🔵 | Ghosts são gerados localmente (70% das vezes com a classe sugerida para cada posição) | Placeholder até existir o backend de PvP (P-22); os números absolutos dependem dessa mistura |
 
 ## 3. Interpretações feitas sem definição exata (validar)
 
-| Código | Status | O que foi interpretado |
-|---|---|---|
-| P-15 | 🔴 | Paladino, "armadura/relíquia ativa": ativa a cada 4s; gera 25% do escudo da armadura (relíquia: 4) e passa 35% ao aliado com menos HP |
-| P-16 | 🔴 | Mago: criado o item básico **Tomo Menor** para a passiva funcionar desde o início; mana dos cajados 3 → 4.5 → 6 → 7.5 por nível (a proposta original citava 15/22/30) |
-| P-17 | 🔴 | Bardo: começa com **dois Tambores no Palco**; fora do Meio o Palco dá −8% e −0.15s (a proposta só definia o Meio) |
-| P-18 | 🔴 | Alquimista: **Bomba Alquímica** (exclusiva, à distância, cura o aliado mais ferido em 50% do dano, aplica Ácido) no lugar do "Cetro de Luz" |
+_Nenhuma pendente. P-15 a P-18 confirmadas no Q-06 (P-17 corrigido)._
 
 ## 4. Funcionalidades não implementadas
 
 | Código | Status | Funcionalidade |
 |---|---|---|
-| P-20 | ⚪ | **Bolsa de expansão** de mochila (item fora da loja até existir a mecânica) |
+| P-20 | ⚪ | **Bolsa de expansão** de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
 | P-21 | ⚪ | **Receitas mágicas** (Fase 2): combinações de itens encostados viram itens novos |
 | P-22 | ⚪ | **PvP assíncrono real**: backend para salvar builds de jogadores; hoje o ghost é gerado localmente |
 | P-23 | ⚪ | **Emboscada PvE** com combate de verdade (hoje só dá ouro) |
@@ -76,6 +73,10 @@ _Nenhuma ainda. Formato: `Q-xx · data · resposta resumida · decisão aplicada
 
 | Código | Resolvido em | Questão | Solução |
 |---|---|---|---|
+| R-05 | Rodada 11 | Escalonamento sem teto (P-02) | Catalisadores do mesmo tipo somam; Veneno máx. 10; crítico excedente máx. +60% (Q-02, Q-03) |
+| R-06 | Rodada 11 | Combo do Ladino distorcia o teste de itens (P-10) | Colunas Com e Sem Ladino no relatório (Q-05) |
+| R-07 | Rodada 11 | Interpretações P-15 a P-18 | Confirmadas; Bardo com 1 Tambor + Adaga + Poção (Q-06) |
+| R-08 | Rodada 11 | Referência dos testes de itens mais fraca que os ghosts | Party de referência com os mesmos duelos (HP) que os ghosts da sala |
 | R-01 | Rodada 10 | Flamejante quebrado (97.7%) | Queimadura 1 dano/s por stack, máx. 5 → 79.7% |
 | R-02 | Rodada 10 | Aljava, Ração e Poção de Mana com +0.0pp | Era o teste (party sem arcos/mascotes); itens agora testados em 3 parties. Poção de Mana dispara abaixo de 50% |
 | R-03 | Rodada 10 | Alaúde "sem espaço" e avançados ~0% na sala 9 | Teste troca o item mais dispensável; avançados medidos com party de referência evoluída e item +1 |
