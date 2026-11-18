@@ -4,9 +4,25 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · após a rodada 15 (respostas Q-15 a Q-17 aplicadas).
+**Última atualização:** 2026-11-18 · início da fase de construção de mecânicas (Q-18 a Q-20 pausadas; Q-21 a Q-27 abertas).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
+
+## Fase atual: construção de mecânicas (decisão do usuário, 2026-11-18)
+
+**Motivo:** cada ajuste de número estava criando dois problemas novos, e cada mecânica grande nova (bolsa, venda, receitas…)
+muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para depois que as mecânicas estiverem fechadas**.
+
+1. **Fase 1 — fechar as mecânicas** (agora): implementar o que falta (perguntas Q-21 a Q-26). Depois de cada mecânica nova,
+   o painel roda só para pegar **absurdos**: classe com mais de 70% ou menos de 25% de vitória, lutas com menos de 8s, um item
+   que domina tudo. Diferenças de 3–5pp **não** são corrigidas nesta fase.
+2. **Fase 2 — congelar o conteúdo e calibrar a régua:** gerador de builds realista (bolsas, venda/troca, economia) e congelado;
+   metas por papel (Q-27).
+3. **Fase 3 — balanceamento fino:** uma mudança por vez, cada uma medida sozinha contra o painel inteiro (antes/depois). Se uma
+   mudança tirar da meta algo que estava dentro, ela não entra e volta como pergunta. Diferenças dentro do erro (±2–3pp) não contam.
+
+**Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
+de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resultado delas muda com bolsa, venda e economia).
 
 ## 0. Perguntas para o agente de análise
 
@@ -16,9 +32,21 @@ Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplic
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-18 | P-03 | **Com o gerador com afinidade, o Mago domina a sala 18** | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
-| Q-19 | P-03 | **Paladino e Patrulheiro não respondem aos buffs** | Sala 18 (rodada 14 → 15): Paladino 40 → 41%, Patrulheiro 39 → 38%. **Paladino:** escudo/luta subiu 222 → 1003 com o fator, mas o dano continua 54/s; a mochila (cruz de 11 casas) já começa com 6 itens, então o gerador consegue pôr só ~1 arma. **Patrulheiro:** é quem mais causa dano depois do Mago (190/s, **50% do dano da party**), mas vence 32%; morre primeiro em 20% das lutas e a party dele cura pouco | Paladino: (a) kit inicial menor (tirar Pedra de Amolar e Gibão; abre 3 casas) · (b) Égide da Fé também dá +10% de dano às armas por armadura encostada. Patrulheiro: (c) HP 90 → 110 · (d) mascote alimentado também dá 3 de escudo (x fator) ao Patrulheiro |
-| Q-20 | P-04 / P-31 | **Resíduos depois da afinidade** | A linha de base da sala 3 caiu de 30% para 25% (ghosts mais fortes), e todos os deltas de encantamento subiram: Flamejante e Armazenador +40.7 (no teto), Vorpal **+19.3** e Vampírico **+17.7** (abaixo da faixa). Fusão no mesmo herói: Maça +1 **−6.0**, Cajado de Aprendiz +1 **−7.7** (o Cajado dá mana ao Mago por ativação: 2 cópias = 2 ativações; o +1 dá 1.5x de mana com 13% menos recarga ≈ 1.72x). Erro da medição ±2.2 a ±2.8pp | (a) Vorpal 12% → 14% e Vampírico 25% → 30% · (b) mana do Cajado por ativação x1.75 por nível de fusão (em vez de +50%) · (c) esperar a próxima rodada: a linha de base vai mudar de novo com o Q-18 |
+| Q-21 | P-20 | **Bolsa de Expansão: como funciona?** | Hoje a mochila é fixa e o item que não cabe é descartado pelo gerador. Ocupação média na sala 18 (casas usadas / total): Guerreiro 13/16 · Paladino **9.5/11** · Bárbaro 12/15 · Bardo 11/16 · Ladino 11/14 · Patrulheiro **12/14** · Mago 13/15 · Alquimista 10/12. Paladino (cruz de 11 casas, kit inicial ocupa 6) fica com ~1 arma; o Lobo (2x2) quase nunca cabe no Patrulheiro | Tamanho: (a) +1 linha na mochila · (b) bolsa como item (2x2) que vira 4 casas novas encostadas · (c) +2 casas escolhidas pelo jogador. Preço/onde: Mercador, 5–8 PO. Limite por herói: 1 · 2 · sem limite. As casas da bolsa contam para adjacência? Para Elos Dourados? |
+| Q-22 | — | **Economia da run: quanto ouro o jogador ganha e gasta?** | Hoje: começa com 20 PO; só a Emboscada dá ouro (+12); a Armadilha tira 3 (e dá 1 item); duelo **não dá ouro** (nem vitória, nem derrota); preços 2–12 PO; rolar a loja 2 PO; vender devolve parte do preço (`sellValue`). O gerador de builds chuta "2 itens por duelo" sem ouro | (a) ouro fixo por sala (ex.: 5 PO) + duelo (ex.: 8 PO vitória / 6 PO derrota, para não virar bola de neve) · (b) juros (+1 PO a cada 10 guardados, máx. 5) · (c) só eventos dão ouro. Também: quanto vale vender (50% do preço?) e itens fundidos valem mais na venda? |
+| Q-23 | — | **Venda e troca no gerador de builds** | A venda já existe na interface (arrastar para a área de venda), mas o gerador ignora: quando o item novo não cabe, ele é jogado fora. Um jogador real vende o item mais fraco e põe o novo. Isso afeta o resultado das classes de mochila pequena (Paladino, Patrulheiro) | (a) gerador troca o item que menos contribui (mede o ganho antes/depois) · (b) troca por regra simples (vende sempre o item +0 mais barato) · (c) gerador funde cópias iguais automaticamente quando dá (jogador real faria) |
+| Q-24 | P-21 | **Receitas mágicas: entram nesta versão?** | Previsto no `CLAUDE.md` (Fase 2): itens encostados viram item novo ao avançar de sala (ex.: Espada Longa + Rubi → Língua de Fogo). Nada implementado | Escopo: (a) sim, 6–10 receitas na primeira versão · (b) adiar para depois do lançamento. Gatilho: (c) automático ao avançar de sala · (d) evento próprio (ex.: Altar/Alquimia) · (e) o jogador escolhe na Fogueira & Bigorna. Os ingredientes somem? A receita dá item exclusivo de classe? |
+| Q-25 | P-23 | **Emboscada com combate de verdade (PvE)** | Hoje as 2 emboscadas ("Cubo Gelatinoso", "Esqueletos") só dão +12 PO, sem luta. Os eventos atuais são 4: Mercador, Fogueira & Bigorna, Corredor Armadilhado, Emboscada | (a) luta contra monstros pré-montados (um por emboscada), escalando com a sala · (b) derrota custa HP para o próximo duelo, ouro, ou uma tocha? · (c) recompensa: ouro, item, escolha entre 3 itens. Quer outros tipos de evento (Altar, Santuário, Tesouro, NPC)? |
+| Q-26 | — | **Que outras mecânicas e conteúdos estão planejados?** | Conteúdo atual: 8 classes, 33 itens (21 básicos, 12 avançados; 10 exclusivos de classe), 10 encantamentos, 4 tipos de evento, fusão até +3, 3 posições. O usuário pediu a lista completa antes de balancear | Lista aberta — incluir tudo, mesmo só ideia: classes novas? mais itens por categoria? raridades/itens lendários? chefes? habilidades ativas? mascotes novos? eventos? itens que mudam com a posição? Para cada um: entra antes ou depois do balanceamento fino? |
+| Q-27 | P-03 | **Critério final de "balanceado" (para a Fase 2)** | Até aqui todas as classes foram julgadas só por vitória; o Paladino foi apontado como fraco por causar pouco dano, mas tanque não precisa causar dano | (a) faixa de vitória por classe na melhor posição: 44–56% nas salas 3, 9 e 18 · (b) tanques julgados também por dano absorvido, escudo dado e aliados vivos no fim · (c) duração 14–18s; encantamentos +20 a +40pp; fusão ≥ 2 cópias · (d) a diferença entre a melhor e a pior classe ≤ 12pp |
+
+**Pausadas até o fim da fase de mecânicas** (o resultado muda com bolsa, venda e economia):
+
+| Código | Ref. | Pergunta | Dados para decidir | Opções |
+|---|---|---|---|---|
+| Q-18 | P-03 | ⏸ **Com o gerador com afinidade, o Mago domina a sala 18** | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
+| Q-19 | P-03 | ⏸ **Paladino e Patrulheiro não respondem aos buffs** | Sala 18 (rodada 14 → 15): Paladino 40 → 41%, Patrulheiro 39 → 38%. **Paladino:** escudo/luta subiu 222 → 1003 com o fator, mas o dano continua 54/s; a mochila (cruz de 11 casas) já começa com 6 itens, então o gerador consegue pôr só ~1 arma. **Patrulheiro:** é quem mais causa dano depois do Mago (190/s, **50% do dano da party**), mas vence 32%; morre primeiro em 20% das lutas e a party dele cura pouco | Paladino: (a) kit inicial menor (tirar Pedra de Amolar e Gibão; abre 3 casas) · (b) Égide da Fé também dá +10% de dano às armas por armadura encostada. Patrulheiro: (c) HP 90 → 110 · (d) mascote alimentado também dá 3 de escudo (x fator) ao Patrulheiro |
+| Q-20 | P-04 / P-31 | ⏸ **Resíduos depois da afinidade** | A linha de base da sala 3 caiu de 30% para 25% (ghosts mais fortes), e todos os deltas de encantamento subiram: Flamejante e Armazenador +40.7 (no teto), Vorpal **+19.3** e Vampírico **+17.7** (abaixo da faixa). Fusão no mesmo herói: Maça +1 **−6.0**, Cajado de Aprendiz +1 **−7.7** (o Cajado dá mana ao Mago por ativação: 2 cópias = 2 ativações; o +1 dá 1.5x de mana com 13% menos recarga ≈ 1.72x). Erro da medição ±2.2 a ±2.8pp | (a) Vorpal 12% → 14% e Vampírico 25% → 30% · (b) mana do Cajado por ativação x1.75 por nível de fusão (em vez de +50%) · (c) esperar a próxima rodada: a linha de base vai mudar de novo com o Q-18 |
 
 ### Respostas recebidas
 
@@ -51,7 +79,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 | Código | Status | Questão | Dados | Proposta / próximo passo |
 |---|---|---|---|---|
 | P-01 | 🔵 | Ritmo das lutas | Rodada 14: **18.6 / 15.3 / 13.3s** (salas 3 / 9 / 18); meta 14–18s; as pontas estão a <1s da faixa | Remedir a cada rodada |
-| P-03 | 🔴 | Classes por sala | Rodada 15: diferença **17 / 19 / 31 pp**. Sala 18: Mago 68% (forte); Patrulheiro 38%, Paladino 41%, Bardo 41%, Ladino 41% (fracos) | Aguardando **Q-18, Q-19** |
+| P-03 | ⚪ | Classes por sala | Rodada 15: diferença **17 / 19 / 31 pp**. Sala 18: Mago 68% (forte); Patrulheiro 38%, Paladino 41%, Bardo 41%, Ladino 41% (fracos) | **Pausado** até o fim da fase de mecânicas (Q-18, Q-19 pausadas) |
 | P-05 | 🔵 | Itens avançados que não compensam na sala 9 | Rodada 11: Lobo Cinzento +2.0 (−4.3 com Ladino; só cabe tirando o Arco Longo), Gema de Mana +2.7, Rubi Ígneo +10.0 | Lobo: resolvido pelas Bolsas (P-20) ou 2 slots extras no gerador (observação do agente). Remedir depois de Q-07 |
 | P-06 | 🔵 | Alaúde dos Ventos só cabe trocando um item | O kit inicial do Bardo não deixa espaço 2x2 livre | Aceitável enquanto não existir a Bolsa de expansão (P-20); rever com ela |
 
@@ -69,10 +97,10 @@ _Nenhuma pendente._ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
 | Código | Status | Funcionalidade |
 |---|---|---|
-| P-20 | ⚪ | **Bolsa de expansão** de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
-| P-21 | ⚪ | **Receitas mágicas** (Fase 2): combinações de itens encostados viram itens novos |
+| P-20 | 🔴 | **Bolsa de expansão** — ver **Q-21**. de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
+| P-21 | 🔴 | **Receitas mágicas** — ver **Q-24**. (Fase 2): combinações de itens encostados viram itens novos |
 | P-22 | ⚪ | **PvP assíncrono real**: backend para salvar builds de jogadores; hoje o ghost é gerado localmente |
-| P-23 | ⚪ | **Emboscada PvE** com combate de verdade (hoje só dá ouro) |
+| P-23 | 🔴 | **Emboscada PvE** — ver **Q-25**. com combate de verdade (hoje só dá ouro) |
 | P-24 | ⚪ | **Telas de fim de run** (vitória com 10 duelos / derrota sem tochas); hoje volta para a Taverna |
 | P-25 | ⚪ | **Arte final** (retratos, ilustrações de eventos, ícones). Os ícones atuais são de game-icons.net (CC BY 3.0): se o jogo for publicado, os créditos precisam aparecer no jogo |
 | P-26 | ⚪ | Ao arrastar, o "fantasma" do item usa o tamanho de célula da origem, não o da mochila de destino (só visual) |

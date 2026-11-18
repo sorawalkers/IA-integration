@@ -5,7 +5,13 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 15 (respostas Q-15 a Q-17 aplicadas).
+**Última atualização:** 2026-11-18 · Rodada 15 · **início da fase de construção de mecânicas.**
+
+> **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
+> venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
+> Nesta fase as simulações continuam rodando, mas só para pegar absurdos (classe acima de 70% ou abaixo de 25%, lutas com menos
+> de 8s, item dominante). Os números das rodadas abaixo são **provisórios**: o espaço da mochila ainda é fixo e o gerador de
+> builds ainda não vende nem troca itens.
 
 ## Como os testes são feitos
 
@@ -407,6 +413,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| — | **Pausa:** início da fase de construção de mecânicas; Q-18 a Q-20 pausadas | — |
 | 15 | Q-15 a Q-17 (fator de profundidade, gerador com afinidade, cura do mascote) | 17 / 19 / 31 pp · lutas 18.8 / 14.9 / 13.0s |
 | 14 | Q-12 a Q-14 (1 instrumento por herói, fusão no mesmo herói, Sobrecarga 70%, HP x0.70 e 0.13·d²) | 16 / 17 / 24 pp · lutas 18.6 / 15.3 / 13.3s |
 | 13 | Q-09 a Q-11 (fusão −13%, instrumentos +75%, Ladino/Mago/Patrulheiro/Paladino, Afiado) | 16 / 16 / 23 pp · lutas 19.4 / 14.9 / 11.6s |
