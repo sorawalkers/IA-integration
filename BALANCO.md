@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 9 (seis ajustes de escalonamento) + diagnóstico de duração das lutas.
+**Última atualização:** 2026-11-18 · Rodada 10 (Flamejante, Poção de Mana, teste de itens corrigido). Rodada 9 e diagnóstico de duração das lutas abaixo.
 
 ## Como os testes são feitos
 
@@ -49,6 +49,22 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
 
+## Rodada 10 — anomalias do relatório de itens (sala 3, 300 lutas)
+
+| Problema | Causa encontrada | Correção | Resultado |
+|---|---|---|---|
+| Flamejante quebrado (97.7%, +64pp) | cada golpe de cada arma somava 1 stack de Queimadura (2 dano/s), sem limite | Queimadura **1 dano/s por stack, máx. 5 stacks** | **79.7%** (+43.7pp), junto de Veloz 82% e Gélido 79% |
+| Aljava, Ração e Poção de Mana com +0.0pp | **artefato do teste:** a party de referência (Mago/Bardo/Guerreiro) não tem arcos nem mascotes; a Poção de Mana só disparava abaixo de 25% de mana | itens testados em **3 parties de referência** (+ Patrulheiro/Bardo/Guerreiro e Alquimista/Ladino/Paladino), fica a melhor; Poção de Mana dispara **abaixo de 50%** | Ração +19.3pp, Aljava +11.7pp, Poção de Mana +11.7pp |
+| Alaúde "sem espaço" | item 2x2 e a mochila inicial do Bardo não tem 2x2 livre (bolsas expandidas ainda não existem) | sem espaço → o teste **troca** o item mais dispensável do herói | Alaúde +11.7pp (no lugar de um Tambor) |
+| Itens avançados ~0% na sala 9 | a party de referência estava com o kit inicial contra ghosts da sala 9 | avançados medidos na **sala 9 com a party de referência evoluída** (mesmo gerador dos ghosts) e o item em +1 | Machado Grande +33.7, Espada Longa +20.3, Cajado Runado +20.3, Arco Longo +19.3, Pergaminho +16.0, Alaúde +11.7 |
+
+Observações da rodada 10:
+- **Armazenador** virou o encantamento mais forte (87.3%, +51pp). Mortal, Afiado e Trovejante são os mais fracos (+7 a +10pp).
+- Poção de Mana, Gema Bruta e Aljava deram exatamente o mesmo resultado (+11.7pp) na party com Ladino: o ganho
+  vem do **Combo do Ladino** (+8% de crítico por item diferente encostado na adaga), não da função do item.
+- **Lobo Cinzento** (−7.3pp) e **Gema de Mana**/**Rubi** (~0) não compensam na sala 9: o Lobo só coube tirando o Arco
+  Longo, e a mana quase não pesa em lutas de 7s (ver diagnóstico de duração abaixo).
+
 ## Diagnóstico principal: as lutas encurtam demais no fim da run
 
 | Sala | Duração média de uma luta |
@@ -84,3 +100,4 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 7 | Grito de Guerra (Bárbaro), Ataque Coordenado (Patrulheiro) | 4 pp (sala 3, sem progressão do jogador) |
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
+| 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
