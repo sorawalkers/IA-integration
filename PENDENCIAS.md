@@ -23,7 +23,7 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 
 **Roteiro da Fase 1** (✅ feito · ⏳ em andamento · ⏸ esperando dados):
 ✅ Nível e XP (HP x1.25 por nível) · ✅ Economia e venda · ✅ Mochila expansível (níveis 3/6/9 + Bolsa de Couro) ·
-✅ Gerador realista (casas extras, funde e vende quando enche) · ⏳ Botão [FUNDIR] entre itens encostados ·
+✅ Gerador realista (casas extras, funde e vende quando enche) · ✅ Botão [FUNDIR] entre itens idênticos encostados (o arraste sobre o item igual continua valendo) ·
 ⏸ Feats (Q-28) · ⏸ 8 receitas (Q-29) · ⏸ 12 eventos (Q-30) · ⏸ Emboscada PvE (Q-31).
 
 **Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
@@ -79,7 +79,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-21** · 2026-11-18 · mochila híbrida: +2 casas na borda nos níveis 3, 6 e 9 (contam para adjacência e Elos) + Bolsa de Couro (+2 casas, 6 PO, rara, ~15% por loja, sem limite) · implementado
 - **Q-22** · 2026-11-18 · ouro inicial 20; +4 PO por sala; duelo +8 PO vitória / +6 PO derrota; venda = 50% do preço base x cópias fundidas (sem contar encantamento) · implementado
 - **Q-23** · 2026-11-18 · gerador funde automaticamente e vende itens +0 sem afinidade quando a mochila enche · implementado
-- **Q-24** · 2026-11-18 · fusão manual com botão [FUNDIR] entre itens idênticos (ou ingredientes de receita) encostados; 8 receitas mágicas que herdam o encantamento · **pendente**: botão (próximo passo) e receitas (faltam os dados, Q-29)
+- **Q-24** · 2026-11-18 · fusão manual com botão [FUNDIR] entre itens idênticos (ou ingredientes de receita) encostados; 8 receitas mágicas que herdam o encantamento · botão [FUNDIR] implementado; **receitas pendentes** (faltam os dados, Q-29)
 - **Q-25** · 2026-11-18 · Emboscada com combate real (vitória +8 PO e 1 de 3 itens; derrota +3 PO, sem perder tocha nem ouro); 12 eventos estilo The Bazaar · **pendente**: faltam os monstros (Q-31) e os efeitos dos eventos (Q-30)
 - **Q-26** · 2026-11-18 · nível 1 a 10 (XP 0, 3, 7, 12, 18, 25, 33, 42, 52, 63; +1 XP por sala, +2 vitória / +1 derrota em duelo ou emboscada), HP base +25% por nível no lugar do HP por duelo; Feats na subida de nível · nível/XP/HP implementados; **Feats pendentes** (falta a tabela, Q-28; números do HP em Q-32)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
