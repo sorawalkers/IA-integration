@@ -1,6 +1,6 @@
 # OSR Battler — Relatório da simulação
 
-> Gerado por `npm run balance --fights 300` em 2026-11-18T18:21:07.790Z · commit `67b87ba`
+> Gerado por `npm run balance --fights 300` em 2026-11-18T18:22:30.522Z · commit `67b87ba`
 > Resumo e histórico das rodadas: `docs/BALANCO.md` (https://osr.valiran.party).
 
 Linha de base **[Mago, Bardo, Guerreiro]** contra ghosts da **sala 3**: 36.0% de vitória, 17.2s por luta (300 lutas por variante).
@@ -26,36 +26,36 @@ Linha de base **[Mago, Bardo, Guerreiro]** contra ghosts da **sala 3**: 36.0% de
 | Bomba Alquímica | basic | 54.3% | +36.7pp | 2.9 | 12.2 (3 PO) | ▲ forte | com Alquimista · party Alquimista/Bardo/Guerreiro · sala 3 · melhor em: Alquimista |
 | Adaga | basic | 67.7% | +35.3pp | 2.8 | 11.8 (3 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
 | Espada Curta | basic | 67.3% | +35.0pp | 2.8 | 8.8 (4 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
+| Machado Grande | advanced | 86.7% | +33.7pp | 2.8 | 3.4 (10 PO) | ▲ forte | com Bárbaro · party Patrulheiro/Bardo/Bárbaro · sala 9 (item +1, party evoluída) · melhor em: Bárbaro (no lugar de Ração de Viagem) |
 | Cajado de Aprendiz | basic | 91.0% | +28.7pp | 2.7 | 7.2 (4 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Arco Curto | basic | 64.0% | +28.0pp | 2.8 | 7.0 (4 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
 | Tomo Menor | basic | 86.3% | +24.0pp | 2.6 | 6.0 (4 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Pedra de Amolar | basic | 84.0% | +21.7pp | 2.4 | 7.2 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Poção de Vida Menor | basic | 83.0% | +20.7pp | 2.3 | 6.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Alquimista |
+| Espada Longa | advanced | 85.7% | +20.3pp | 2.6 | 2.5 (8 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro |
+| Cajado Runado | advanced | 85.7% | +20.3pp | 2.8 | 2.3 (9 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo |
 | Tambor de Guerra | basic | 82.0% | +19.7pp | 2.3 | 4.9 (4 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Arco Longo | advanced | 84.7% | +19.3pp | 2.7 | 2.8 (7 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo |
 | Ração de Viagem | basic | 51.7% | +19.3pp | 2.3 | 9.7 (2 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Patrulheiro |
+| Pergaminho de Fogo | advanced | 81.3% | +16.0pp | 2.5 | 4.0 (4 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro |
 | Gazuas | basic | 76.0% | +13.7pp | 2.0 | 4.6 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Broquel | basic | 75.7% | +13.3pp | 2.0 | 4.4 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Amuleto de Madeira | basic | 75.3% | +13.0pp | 1.9 | 4.3 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Poção de Mana Menor | basic | 74.0% | +11.7pp | 1.9 | 3.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Alaúde dos Ventos | advanced | 77.0% | +11.7pp | 2.4 | 1.0 (12 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo (no lugar de Tambor de Guerra) |
 | Gema Bruta | basic | 74.0% | +11.7pp | 1.9 | 3.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Aljava | basic | 74.0% | +11.7pp | 1.9 | 3.9 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
 | Gibão de Couro | basic | 70.3% | +8.0pp | 1.6 | 2.7 (3 PO) | ▲ forte | party Alquimista/Ladino/Paladino · sala 3 · melhor em: Ladino |
+| Poção de Vida Maior | advanced | 73.0% | +7.7pp | 1.5 | 1.5 (5 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro |
 | Erva Curativa | basic | 39.7% | +7.3pp | 1.5 | 3.7 (2 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 3 · melhor em: Guerreiro |
+| Escudo Torre | advanced | 98.3% | +7.0pp | 1.6 | 0.8 (9 PO) | ▲ forte | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Guerreiro |
+| Elmo de Ferro | advanced | 71.0% | +5.7pp | 1.6 | 1.1 (5 PO) | ▲ forte | party Patrulheiro/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Patrulheiro |
+| Grimório | advanced | 74.7% | +5.3pp | 2.3 | 0.5 (11 PO) | ▲ forte | com Mago · party Mago/Ladino/Paladino · sala 9 (item +1, party evoluída) · melhor em: Mago (no lugar de Cajado Runado) |
 | Rato de Cripta | basic | 45.7% | +2.3pp | 2.4 | 0.8 (3 PO) |  | com Patrulheiro · party Patrulheiro/Ladino/Paladino · sala 3 · melhor em: Patrulheiro |
-| Cajado Runado | advanced | 0.3% | +0.3pp | 0.3 | 0.0 (9 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Grimório | advanced | 0.3% | +0.3pp | 0.3 | 0.0 (11 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Espada Longa | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (8 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Arco Longo | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (7 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Pergaminho de Fogo | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (4 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Elmo de Ferro | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (5 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Poção de Vida Maior | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (5 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Escudo Torre | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (9 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Guerreiro |
-| Machado Grande | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (10 PO) |  | com Bárbaro · party Mago/Bardo/Bárbaro · sala 9 · melhor em: Bárbaro |
-| Alaúde dos Ventos | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (12 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Bardo (no lugar de Tambor de Guerra) |
-| Lobo Cinzento | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (10 PO) |  | com Patrulheiro · party Patrulheiro/Bardo/Guerreiro · sala 9 · melhor em: Patrulheiro |
-| Gema de Mana | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (5 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Rubi Ígneo | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (5 PO) |  | party Mago/Bardo/Guerreiro · sala 9 · melhor em: Mago |
-| Símbolo Sagrado | advanced | 0.0% | +0.0pp | 0.0 | 0.0 (6 PO) |  | com Paladino · party Mago/Bardo/Paladino · sala 9 · melhor em: Paladino |
+| Símbolo Sagrado | advanced | 69.7% | +2.0pp | 0.9 | 0.3 (6 PO) |  | party Alquimista/Ladino/Paladino · sala 9 (item +1, party evoluída) · melhor em: Paladino |
+| Rubi Ígneo | advanced | 92.0% | +0.7pp | 0.7 | 0.1 (5 PO) |  | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Mago |
+| Lobo Cinzento | advanced | 59.7% | -7.3pp | 2.5 | -0.7 (10 PO) | ▼ fraco | com Patrulheiro · party Patrulheiro/Ladino/Paladino · sala 9 (item +1, party evoluída) · melhor em: Patrulheiro (no lugar de Arco Longo) |
+| Gema de Mana | advanced | 91.3% | +0.0pp | 0.0 | 0.0 (5 PO) |  | party Mago/Bardo/Guerreiro · sala 9 (item +1, party evoluída) · melhor em: Bardo |
 
 ## Encantamentos (em todas as armas)
 
@@ -91,4 +91,4 @@ Linha de base **[Mago, Bardo, Guerreiro]** contra ghosts da **sala 3**: 36.0% de
 | Erva Curativa +1 | Catalisador | 45.3% | +0.0pp | 0.0 |  | vs 2x Erva Curativa: 45% |
 | Gema Bruta +1 | Catalisador | 61.3% | +0.0pp | 0.8 |  | vs 2x Gema Bruta: 61% |
 
-_Tempo de simulação: 55.8s._
+_Tempo de simulação: 57.2s._
