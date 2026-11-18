@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · início da fase de construção de mecânicas (Q-18 a Q-20 pausadas; Q-21 a Q-27 abertas).
+**Última atualização:** 2026-11-18 · Fase 1, passo 1 (nível/XP, economia, mochila expansível e gerador realista implementados; Q-21 a Q-26 respondidas).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -21,6 +21,11 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 3. **Fase 3 — balanceamento fino:** uma mudança por vez, cada uma medida sozinha contra o painel inteiro (antes/depois). Se uma
    mudança tirar da meta algo que estava dentro, ela não entra e volta como pergunta. Diferenças dentro do erro (±2–3pp) não contam.
 
+**Roteiro da Fase 1** (✅ feito · ⏳ em andamento · ⏸ esperando dados):
+✅ Nível e XP (HP x1.25 por nível) · ✅ Economia e venda · ✅ Mochila expansível (níveis 3/6/9 + Bolsa de Couro) ·
+✅ Gerador realista (casas extras, funde e vende quando enche) · ⏳ Botão [FUNDIR] entre itens encostados ·
+⏸ Feats (Q-28) · ⏸ 8 receitas (Q-29) · ⏸ 12 eventos (Q-30) · ⏸ Emboscada PvE (Q-31).
+
 **Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
 de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resultado delas muda com bolsa, venda e economia).
 
@@ -32,12 +37,11 @@ de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resul
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-21 | P-20 | **Bolsa de Expansão: como funciona?** | Hoje a mochila é fixa e o item que não cabe é descartado pelo gerador. Ocupação média na sala 18 (casas usadas / total): Guerreiro 13/16 · Paladino **9.5/11** · Bárbaro 12/15 · Bardo 11/16 · Ladino 11/14 · Patrulheiro **12/14** · Mago 13/15 · Alquimista 10/12. Paladino (cruz de 11 casas, kit inicial ocupa 6) fica com ~1 arma; o Lobo (2x2) quase nunca cabe no Patrulheiro | Tamanho: (a) +1 linha na mochila · (b) bolsa como item (2x2) que vira 4 casas novas encostadas · (c) +2 casas escolhidas pelo jogador. Preço/onde: Mercador, 5–8 PO. Limite por herói: 1 · 2 · sem limite. As casas da bolsa contam para adjacência? Para Elos Dourados? |
-| Q-22 | — | **Economia da run: quanto ouro o jogador ganha e gasta?** | Hoje: começa com 20 PO; só a Emboscada dá ouro (+12); a Armadilha tira 3 (e dá 1 item); duelo **não dá ouro** (nem vitória, nem derrota); preços 2–12 PO; rolar a loja 2 PO; vender devolve parte do preço (`sellValue`). O gerador de builds chuta "2 itens por duelo" sem ouro | (a) ouro fixo por sala (ex.: 5 PO) + duelo (ex.: 8 PO vitória / 6 PO derrota, para não virar bola de neve) · (b) juros (+1 PO a cada 10 guardados, máx. 5) · (c) só eventos dão ouro. Também: quanto vale vender (50% do preço?) e itens fundidos valem mais na venda? |
-| Q-23 | — | **Venda e troca no gerador de builds** | A venda já existe na interface (arrastar para a área de venda), mas o gerador ignora: quando o item novo não cabe, ele é jogado fora. Um jogador real vende o item mais fraco e põe o novo. Isso afeta o resultado das classes de mochila pequena (Paladino, Patrulheiro) | (a) gerador troca o item que menos contribui (mede o ganho antes/depois) · (b) troca por regra simples (vende sempre o item +0 mais barato) · (c) gerador funde cópias iguais automaticamente quando dá (jogador real faria) |
-| Q-24 | P-21 | **Receitas mágicas: entram nesta versão?** | Previsto no `CLAUDE.md` (Fase 2): itens encostados viram item novo ao avançar de sala (ex.: Espada Longa + Rubi → Língua de Fogo). Nada implementado | Escopo: (a) sim, 6–10 receitas na primeira versão · (b) adiar para depois do lançamento. Gatilho: (c) automático ao avançar de sala · (d) evento próprio (ex.: Altar/Alquimia) · (e) o jogador escolhe na Fogueira & Bigorna. Os ingredientes somem? A receita dá item exclusivo de classe? |
-| Q-25 | P-23 | **Emboscada com combate de verdade (PvE)** | Hoje as 2 emboscadas ("Cubo Gelatinoso", "Esqueletos") só dão +12 PO, sem luta. Os eventos atuais são 4: Mercador, Fogueira & Bigorna, Corredor Armadilhado, Emboscada | (a) luta contra monstros pré-montados (um por emboscada), escalando com a sala · (b) derrota custa HP para o próximo duelo, ouro, ou uma tocha? · (c) recompensa: ouro, item, escolha entre 3 itens. Quer outros tipos de evento (Altar, Santuário, Tesouro, NPC)? |
-| Q-26 | — | **Que outras mecânicas e conteúdos estão planejados?** | Conteúdo atual: 8 classes, 33 itens (21 básicos, 12 avançados; 10 exclusivos de classe), 10 encantamentos, 4 tipos de evento, fusão até +3, 3 posições. O usuário pediu a lista completa antes de balancear | Lista aberta — incluir tudo, mesmo só ideia: classes novas? mais itens por categoria? raridades/itens lendários? chefes? habilidades ativas? mascotes novos? eventos? itens que mudam com a posição? Para cada um: entra antes ou depois do balanceamento fino? |
+| Q-28 | Q-26 | **Tabela de Feats (talentos) — não chegou até mim** | A decisão do Q-26 cita "a tabela de 4 Feats por classe + 6 genéricos" para o modal de subida de nível (3 opções: 2 da classe + 1 genérico), mas a tabela não veio na mensagem. O nível já está implementado (XP, HP, casas extras); o modal está esperando a tabela | Mandar a tabela: para cada um dos 38 Feats (8 classes x 4 + 6 genéricos), nome, efeito e números. Se preferir, eu escrevo uma proposta e vocês aprovam |
+| Q-29 | Q-24 | **Receitas mágicas: ingredientes e efeitos** | Recebi só os nomes das 8 receitas: Língua de Fogo, Presa de Víbora, Égide do Cruzado, Cajado do Arquimago, Elixir da Restauração, Harpa da Fortuna, Machado Trovejante, Lobo Alfa Espiritual. O exemplo antigo do `CLAUDE.md` é Espada Longa + Rubi → Língua de Fogo | Para cada receita: os 2 ingredientes (itens do catálogo atual), tamanho do item novo, efeito e números, se é exclusivo de classe. O encantamento dos ingredientes passa para o resultado (já decidido). Se um ingrediente estiver fundido (+1/+2), o resultado herda o nível? |
+| Q-30 | Q-25 | **Os 12 eventos: lista e efeitos** | Recebi 9 nomes novos: Mestre de Armas, Alquimista Louco, Santuário da Purificação, Baú Trancado, Forja Rúnica, Feira 2-por-1, Emboscada de Elite, Fonte de Mana, Bibliotecário Fantasma. Hoje existem 4: Mercador, Fogueira & Bigorna, Corredor Armadilhado, Emboscada (2 variações) | Os 12 nomes finais (os 4 atuais entram na conta?) e, para cada um: o que faz, risco, recompensa, custo em PO, se tem combate. Ex.: o que o Santuário "purifica"? o Baú Trancado precisa de Gazuas? |
+| Q-31 | Q-25 | **Monstros da Emboscada PvE** | Decidido: combate real contra monstros pré-montados escalando com a profundidade; vitória +8 PO e escolha de 1 entre 3 itens; derrota +3 PO, sem perder tocha nem ouro. Falta definir os monstros | Opção (a): monstro = party de 3 "heróis-monstro" com mochila fixa (ex.: Cubo Gelatinoso, Esqueletos, Goblins), HP x fator de nível · (b) 1 monstro grande com vários ataques · (c) usar o gerador de builds com 80% da força de um ghost da mesma sala. E a Emboscada de Elite: mais forte com recompensa maior? Dá +2 XP como a emboscada normal? |
+| Q-32 | Q-26 | **HP por nível: os números do enunciado não batem com "+25% cumulativo", e as lutas saíram do ritmo** | Implementei x1.25 por nível composto: Nv6 = **305%**, Nv10 = **745%** (o enunciado diz ~290% e 640%; isso daria x1.23 por nível). Com XP típico (1 por sala + 1.5 por duelo) o herói está no Nv2 na sala 3, Nv4 na 9 e Nv6 na 18. Duração das lutas: **25.1s / 15.9s / 8.0s** (antes 18.8 / 14.9 / 13.0; meta 14–18s). Na sala 3 o HP subiu (x1.25 contra x0.86 antes) e na sala 18 caiu (x3.05 contra x4.39) | (a) manter x1.25 · (b) x1.23 (bate com 290% / 640%) · (c) Nv1 começa em 80% do HP da classe e x1.30 por nível (estimativa 20 / 16 / 13s, a medir) · (d) aceitar agora e ajustar só na Fase 2 |
 | Q-27 | P-03 | **Critério final de "balanceado" (para a Fase 2)** | Até aqui todas as classes foram julgadas só por vitória; o Paladino foi apontado como fraco por causar pouco dano, mas tanque não precisa causar dano | (a) faixa de vitória por classe na melhor posição: 44–56% nas salas 3, 9 e 18 · (b) tanques julgados também por dano absorvido, escudo dado e aliados vivos no fim · (c) duração 14–18s; encantamentos +20 a +40pp; fusão ≥ 2 cópias · (d) a diferença entre a melhor e a pior classe ≤ 12pp |
 
 **Pausadas até o fim da fase de mecânicas** (o resultado muda com bolsa, venda e economia):
@@ -72,6 +76,12 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-15** · 2026-11-18 · (a) DOT x fator de profundidade + (d) escudo da relíquia e do Guerreiro x fator · aplicado na rodada 15 → Ladino 35 → 41% na sala 18
 - **Q-16** · 2026-11-18 · (a) gerador com 60% de afinidade de classe · aplicado na rodada 15 → Mago 59 → 68% na sala 18 (ver Q-18)
 - **Q-17** · 2026-11-18 · (c) mascote alimentado cura o Patrulheiro (2 HP x fator) + (d) esperar o Q-16 · aplicado na rodada 15 → Patrulheiro 39 → 38% (ver Q-19)
+- **Q-21** · 2026-11-18 · mochila híbrida: +2 casas na borda nos níveis 3, 6 e 9 (contam para adjacência e Elos) + Bolsa de Couro (+2 casas, 6 PO, rara, ~15% por loja, sem limite) · implementado
+- **Q-22** · 2026-11-18 · ouro inicial 20; +4 PO por sala; duelo +8 PO vitória / +6 PO derrota; venda = 50% do preço base x cópias fundidas (sem contar encantamento) · implementado
+- **Q-23** · 2026-11-18 · gerador funde automaticamente e vende itens +0 sem afinidade quando a mochila enche · implementado
+- **Q-24** · 2026-11-18 · fusão manual com botão [FUNDIR] entre itens idênticos (ou ingredientes de receita) encostados; 8 receitas mágicas que herdam o encantamento · **pendente**: botão (próximo passo) e receitas (faltam os dados, Q-29)
+- **Q-25** · 2026-11-18 · Emboscada com combate real (vitória +8 PO e 1 de 3 itens; derrota +3 PO, sem perder tocha nem ouro); 12 eventos estilo The Bazaar · **pendente**: faltam os monstros (Q-31) e os efeitos dos eventos (Q-30)
+- **Q-26** · 2026-11-18 · nível 1 a 10 (XP 0, 3, 7, 12, 18, 25, 33, 42, 52, 63; +1 XP por sala, +2 vitória / +1 derrota em duelo ou emboscada), HP base +25% por nível no lugar do HP por duelo; Feats na subida de nível · nível/XP/HP implementados; **Feats pendentes** (falta a tabela, Q-28; números do HP em Q-32)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
@@ -97,10 +107,10 @@ _Nenhuma pendente._ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
 | Código | Status | Funcionalidade |
 |---|---|---|
-| P-20 | 🔴 | **Bolsa de expansão** — ver **Q-21**. de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
-| P-21 | 🔴 | **Receitas mágicas** — ver **Q-24**. (Fase 2): combinações de itens encostados viram itens novos |
+| P-20 | ✅ | **Bolsa de expansão** — implementada (Q-21). de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
+| P-21 | 🔴 | **Receitas mágicas** — faltam ingredientes e efeitos (**Q-29**). (Fase 2): combinações de itens encostados viram itens novos |
 | P-22 | ⚪ | **PvP assíncrono real**: backend para salvar builds de jogadores; hoje o ghost é gerado localmente |
-| P-23 | 🔴 | **Emboscada PvE** — ver **Q-25**. com combate de verdade (hoje só dá ouro) |
+| P-23 | 🔴 | **Emboscada PvE** — faltam os monstros (**Q-31**) e os eventos (**Q-30**). com combate de verdade (hoje só dá ouro) |
 | P-24 | ⚪ | **Telas de fim de run** (vitória com 10 duelos / derrota sem tochas); hoje volta para a Taverna |
 | P-25 | ⚪ | **Arte final** (retratos, ilustrações de eventos, ícones). Os ícones atuais são de game-icons.net (CC BY 3.0): se o jogo for publicado, os créditos precisam aparecer no jogo |
 | P-26 | ⚪ | Ao arrastar, o "fantasma" do item usa o tamanho de célula da origem, não o da mochila de destino (só visual) |

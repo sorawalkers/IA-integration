@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 15 · **início da fase de construção de mecânicas.**
+**Última atualização:** 2026-11-18 · Fase 1, passo 1 (nível/XP, economia, mochila expansível, gerador realista).
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -54,6 +54,34 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Fase 1, passo 1 — nível, economia, mochila expansível e gerador realista (checagem de absurdos)
+
+| Mecânica | Como ficou |
+|---|---|
+| Nível (Q-26) | XP 0/3/7/12/18/25/33/42/52/63 (Nv1–10); +1 XP por sala, +2/+1 por duelo; **HP da classe x1.25 por nível** (substitui o HP por duelo). O mesmo fator escala os efeitos de valor fixo |
+| Economia (Q-22) | 20 PO iniciais; +4 PO por sala; duelo +8 / +6 PO; venda 50% do preço x cópias fundidas |
+| Mochila (Q-21) | +2 casas na borda nos níveis 3, 6 e 9; Bolsa de Couro (+2 casas, 6 PO, ~15% por loja, sem limite) |
+| Gerador (Q-23) | XP típico por sala (Nv2 na sala 3, Nv4 na 9, Nv6 na 18); casas extras dos níveis + 15% de bolsa por duelo; funde cópias e vende +0 sem afinidade quando enche |
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** | **25.1s** ⚠ | 15.9s | **8.0s** ⚠ |
+| Guerreiro | Vang 38% | Vang 45% | Vang 53% |
+| Paladino | Vang 38% | Vang 42% | Vang **51%** (era 41) |
+| Bárbaro | Vang 38% | Vang 41% | Vang 49% |
+| Bardo | Meio 27% | Meio 36% | Meio 43% |
+| Ladino | Meio 47% | Meio 42% | Meio 37% |
+| Patrulheiro | Ret 36% | Ret 32% | Ret **44%** (era 38) |
+| Mago | Ret 31% | Ret 50% | Meio **67%** ⚠ |
+| Alquimista | Ret 38% | Ret 47% | Ret 52% |
+| **Diferença** | 21 pp | 18 pp | 30 pp |
+
+**Checagem de absurdos** (limites da Fase 1: classe > 70% ou < 25%, luta < 8s):
+- ⚠ **Lutas da sala 18 com 8.0s** (no limite) e da sala 3 com 25.1s: efeito da troca do HP por duelo pelo HP por nível → **Q-32**.
+- ⚠ **Mago 67%** na sala 18 (perto do limite de 70%): já registrado no Q-18 (pausado).
+- Com mais espaço na mochila, **Paladino** (41 → 51%) e **Patrulheiro** (38 → 44%) subiram na sala 18, como suspeitado.
+- Nada passou dos limites; nenhum ajuste de número foi feito.
 
 ## Rodada 15 — respostas Q-15, Q-16 e Q-17
 
@@ -413,6 +441,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F1.1 | Nível/XP (HP x1.25 por nível), economia, mochila expansível, gerador funde/vende | 21 / 18 / 30 pp · lutas 25.1 / 15.9 / 8.0s |
 | — | **Pausa:** início da fase de construção de mecânicas; Q-18 a Q-20 pausadas | — |
 | 15 | Q-15 a Q-17 (fator de profundidade, gerador com afinidade, cura do mascote) | 17 / 19 / 31 pp · lutas 18.8 / 14.9 / 13.0s |
 | 14 | Q-12 a Q-14 (1 instrumento por herói, fusão no mesmo herói, Sobrecarga 70%, HP x0.70 e 0.13·d²) | 16 / 17 / 24 pp · lutas 18.6 / 15.3 / 13.3s |
