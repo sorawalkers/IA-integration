@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Rodada 11 (respostas Q-01 a Q-06 do agente de análise aplicadas).
+**Última atualização:** 2026-11-18 · Rodada 12 (respostas Q-07 e Q-08 + observações do agente de análise aplicadas).
 
 ## Como os testes são feitos
 
@@ -48,6 +48,73 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Rodada 12 — respostas Q-07, Q-08 e observações do agente de análise
+
+| Mudança | Antes | Agora |
+|---|---|---|
+| HP (Q-07) | x(1 + 0.25·duelos) | x0.75 · (1 + 0.10·duelos + 0.10·duelos²) → x0.90 / x1.65 / x3.90 nas salas 3 / 9 / 18 |
+| Fusão de armas (Q-07 + observação 2) | dano x1.85, recarga −5%/nível | dano **x1.7** e recarga **−8%/nível** (instrumentos seguem −5%) |
+| Armazenador | 25 de mana | 20 |
+| Veloz | −20% | −22% |
+| Mortal | críticos x3 | críticos x3 **e +10% de crítico** |
+| Afiado | +25% | +30% |
+| Vampírico | 20% | 25% |
+| Vorpal | 10% | 12% |
+| Trovejante | só atordoa (25%) | **+20% de dano** e atordoa (25%) |
+| Tambor de Guerra (observação 1) | adianta 0.5s | adianta 0.5s **e o próximo golpe de cada aliado causa +2** (não acumula, não escala com a fusão) |
+| HP por duelo | por duelo vencido | por duelo **jogado** (pedido do usuário: evita bola de neve) |
+
+### Duração das lutas e classes por sala (512 composições, 80 lutas cada)
+
+| | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Duração média da luta** (meta 14–18s) | **19.5s** (era 26.1) | **15.7s** ✅ | **13.6s** (era 7.5) |
+| Guerreiro | Vang 44% | Vang 47% | Vang 53% |
+| Paladino | Vang 40% | Vang 40% | Vang 41% |
+| Bárbaro | Vang 40% | Vang 42% | Vang 50% |
+| Bardo | Meio **38%** (era 28) | Meio 47% | Meio 55% |
+| Ladino | Meio 42% | Meio 37% | Meio **35%** |
+| Patrulheiro | Ret 32% | Ret 34% | Ret 39% |
+| Mago | Ret 43% | Ret 51% | Meio **61%** |
+| Alquimista | Ret 39% | Ret 50% | Ret 56% |
+| **Diferença** | **12 pp** | 17 pp | **26 pp** (era 21) |
+
+- As durações ficaram como o teste previu (19.9 / 16.1 / 13.4s): todas perto da meta, sala 3 ainda 1.5s acima.
+- O Bardo voltou de 28% para 38% na sala 3 com a inspiração do Tambor.
+- Com lutas mais longas na sala 18, quem escala com tempo (Mago, Alquimista, Bardo) sobe; o Ladino cai (35%). Diferença 26pp → **Q-10**.
+
+### Encantamentos (sala 3, em todas as armas; meta +20 a +40pp)
+
+| Encantamento | Rodada 11 | Rodada 12 |
+|---|---|---|
+| Gélido | +39.3 | +35.3 ✅ |
+| Armazenador | +18.0 | +32.7 ✅ |
+| Trovejante | +17.0 | +32.3 ✅ |
+| Flamejante | +33.7 | +30.0 ✅ |
+| Defensor | +25.3 | +24.3 ✅ |
+| Vampírico | +14.7 | +21.3 ✅ |
+| Mortal | +7.7 | +21.0 ✅ |
+| Vorpal | +19.3 | +20.7 ✅ |
+| Veloz | +16.7 | +19.7 (no limite) |
+| Afiado | +13.7 | **+13.7** ❌ |
+
+9 de 10 na faixa. Afiado continua abaixo → **Q-11**.
+
+### Fusão: item +1 contra 2 cópias +0 (sala 3)
+
+| Item | +1 | 2 cópias | Delta |
+|---|---|---|---|
+| Espada Curta | 74.7% | 72% | +2.3 |
+| Arco Curto | 78.7% | 77% | +1.7 |
+| Cajado de Aprendiz | 75.0% | 74% | +1.3 |
+| Maça | 73.7% | 75% | −1.7 |
+| Adaga | 67.7% | 73% | **−5.7** |
+| Tambor de Guerra | 57.7% | 71% | **−13.0** |
+
+A regra "fundir nunca pior que 2 cópias" ainda falha na Adaga e no Tambor → **Q-09**. Em DPS bruto, uma arma +1
+dá 1.7 / 0.92 = **x1.85** de uma cópia, contra x2 de duas cópias; o espaço que a fusão libera não aparece nesse teste
+(as 2 cópias cabem na mochila).
 
 ## Rodada 11 — respostas do agente de análise (Q-01 a Q-06)
 
@@ -168,4 +235,5 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| 12 | Q-07 (curva de HP, fusão x1.7), Q-08 (encantamentos), fusão −8% recarga, Tambor +2 | 12 / 17 / 26 pp · lutas 19.5 / 15.7 / 13.6s |
 | 11 | Respostas Q-01 a Q-06 (HP por duelo, fusão x1.85, catalisadores somam, tetos, encantamentos, Bardo) | 14 / 16 / 21 pp · lutas 26.1 / 15.8 / 7.5s |
