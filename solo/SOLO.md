@@ -4,7 +4,7 @@
 > (4 classes solo, Jaula do Patrulheiro, 24 Feats de classe em 2 métodos + 10 genéricos, matriz 4x4 com iniciativa alternada).
 > Simulação completa: `relatorio-solo.md`. Primeira versão do experimento (8 classes): histórico no fim.
 
-**Data:** 2026-11-19 · **Rodada S-7** (respostas S-Q14 a S-Q18) sobre a S-5 (SPEC-RUNIC-FLOW). HP = classe x **0.88** x 1.50^(nível − 1); efeitos fixos x1.50^(nível − 1), exceto Veneno/Queimadura: **x1.25^(nível − 1)**.
+**Data:** 2026-11-19 · **Rodada S-8** (respostas S-Q19 e S-Q20) sobre a S-5 (SPEC-RUNIC-FLOW). HP = classe x **0.88** x 1.50^(nível − 1); efeitos fixos x1.50^(nível − 1), exceto Veneno/Queimadura: **x1.25^(nível − 1)**.
 
 ## 1. As 4 classes do lançamento
 
@@ -14,7 +14,7 @@ no ghost nem no balanço, e os itens exclusivos deles saem da loja.
 | Classe | HP | Recurso | Mochila | Kit inicial | Pool exclusivo na loja |
 |---|---|---|---|---|---|
 | Guerreiro — Mestre de Aço | 160 | 45 escudo + 100 estamina | 5x5 (25) | Espada Curta, Broquel, Pedra de Amolar, Gibão, Poção de Vida | Escudo Torre, Armadura de Placas, Mangual Pesado, Estandarte de Guerra |
-| Ladino — Mestre das Toxinas | 135 | 100 estamina, **8% de esquiva** | 4x6 (24) | 2 Adagas, Gazuas, Gibão, Poção de Vida (Frasco de Veneno só na loja) | Adaga Serrilhada, Frasco de Veneno, Capa das Sombras, Gazuas Mestras |
+| Ladino — Mestre das Toxinas | 135 | 100 estamina, **8% de esquiva** | 4x6 (24) | 2 Adagas, Gazuas, Frasco de Veneno (fora da cadeia das Adagas), Poção de Vida | Adaga Serrilhada, Frasco de Veneno, Capa das Sombras, Gazuas Mestras |
 | Mago — Arquiteto Arcano | 125 | 120 mana | Altar em cruz 5x5 (17) | Cajado de Aprendiz, Tomo Menor, 2 Gemas Brutas, Poção de Mana | Grimório Proibido, Orbe de Cristal, Manto Arcano, Runa de Mana |
 | Patrulheiro — Guardião da Matilha | 130 | 90 estamina | 4x5 + **Jaula 2x2** (24) | Arco Curto, Aljava, Ração, Erva (Mochila) + 2 Ratos (Jaula) | Lobo Cinzento, Falcão Caçador, Arco Composto, Erva Ancestral |
 
@@ -58,7 +58,64 @@ Subida de nível: 3 opções = 2 Feats da classe + 1 genérico (Sinergia de Bord
 | Mago | **Sobrecarga:** Sobrecarga Contínua (3s → 2s), Foco de Cristal (gemas +30%), Reserva Arcana (+40 mana) | **Elementalista:** Chama Arcana (magia aplica 2 Queimaduras, teto 8), Toque Glacial (atrasa 0.35s o item mais rápido do alvo), Barreira Elemental (30% da mana gasta vira escudo) |
 | Patrulheiro | **Feras:** Vínculo Natural (cura 4 HP), Toca Farta (3 comidas por mascote), Chamado da Matilha (cada outro mascote +10% velocidade) | **Atirador:** Olho de Águia (arcos +25% crítico e +20% dano), Flechas Envenenadas (crítico à distância: 3 Venenos), Caçador Solitário (1 mascote: arcos +25% velocidade e 15% roubo de vida) |
 
-## 3. Rodada S-7 — respostas S-Q14 a S-Q18 (matriz 4x4, 500 lutas por confronto, iniciativa alternada)
+## 3. Rodada S-8 — respostas S-Q19 e S-Q20 (matriz 4x4, 500 lutas por confronto, iniciativa alternada)
+
+**Mudanças:** o Frasco de Veneno do kit do Ladino começa **fora da cadeia das Adagas** (casa (3,4), sem seta apontando para ele): o jogador
+monta Adaga → Adaga → Frasco girando/reorganizando (S-Q19 b). Régua de duração do painel solo: **14–24s** (era 14–18s) (S-Q20 c).
+
+| Classe | Sala 3 (S-7 → S-8) | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Guerreiro | 48 → 49% | 59 → 60% | 56 → 56% |
+| **Ladino** | 61 → **57%** | 48 → 48% | 40 → 40% |
+| Patrulheiro | 49 → 51% | 48 → 48% | 49 → 49% |
+| **Mago** | 39 → **40%** | 44 → 44% | 50 → 50% |
+| **Diferença** | 23 → **17pp** | 15 → 15pp | 16 → 17pp |
+| Duração da luta (meta 14–24s) | 18.3s ✅ | 16.7s ✅ | 22.3s ✅ |
+| **Classes na faixa 40–60%** | 2 → **4 de 4** ✅ | **4 de 4** ✅ | 4 → 3 de 4 (Ladino 40% arredondado, logo abaixo) |
+| Confrontos extremos (> 80%) | 0.5 | 1 | 0 |
+| Espelhos entre 45% e 55% | 48 / 47 / 49 / 45 | 45 / 52 / 48 / 51 | 44 / 50 / 50 / 50 |
+
+- **As 3 salas na régua (dentro do erro):** salas 3 e 9 com as 4 classes em 40–60%; na sala 18 o Ladino fica na borda (40%, abaixo por fração
+  de ponto — igual à S-7, dentro do erro de ±2.2pp). Diferença entre classes 15–17pp em todas as salas. Duração dentro de 14–24s nas 3 salas.
+- **Ladino na sala 3** caiu 4pp (61 → 57%) com o Frasco fora da cadeia; contra o Mago 81% (era 85%). O Mago chegou a 40%.
+- Confrontos ainda desiguais: Guerreiro x Ladino 85% na sala 9 e 75% na sala 18; Ladino x Mago 81% na sala 3. Espelhos 44–52% (até 1pp fora, dentro do erro).
+
+Matrizes (linha = sua classe, % de vitória contra a coluna):
+
+### Confrontos — sala 3
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 48 | 65 | 42 | 40 |
+| **Ladino** | 36 | 47 | 65 | 81 |
+| **Patrulheiro** | 58 | 33 | 49 | 65 |
+| **Mago** | 57 | 22 | 38 | 45 |
+
+### Confrontos — sala 9
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 45 | 85 | 56 | 52 |
+| **Ladino** | 18 | 52 | 51 | 69 |
+| **Patrulheiro** | 38 | 52 | 48 | 55 |
+| **Mago** | 46 | 34 | 45 | 51 |
+
+### Confrontos — sala 18
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 44 | 75 | 46 | 61 |
+| **Ladino** | 25 | 50 | 37 | 47 |
+| **Patrulheiro** | 52 | 58 | 50 | 37 |
+| **Mago** | 41 | 48 | 59 | 50 |
+
+### Rodada S-7 — respostas S-Q14 a S-Q18
 
 **Mudanças:** Guerreiro — só **armas** metálicas transmitem o bônus de aço pela seta, e ele caiu de +12% para **+10%** (armaduras, elmos e
 broquéis não transmitem mais) (S-Q14 a+b); Ladino — pulso de Mãos Rápidas **0.25s → 0.40s** e **Frasco de Veneno de volta no kit** (2 Adagas,
@@ -486,20 +543,21 @@ Linha = sua classe, coluna = oponente; % de vitória da linha.
 
 Teste de economia da S-1 (não aplicado; `--items`): com 50% / 33% dos itens extras a sala 18 ia para 6.3 / 7.1s e o Ladino continuava em 67–85%.
 
-## 4. Emboscada PvE (S-7, mesma calibragem da S-5)
+## 4. Emboscada PvE (S-8, mesma calibragem da S-5)
 
+| Encontro | Sala 3 | Sala 9 | Sala 18 |
 MONSTER {"items":0.5,"tune":{"goblins":{"hp":0.69,"dmg":0.69,"growth":1.45,"elite":{"hp":0.99,"dmg":0.73}},"skeletons":{"hp":0.68,"dmg":0.68,"growth":1.3,"elite":{"hp":0.9,"dmg":0.67}},"cubes":{"hp":0.52,"dmg":0.52,"growth":1.1,"elite":{"hp":1.15,"dmg":0.85}}}} · ELITE {"plus":1,"items":1} · 300 lutas por célula
 
 | Encontro | Sala 3 | Sala 9 | Sala 18 |
 |---|---|---|---|
-| Horda de Goblins | 83% (11.3s) | 82% (9.0s) | 73% (10.0s) |
-| Elite: Horda de Goblins | 58% (10.2s) | 50% (7.6s) | 49% (8.0s) |
-| Câmara dos Esqueletos | 83% (24.7s) | 68% (16.2s) | 76% (17.3s) |
-| Elite: Câmara dos Esqueletos | 55% (21.0s) | 39% (13.5s) | 61% (14.3s) |
-| Ninho de Cubos Gelatinosos | 78% (31.5s) | 81% (26.9s) | 73% (36.8s) |
-| Elite: Ninho de Cubos Gelatinosos | 49% (29.7s) | 58% (24.3s) | 56% (32.4s) |
-| **Média normal** (meta ~75%) | **81%** | **77%** | **74%** |
-| **Média Elite** (meta ~50%) | **54%** | **49%** | **55%** |
+| Horda de Goblins | 82% (11.3s) | 83% (8.8s) | 75% (10.0s) |
+| Elite: Horda de Goblins | 57% (10.2s) | 53% (7.5s) | 50% (8.0s) |
+| Câmara dos Esqueletos | 81% (24.3s) | 68% (16.0s) | 76% (17.1s) |
+| Elite: Câmara dos Esqueletos | 52% (20.4s) | 41% (13.2s) | 62% (14.2s) |
+| Ninho de Cubos Gelatinosos | 76% (32.1s) | 81% (26.8s) | 73% (36.9s) |
+| Elite: Ninho de Cubos Gelatinosos | 48% (29.4s) | 59% (24.0s) | 57% (32.4s) |
+| **Média normal** (meta ~75%) | **80%** | **77%** | **75%** |
+| **Média Elite** (meta ~50%) | **53%** | **51%** | **56%** |
 
 Calibragem (`MONSTER.tune`, sem mudança): Goblins HP/dano x0.69, crescimento 1.45; Esqueletos x0.68, 1.30; Cubos x0.52, 1.10;
 Elite (HP/dano): x0.99/0.73, x0.90/0.67, x1.15/0.85.
@@ -552,13 +610,19 @@ Elite (HP/dano): x0.99/0.73, x0.90/0.67, x1.15/0.85.
 - **S-Q17** · 2026-11-19 · reavaliar depois de S-Q14/S-Q15 · sala 18 continua em 22.3s (ver S-Q20)
 - **S-Q18** · 2026-11-19 · (a) cancelar a S-Q11 (HP do Ladino 135) · aplicado
 - **S-15 a S-22** · 2026-11-19 · confirmadas
+- **S-Q19** · 2026-11-19 · (b) Frasco do kit fora da cadeia das Adagas · aplicado (S-8) → Ladino 57%, Mago 40% na sala 3
+- **S-Q20** · 2026-11-19 · (c) régua de duração 14–24s, sem mudança numérica · aplicado (S-8) → 18.3 / 16.7 / 22.3s ✅
 
 ## 7. Perguntas para o agente de análise
 
-| Código | Pergunta | Dados | Opções |
-|---|---|---|---|
-| S-Q19 | **Sala 3: Ladino 61% e Mago 39%** (as duas a 1pp da faixa) | Ladino contra Mago 85%, contra Patrulheiro 74%. No Nv2 o kit pesa mais: 2 Adagas + Frasco, pulso de 0.4s em cadeia (Adaga → Adaga → Frasco) e 15% mais rápido no Frasco 1x1. Mago: 125 HP, altar de 17 casas, Tomo 10-13 | (a) aceitar (erro ±2.2pp; salas 9 e 18 na faixa) · (b) Frasco do kit sem o pulso (posição longe das Adagas) · (c) Mago com 2 Tomos Menores no kit (sem a Poção de Mana) |
-| S-Q20 | **Sala 18 em 22.3s** (meta 14–18s) | S-Q13 (HP 0.83 no Nv5+) e S-Q14 encurtaram pouco (22.7 → 21.1 → 22.3s). Salas 3 e 9: 18.1 / 16.6s. Com +1 de fusão na sala 18 (S-Q8) e menos itens, o dano cresce menos que o HP (x1.50 por nível) | (a) base 0.83 → 0.75 a partir do Nv5 · (b) fusão do gerador na sala 18: 20% → 40% dos itens em +2 · (c) meta de duração por sala (sala 18: 18–24s) |
+Nenhuma pergunta de balanço aberta: as 4 classes estão em 40–60% nas 3 salas (a sala 18 com o Ladino na borda, dentro do erro) e a duração
+está dentro de 14–24s. Pontos para acompanhar:
+
+| Código | Ponto | Dados |
+|---|---|---|
+| S-P1 | Confrontos ainda desiguais | Guerreiro x Ladino 65 / 85 / 75%; Ladino x Mago 81 / 69 / 47%; Patrulheiro x Mago 65 / 55 / 37% |
+| S-P2 | Ladino na borda da sala 18 (40%) | Cai de 57% (sala 3) para 40% (sala 18): o motor dele (pulsos, Veneno dos itens) cresce menos que o HP no fim |
+| S-P3 | Gerador × jogador real | O gerador sorteia itens (60% com afinidade) e escolhe a melhor rotação; um jogador que monta circuitos de propósito deve render mais. Vale testar builds "de jogador" por motor (ex.: Guerreiro Comandante, Mago Criomante) |
 
 ## Histórico do experimento
 
@@ -571,6 +635,7 @@ Elite (HP/dano): x0.99/0.73, x0.90/0.67, x1.15/0.85.
 | 2026-11-19 | S-4 · Combo só armas/frascos/ferramentas, teto de Veneno 10, Núcleo 2% | 31 / 27 / 19pp | 17.9 / 14.7 / 20.3s |
 | 2026-11-19 | S-5 · SPEC-RUNIC-FLOW: fluxo rúnico, expansão na loja, 4 motores + pontes | 24 / 29 / 25pp | 18.8 / 16.3 / 22.7s |
 | 2026-11-19 | S-6 · poções +1 uso por nível, HP 0.83 a partir do Nv5, Tomo +1 | 24 / 28 / 24pp | 18.6 / 16.2 / 21.1s |
-| 2026-11-19 | **S-7 · aço só de armas (+10%), pulso 0.4s + Frasco no kit, expansão a cada 2 duelos** | 23 / 15 / 16pp | 18.1 / 16.6 / 22.3s |
+| 2026-11-19 | S-7 · aço só de armas (+10%), pulso 0.4s + Frasco no kit, expansão a cada 2 duelos | 23 / 15 / 16pp | 18.1 / 16.6 / 22.3s |
+| 2026-11-19 | **S-8 · Frasco fora da cadeia no kit; régua de duração 14–24s** | 17 / 15 / 17pp | 18.3 / 16.7 / 22.3s |
 
 As lutas encurtaram de uma versão para a outra porque a média de 8 classes incluía classes lentas (Paladino, Bárbaro, Bardo, Alquimista) e porque Mago e Patrulheiro ganharam itens exclusivos fortes e mochilas novas (altar em cruz, Jaula).
