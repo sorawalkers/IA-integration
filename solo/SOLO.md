@@ -546,9 +546,6 @@ Teste de economia da S-1 (não aplicado; `--items`): com 50% / 33% dos itens ext
 ## 4. Emboscada PvE (S-8, mesma calibragem da S-5)
 
 | Encontro | Sala 3 | Sala 9 | Sala 18 |
-MONSTER {"items":0.5,"tune":{"goblins":{"hp":0.69,"dmg":0.69,"growth":1.45,"elite":{"hp":0.99,"dmg":0.73}},"skeletons":{"hp":0.68,"dmg":0.68,"growth":1.3,"elite":{"hp":0.9,"dmg":0.67}},"cubes":{"hp":0.52,"dmg":0.52,"growth":1.1,"elite":{"hp":1.15,"dmg":0.85}}}} · ELITE {"plus":1,"items":1} · 300 lutas por célula
-
-| Encontro | Sala 3 | Sala 9 | Sala 18 |
 |---|---|---|---|
 | Horda de Goblins | 82% (11.3s) | 83% (8.8s) | 75% (10.0s) |
 | Elite: Horda de Goblins | 57% (10.2s) | 53% (7.5s) | 50% (8.0s) |
