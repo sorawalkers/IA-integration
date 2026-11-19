@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-18 · Fase 1, passo 3 (42 Feats).
+**Última atualização:** 2026-11-19 · **Fase 1 concluída**: 12 eventos e Emboscada PvE.
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -54,6 +54,29 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Fase 1, passo 4 — 12 eventos e Emboscada PvE (fim da Fase 1)
+
+**Implementado:** baralho com 12 eventos (Mercador com 5 itens, Fogueira & Bigorna com Têmpera Rápida, Emboscada, Emboscada de Elite,
+Mestre de Armas, Alquimista Louco, Santuário, Baú Trancado, Forja Rúnica, Feira 2-por-1, Fonte de Mana, Bibliotecário Fantasma)
+e combate real contra 3 encontros de monstros (Goblins, Esqueletos, Cubos Gelatinosos).
+
+Os números dos duelos PvP **não mudaram** (os eventos não entram na simulação de duelo): lutas 20.9 / 14.7 / 7.4s; diferença 15 / 22 / 23pp.
+
+**Emboscada PvE — vitória da party** (300 lutas por célula, composições sorteadas, party do gerador de builds):
+
+| Encontro | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Horda de Goblins | 100% (6.9s) | 100% (3.6s) | 100% (1.8s) |
+| Elite: Horda de Goblins | 99% (10.1s) | 100% (5.0s) | 100% (2.2s) |
+| Câmara dos Esqueletos | 100% (11.5s) | 100% (5.7s) | 100% (2.5s) |
+| Elite: Câmara dos Esqueletos | 99% (17.7s) | 100% (8.5s) | 100% (3.4s) |
+| Ninho de Cubos Gelatinosos | 100% (13.9s) | 100% (7.0s) | 100% (2.9s) |
+| Elite: Ninho de Cubos Gelatinosos | 74% (29.6s) | 96% (16.7s) | 100% (5.0s) |
+
+
+⚠ **Absurdo:** a party vence quase sempre. Os monstros só crescem em HP; o dano e o kit (2–3 itens) ficam fixos enquanto a party ganha
+12 itens até a sala 18. Testei duas correções (sem aplicar) → **Q-35**.
 
 ## Fase 1, passo 3 — 42 Feats (checagem de absurdos)
 
@@ -488,6 +511,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F1.4 | 12 eventos e Emboscada PvE (Q-30, Q-31) | duelos iguais · PvE ~100% de vitória (Q-35) |
 | F1.3 | 42 Feats (modal, gerador, referência) | 15 / 22 / 23 pp · lutas 20.9 / 14.7 / 7.4s |
 | F1.2 | HP 0.80 x 1.30^nível (Q-32), 8 receitas (Q-29), painel de metas (Q-27) | 17 / 18 / 29 pp · lutas 20.9 / 13.6 / 7.8s |
 | F1.1 | Nível/XP (HP x1.25 por nível), economia, mochila expansível, gerador funde/vende | 21 / 18 / 30 pp · lutas 25.1 / 15.9 / 8.0s |

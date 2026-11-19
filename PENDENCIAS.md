@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-18 · Fase 1, passo 3 (42 Feats implementados).
+**Última atualização:** 2026-11-19 · **Fase 1 concluída** (12 eventos e Emboscada PvE implementados). Uma pergunta nova (Q-35).
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -25,7 +25,7 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 ✅ Nível e XP (HP x1.25 por nível) · ✅ Economia e venda · ✅ Mochila expansível (níveis 3/6/9 + Bolsa de Couro) ·
 ✅ Gerador realista (casas extras, funde e vende quando enche) · ✅ Botão [FUNDIR] entre itens idênticos encostados (o arraste sobre o item igual continua valendo) ·
 ✅ HP 0.80 x 1.30^(nível − 1) (Q-32) · ✅ 8 receitas mágicas (Q-29) · ✅ Painel de metas no relatório (Q-27) ·
-⏳ Emboscada PvE com monstros (Q-31) · ⏳ 12 eventos (Q-30) · ✅ 42 Feats (10 genéricos + 32 de classe) com modal de subida de nível e no gerador de builds.
+✅ Emboscada PvE com monstros (Q-31) · ✅ 12 eventos (Q-30) · ✅ 42 Feats (10 genéricos + 32 de classe) com modal de subida de nível e no gerador de builds.
 
 **Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
 de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resultado delas muda com bolsa, venda e economia).
@@ -38,7 +38,7 @@ de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resul
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-34 | P-01 | **A curva do Q-32 não segurou a sala 18 (7.8s)** | Com HP = 0.80 x 1.30^(nível − 1): lutas **20.9s / 13.6s / 7.8s** (salas 3 / 9 / 18); a previsão era ~19 / 16 / ~14s. O HP na sala 18 (Nv6 = x2.97) ficou quase igual ao da curva anterior (x3.05, que deu 8.0s); o que encurta a sala 18 é o dano: armas +2/+3, 3 encantamentos e agora as receitas nos ghosts. **Mago 70%** na sala 18 (no limite de absurdo). Painel: sala 3 1/8 classes na faixa, sala 9 2/8, sala 18 5/8 | (a) crescimento 1.30 → 1.40 por nível (Nv2 1.12 · Nv4 2.20 · Nv6 4.30; a medir) · (b) XP mais rápido para o nível acompanhar o dano · (c) aceitar na Fase 1 e resolver na Fase 3 junto com o Q-18 (Mago) |
+| Q-35 | Q-31 | **A Emboscada PvE ficou fácil demais** (absurdo da Fase 1) | Os monstros só crescem em **HP** (fator de nível) e +fusão da sala; o **dano** não cresce e o kit é fixo (2–3 itens), enquanto a party do jogador ganha 12 itens extras até a sala 18. Vitória da party (300 lutas, composições sorteadas):<br>¦  Encontro  ¦  Sala 3  ¦  Sala 9  ¦  Sala 18  ¦ <br> ¦ --- ¦ --- ¦ --- ¦ --- ¦ <br> ¦  Horda de Goblins  ¦  100% (6.9s)  ¦  100% (3.6s)  ¦  100% (1.8s)  ¦ <br> ¦  Elite: Horda de Goblins  ¦  99% (10.1s)  ¦  100% (5.0s)  ¦  100% (2.2s)  ¦ <br> ¦  Câmara dos Esqueletos  ¦  100% (11.5s)  ¦  100% (5.7s)  ¦  100% (2.5s)  ¦ <br> ¦  Elite: Câmara dos Esqueletos  ¦  99% (17.7s)  ¦  100% (8.5s)  ¦  100% (3.4s)  ¦ <br> ¦  Ninho de Cubos Gelatinosos  ¦  100% (13.9s)  ¦  100% (7.0s)  ¦  100% (2.9s)  ¦ <br> ¦  Elite: Ninho de Cubos Gelatinosos  ¦  74% (29.6s)  ¦  96% (16.7s)  ¦  100% (5.0s)  ¦ <br><br>Testes (não aplicados): **(A) dano x fator de nível** → normais seguem ~100%, Elite de Cubos 55 / 70 / 90%. **(B) dano x fator x1.5 e HP x2** → normais 78–100%, Elites 0–4% na sala 3 e 43–73% na sala 18 (difícil cedo, fácil tarde) | (a) monstros ganham itens extras por sala, como o gerador dos ghosts (pool temático: goblins = adagas/venenos/gazuas, esqueletos = espadas/broquéis/arcos, cubos = núcleos/pseudópodes), mais dano x fator · (b) multiplicadores fixos como o teste B, calibrados por sala · (c) meta de vitória da party: normal ~70–80%, Elite ~45–55% |
 
 **Pausadas até o fim da fase de mecânicas** (o resultado muda com bolsa, venda e economia):
 
@@ -85,6 +85,9 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-31** · 2026-11-18 · (a) 3 encontros fixos (Goblins, Esqueletos, Cubos Gelatinosos) escalando com o nível; Elite = +35% HP e +1 fusão; recompensas definidas · registrado; implementação no próximo passo
 - **Q-32** · 2026-11-18 · (c) HP 0.80 x 1.30^(nível − 1) · implementado → lutas 20.9 / 13.6 / 7.8s (ver Q-34)
 - **Q-33** · 2026-11-18 · tabela dos 32 Feats de classe (4 por classe) · implementado junto com os 10 genéricos; ver interpretações P-38 a P-48
+- **Q-34** · 2026-11-19 · (c) aceitar os 7.4s da sala 18 na Fase 1 e resolver na Fase 3 junto com o Q-18 (Mago) · registrado
+- **P-38 a P-48** · 2026-11-19 · todas as 11 interpretações de Feats confirmadas
+- **Q-30 / Q-31** · implementados em 2026-11-19 (ver P-49 a P-54)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
@@ -106,21 +109,15 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 
 | Código | Status | Interpretação | Validar |
 |---|---|---|---|
-| P-34 | 🟡 | **Égide do Cruzado** "limpa 2 stacks": limpa 2 de Veneno **e** 2 de Queimadura do portador e dos 2 aliados a cada ativação; o escudo também escala com a fusão do item | Confirmar |
-| P-35 | 🟡 | **Itens de receita** com dano fixo (26, 12, 22, 38, 24), sem faixa mín.–máx. como os outros itens | Confirmar ou dar a faixa |
-| P-36 | 🟡 | **Elixir da Restauração** no Alquimista é arremessado no aliado que precisa (como as outras poções dele); cura 35% do HP máximo **do alvo** | Confirmar |
-| P-37 | 🟡 | **Harpa da Fortuna**: +2 PO por harpa ao vencer o **duelo** (emboscada ainda não tem combate) | Confirmar |
-| P-38 | 🟡 | **Bastião da Cruz**: dá +15 de escudo (x nível) ao time a cada 4s **sem exigir item** na casa central da cruz (a casa central nem sempre existe com as casas extras) | Confirmar ou definir a condição |
-| P-39 | 🟡 | **Destilaria**: poções não têm recarga (disparam por limite de HP/mana). Implementado como "age mais cedo": poção encostada em erva dispara abaixo de 50% de HP (em vez de 40%) e 60% de mana (em vez de 50%) | Confirmar ou definir outro efeito |
-| P-40 | 🟡 | **Artesão Improvisado**: +1 encantamento por visita à Fogueira & Bigorna **por herói com o Feat** (2 heróis com o Feat = 3 encantamentos) | Confirmar |
-| P-41 | 🟡 | **Luz Cegante**: "velocidade de ataque −20%" = todas as recargas do herói da frente inimigo andam 20% mais devagar por 2s | Confirmar |
-| P-42 | 🟡 | **Imortal**: também salva de um golpe letal (fica com 1 HP e entra nos 2s de invulnerabilidade); invulnerável = golpes não causam dano (Veneno/Queimadura continuam) | Confirmar |
-| P-43 | 🟡 | **Sinergia de Borda**: o Elo que sai do herói com o Feat corta 30% da recarga (em vez de 15%) **dos dois itens** ligados | Confirmar |
-| P-44 | 🟡 | **Líder da Matilha**: mascotes são itens (não morrem); conta cada mascote na mochila do Patrulheiro | Confirmar |
-| P-45 | 🟡 | **Prontidão**: o item de menor recarga começa a luta com metade da recarga cumprida | Confirmar |
-| P-46 | 🟡 | **Palco Expandido**: itens encostados no Palco espalham os **efeitos próprios** aos aliados com metade da força do Palco; o corte de recarga do instrumento continua só no Palco | Confirmar |
-| P-47 | 🟡 | **Reserva Arcana**: todos já começam a luta com mana cheia, então o Feat vale +40 de mana máxima | Confirmar |
-| P-48 | 🟡 | **Mente Tática**: +15% de dano e de cura nos itens que recebem algum bônus de catalisador | Confirmar |
+
+| Código | Status | Interpretação | Validar |
+|---|---|---|---|
+| P-49 | 🟡 | **Corredor Armadilhado saiu do baralho**: a lista dos 12 eventos (Q-30) não o inclui | Confirmar |
+| P-50 | 🟡 | **Fonte de Mana**, opção "mana cheia": todos já começam com a mana cheia, então virou **+40 de mana máxima (começa cheia)** no próximo duelo PvP | Confirmar ou definir outro efeito |
+| P-51 | 🟡 | **Alquimista Louco**: os 3 tônicos são Vigor (+25% HP máximo), Fúria (+20% de dano das armas) e Celeridade (−12% de recarga); o Frasco Pesado vai para a mochila do herói (ou para o baú, se não couber) | Confirmar os 3 tônicos e números |
+| P-52 | 🟡 | **Santuário**: item do baú também pode ser oferecido (só dá o ouro, sem XP); +2 XP só para o herói portador | Confirmar |
+| P-53 | 🟡 | **Baú Trancado / Fonte**: os efeitos de "próximo duelo" valem só para o próximo **duelo PvP** (não para emboscadas) e somem depois dele | Confirmar |
+| P-54 | 🟡 | **Emboscada**: os monstros usam o XP médio da party; o encontro é sorteado entre os 3; Elite repete o mesmo encontro com +35% HP e +1 fusão; o saque normal sai de básicos+avançados da sala | Confirmar |
 
 P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
@@ -131,7 +128,7 @@ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 | P-20 | ✅ | **Bolsa de expansão** — implementada (Q-21). de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
 | P-21 | 🔴 | **Receitas mágicas** — faltam ingredientes e efeitos (**Q-29**). (Fase 2): combinações de itens encostados viram itens novos |
 | P-22 | ⚪ | **PvP assíncrono real**: backend para salvar builds de jogadores; hoje o ghost é gerado localmente |
-| P-23 | 🔴 | **Emboscada PvE** — faltam os monstros (**Q-31**) e os eventos (**Q-30**). com combate de verdade (hoje só dá ouro) |
+| P-23 | ✅ | **Emboscada PvE** — implementada (Q-31); dificuldade em **Q-35**. com combate de verdade (hoje só dá ouro) |
 | P-24 | ⚪ | **Telas de fim de run** (vitória com 10 duelos / derrota sem tochas); hoje volta para a Taverna |
 | P-25 | ⚪ | **Arte final** (retratos, ilustrações de eventos, ícones). Os ícones atuais são de game-icons.net (CC BY 3.0): se o jogo for publicado, os créditos precisam aparecer no jogo |
 | P-26 | ⚪ | Ao arrastar, o "fantasma" do item usa o tamanho de célula da origem, não o da mochila de destino (só visual) |
@@ -148,6 +145,7 @@ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 |---|---|---|---|
 | R-14 | Rodada 15 | Veneno/Queimadura e escudos fixos não escalavam com o HP (Q-15) | Fator de profundidade 1.23 / 2.47 / 6.28 |
 | R-15 | Rodada 15 | Gerador sorteava itens sem olhar a classe (Q-16) | 60% dos itens com afinidade de classe |
+| R-16 | 2026-11-19 | Interpretações de Feats P-38 a P-48 | Todas confirmadas |
 | R-12 | Rodada 14 | Encantamentos desiguais (P-04) | 10 de 10 na faixa +20 a +40pp (Vampírico +19.7, no limite) |
 | R-13 | Rodada 14 | Fundir pior que 2 cópias (P-31) | Teste no mesmo herói + 1 instrumento por herói: fusão empatada ou melhor |
 | R-10 | Rodada 13 | Afiado abaixo da faixa (Q-11) | +30% de crítico e cada crítico adianta 0.3s → +23.3pp |

@@ -1,6 +1,6 @@
 # OSR Battler — Relatório da simulação
 
-> Gerado por `npm run balance --fights 300 --out relatorio.md` em 2026-11-18T21:02:39.752Z · commit `eef7969`
+> Gerado por `npm run balance --fights 300 --out relatorio.md` em 2026-11-19T11:52:08.203Z · commit `072b6c3`
 > Resumo e histórico das rodadas: `docs/BALANCO.md` (https://osr.valiran.party).
 
 Linha de base **[Mago, Bardo, Guerreiro]** contra ghosts da **sala 3**: 20.0% de vitória, 17.0s por luta (300 lutas por variante).
@@ -103,7 +103,7 @@ a utilidade própria do item.
 | Arco Curto +1 | Arma/Instrumento | 55.0% | +0.0pp | 1.8 |  | vs 2x Arco Curto: 55% · no Guerreiro |
 | Erva Curativa +1 | Catalisador | 23.7% | +0.0pp | 0.0 |  | vs 2x Erva Curativa: 24% · no Guerreiro |
 
-_Tempo de simulação: 163.8s._
+_Tempo de simulação: 133.5s._
 
 ---
 
@@ -141,52 +141,17 @@ Melhor posição de cada classe · vitória nela · (média geral nas 512 compos
 | Duração média 14–18s | ❌ 20.9s | ✅ 14.7s | ❌ 7.4s |
 | Absurdos da Fase 1 (classe > 70% ou < 25%, luta < 8s) | ✅ nenhum | ✅ nenhum | ⚠ luta < 8s |
 
-_Tempo de simulação: 279.8s._
+_Tempo de simulação: 217.7s._
 
 ---
 
-## Diagnóstico das classes — sala 18
+## Emboscada PvE: vitória da party (300 lutas, composições sorteadas, party do gerador)
 
-300 lutas por classe, na melhor posição; os outros 2 heróis são sorteados entre as 8 classes.
-
-### Desempenho do herói da classe
-
-Dano = dano direto dos golpes (sem Veneno/Queimadura, que não têm dono no registro). "Golpes com DOT" = golpes que aplicaram Veneno ou Queimadura. Escudo e cura = gerados pelos itens do herói (para qualquer aliado).
-
-| Classe | Posição | Vitória | Tempo vivo | Morre primeiro | Dano/luta | % do dano da party | Dano/s vivo | Golpes/luta | Golpes com DOT | Escudo/luta | Cura/luta |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| Guerreiro | Vanguarda | 47% | 5.8s de 8.2s (70%) | 40% | 724 | 28% | 125.8 | 24.5 | 0.2 | 7 | 441 |
-| Paladino | Vanguarda | 40% | 6.2s de 8.8s (70%) | 33% | 567 | 24% | 91.9 | 9.1 | 0.2 | 291 | 406 |
-| Bárbaro | Vanguarda | 59% | 4.7s de 6.6s (72%) | 31% | 1197 | 44% | 254.1 | 17.1 | 0.6 | 12 | 44 |
-| Bardo | Meio | 38% | 5.1s de 6.5s (78%) | 6% | 469 | 20% | 92.1 | 15.3 | 0.5 | 8 | 294 |
-| Ladino | Meio | 37% | 5.8s de 7.9s (73%) | 4% | 682 | 34% | 118.0 | 18.4 | 12.3 | 14 | 237 |
-| Patrulheiro | Retaguarda | 38% | 5.2s de 6.4s (81%) | 19% | 961 | 43% | 183.4 | 20.8 | 0.3 | 9 | 40 |
-| Mago | Meio | 57% | 2.6s de 4.2s (63%) | 16% | 1249 | 60% | 473.8 | 8.1 | 0.2 | 4 | 15 |
-| Alquimista | Retaguarda | 52% | 9.4s de 10.8s (87%) | 19% | 431 | 16% | 45.9 | 12.5 | 0.5 | 8 | 1867 |
-
-### Mochila montada pelo gerador (média de itens por tipo)
-
-| Classe | arma corpo a corpo | arma à distância | arma mágica | mascote | instrumento | armadura | poção | catalisador/outro | Corpo a corpo na Retaguarda (-20%) |
-|---|---|---|---|---|---|---|---|---|---|
-| Guerreiro | 2.3 | 0.1 | 0.2 | 0.0 | 0.1 | 3.1 | 1.1 | 1.7 | — |
-| Paladino | 2.0 | 0.1 | 0.2 | 0.0 | 0.0 | 2.7 | 0.9 | 2.8 | — |
-| Bárbaro | 3.7 | 0.1 | 0.2 | 0.0 | 0.1 | 0.2 | 0.2 | 2.8 | — |
-| Bardo | 1.2 | 0.1 | 0.3 | 0.0 | 1.6 | 0.2 | 2.1 | 0.9 | — |
-| Ladino | 2.6 | 0.3 | 0.7 | 0.0 | 0.0 | 0.3 | 1.5 | 2.4 | — |
-| Patrulheiro | 0.2 | 1.9 | 0.2 | 2.7 | 0.1 | 0.2 | 0.2 | 4.1 | 0.2 |
-| Mago | 0.2 | 0.1 | 3.8 | 0.0 | 0.0 | 0.2 | 1.1 | 3.2 | — |
-| Alquimista | 0.2 | 1.6 | 0.2 | 0.0 | 0.1 | 1.2 | 3.1 | 2.2 | 0.2 |
-
-### Fusão no mesmo herói (sala 3, linha de base Mago/Bardo/Guerreiro, 300 lutas)
-
-| Item | Herói | 2 cópias +0 | 1 cópia +1 | Delta (pp) |
-|---|---|---|---|---|
-| Adaga | Mago | 25.3% | 21.0% | -4.3 |
-| Adaga | Bardo | 23.0% | 28.7% | +5.7 |
-| Adaga | Guerreiro | 38.0% | 36.7% | -1.3 |
-| Gema Bruta | Mago | 33.3% | 28.0% | -5.3 |
-| Gema Bruta | Bardo | 12.0% | 12.0% | +0.0 |
-| Gema Bruta | Guerreiro | 12.0% | 12.0% | +0.0 |
-| Tambor de Guerra | Mago | 22.0% | 27.3% | +5.3 |
-| Tambor de Guerra | Bardo | 12.0% | 17.3% | +5.3 |
-| Tambor de Guerra | Guerreiro | 21.0% | 30.3% | +9.3 |
+| Encontro | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Horda de Goblins | 100% (6.9s) | 100% (3.6s) | 100% (1.8s) |
+| Elite: Horda de Goblins | 99% (10.1s) | 100% (5.0s) | 100% (2.2s) |
+| Câmara dos Esqueletos | 100% (11.5s) | 100% (5.7s) | 100% (2.5s) |
+| Elite: Câmara dos Esqueletos | 99% (17.7s) | 100% (8.5s) | 100% (3.4s) |
+| Ninho de Cubos Gelatinosos | 100% (13.9s) | 100% (7.0s) | 100% (2.9s) |
+| Elite: Ninho de Cubos Gelatinosos | 74% (29.6s) | 96% (16.7s) | 100% (5.0s) |
