@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-19 · **Fase 1 concluída**: 12 eventos e Emboscada PvE.
+**Última atualização:** 2026-11-19 · **Fase 1 encerrada**: Emboscada PvE calibrada (Q-35). Próximo: Fase 3 pelo Q-18.
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -55,7 +55,39 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
 
-## Fase 1, passo 4 — 12 eventos e Emboscada PvE (fim da Fase 1)
+## Fase 1, passo 5 — Emboscada PvE calibrada (Q-35)
+
+**Implementado:** os monstros ganham itens extras por sala de um **pool temático** (Goblins: Adaga, Poção de Veneno, Gazuas, Presa de Víbora ·
+Esqueleto Guerreiro: Espada Curta, Broquel, Espada Longa, Elmo · Arqueiro: Arco Curto, Aljava, Arco Longo · Cubo: Pseudópode, Núcleo),
+com casas na borda para eles (2 por item) e fusão quando não cabem. O **dano** dos monstros agora cresce com o **fator de nível** da party.
+Calibragem em `MONSTER` (`encounters.ts`), por busca binária até a meta (média das 3 salas):
+
+| Ajuste | Goblins | Esqueletos | Cubos |
+|---|---|---|---|
+| Itens extras | 0.5x os do ghost da sala (sala 3: 1 · sala 9: 3 · sala 18: 6, repartidos) | igual | igual |
+| HP e dano (normal) | x1.93 | x1.58 | x1.24 |
+| HP e dano da Elite (por cima do +35% de HP e +1 fusão) | x0.69 | x0.65 | x0.58 |
+
+**Vitória da party** (`npx tsx scripts/pve.ts --fights 300`, composições sorteadas, party do gerador de builds):
+
+| Encontro | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Horda de Goblins | 73% (15.7s) | 76% (7.3s) | 83% (3.1s) |
+| Elite: Horda de Goblins | 42% (13.6s) | 52% (6.1s) | 63% (2.7s) |
+| Câmara dos Esqueletos | 81% (20.4s) | 73% (10.0s) | 67% (4.4s) |
+| Elite: Câmara dos Esqueletos | 62% (19.6s) | 49% (9.0s) | 40% (3.7s) |
+| Ninho de Cubos Gelatinosos | 89% (22.3s) | 68% (14.7s) | 68% (6.5s) |
+| Elite: Ninho de Cubos Gelatinosos | 74% (27.1s) | 36% (18.8s) | 41% (7.4s) |
+| **Média normal** (meta ~75%) | **81%** | **72%** | **73%** |
+| **Média Elite** (meta ~50%) | **59%** | **46%** | **48%** |
+
+- Meta na média (75% / 50%); por sala, os Goblins ficam mais fáceis com a sala e os Esqueletos/Cubos mais difíceis (±10pp).
+  Testei 0.25x de itens (monstros-base mais fortes): a diferença entre salas **aumentou** (62–87%), então ficou 0.5x.
+- ⚠ **Elite abaixo de 1 (P-55):** o +1 de fusão sozinho deixava a Elite 40–60pp abaixo da normal; para chegar a ~25pp, o HP/dano da Elite
+  ficou x0.58–0.69, ou seja, a Elite tem **menos HP** que a normal (x0.78–0.93) e é mais forte só pela fusão.
+- Lutas da sala 18 curtas (2.7–7.4s), como nos duelos (Q-34): a party do gerador mata muito rápido; fica para a Fase 3.
+
+## Fase 1, passo 4 — 12 eventos e Emboscada PvE
 
 **Implementado:** baralho com 12 eventos (Mercador com 5 itens, Fogueira & Bigorna com Têmpera Rápida, Emboscada, Emboscada de Elite,
 Mestre de Armas, Alquimista Louco, Santuário, Baú Trancado, Forja Rúnica, Feira 2-por-1, Fonte de Mana, Bibliotecário Fantasma)
@@ -511,6 +543,7 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F1.5 | Emboscada calibrada (Q-35): itens temáticos, dano x fator, ajuste por encontro | duelos iguais · PvE 81 / 72 / 73% normal, 59 / 46 / 48% Elite |
 | F1.4 | 12 eventos e Emboscada PvE (Q-30, Q-31) | duelos iguais · PvE ~100% de vitória (Q-35) |
 | F1.3 | 42 Feats (modal, gerador, referência) | 15 / 22 / 23 pp · lutas 20.9 / 14.7 / 7.4s |
 | F1.2 | HP 0.80 x 1.30^nível (Q-32), 8 receitas (Q-29), painel de metas (Q-27) | 17 / 18 / 29 pp · lutas 20.9 / 13.6 / 7.8s |

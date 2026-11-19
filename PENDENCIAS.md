@@ -4,19 +4,19 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-19 · **Fase 1 concluída** (12 eventos e Emboscada PvE implementados). Uma pergunta nova (Q-35).
+**Última atualização:** 2026-11-19 · **Fase 1 encerrada**: Q-35 aplicado (Emboscada calibrada), P-49 a P-54 confirmadas. Q-18 a Q-20 despausadas.
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
-## Fase atual: construção de mecânicas (decisão do usuário, 2026-11-18)
+## Fase atual: Fase 1 encerrada, início da Fase 3 pelo Q-18 (2026-11-19)
 
 **Motivo:** cada ajuste de número estava criando dois problemas novos, e cada mecânica grande nova (bolsa, venda, receitas…)
 muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para depois que as mecânicas estiverem fechadas**.
 
-1. **Fase 1 — fechar as mecânicas** (agora): implementar o que falta (perguntas Q-21 a Q-26). Depois de cada mecânica nova,
+1. **Fase 1 — fechar as mecânicas** (✅ encerrada em 2026-11-19): implementar o que falta (perguntas Q-21 a Q-26). Depois de cada mecânica nova,
    o painel roda só para pegar **absurdos**: classe com mais de 70% ou menos de 25% de vitória, lutas com menos de 8s, um item
    que domina tudo. Diferenças de 3–5pp **não** são corrigidas nesta fase.
-2. **Fase 2 — congelar o conteúdo e calibrar a régua:** gerador de builds realista (bolsas, venda/troca, economia) e congelado;
+2. **Fase 2 — congelar o conteúdo e calibrar a régua** (conteúdo congelado em 2026-11-19): gerador de builds realista (bolsas, venda/troca, economia) e congelado;
    metas por papel (Q-27).
 3. **Fase 3 — balanceamento fino:** uma mudança por vez, cada uma medida sozinha contra o painel inteiro (antes/depois). Se uma
    mudança tirar da meta algo que estava dentro, ela não entra e volta como pergunta. Diferenças dentro do erro (±2–3pp) não contam.
@@ -25,10 +25,10 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 ✅ Nível e XP (HP x1.25 por nível) · ✅ Economia e venda · ✅ Mochila expansível (níveis 3/6/9 + Bolsa de Couro) ·
 ✅ Gerador realista (casas extras, funde e vende quando enche) · ✅ Botão [FUNDIR] entre itens idênticos encostados (o arraste sobre o item igual continua valendo) ·
 ✅ HP 0.80 x 1.30^(nível − 1) (Q-32) · ✅ 8 receitas mágicas (Q-29) · ✅ Painel de metas no relatório (Q-27) ·
-✅ Emboscada PvE com monstros (Q-31) · ✅ 12 eventos (Q-30) · ✅ 42 Feats (10 genéricos + 32 de classe) com modal de subida de nível e no gerador de builds.
+✅ Emboscada PvE com monstros (Q-31) e calibrada (Q-35) · ✅ 12 eventos (Q-30) · ✅ 42 Feats (10 genéricos + 32 de classe) com modal de subida de nível e no gerador de builds.
 
-**Pedido ao agente de análise:** nesta fase, responda as perguntas de mecânica (Q-21 a Q-27) e **não proponha ajustes finos
-de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resultado delas muda com bolsa, venda e economia).
+**Pedido ao agente de análise:** as perguntas de balanceamento Q-18 a Q-20 voltaram. Na Fase 3 cada opção é medida
+**sozinha** contra o painel inteiro antes de entrar; a primeira bateria mede as opções do Q-18 e a duração das lutas da sala 18 (Q-34).
 
 ## 0. Perguntas para o agente de análise
 
@@ -36,17 +36,15 @@ de números**. As perguntas de balanceamento Q-18 a Q-20 ficam pausadas (o resul
 > resposta ao Claude Code (que roda os testes). A resposta é registrada aqui com a data, a decisão é aplicada e o
 > efeito medido entra em `BALANCO.md`. Responda citando o código (`Q-xx`).
 
-| Código | Ref. | Pergunta | Dados para decidir | Opções |
-|---|---|---|---|---|
-| Q-35 | Q-31 | **A Emboscada PvE ficou fácil demais** (absurdo da Fase 1) | Os monstros só crescem em **HP** (fator de nível) e +fusão da sala; o **dano** não cresce e o kit é fixo (2–3 itens), enquanto a party do jogador ganha 12 itens extras até a sala 18. Vitória da party (300 lutas, composições sorteadas):<br>¦  Encontro  ¦  Sala 3  ¦  Sala 9  ¦  Sala 18  ¦ <br> ¦ --- ¦ --- ¦ --- ¦ --- ¦ <br> ¦  Horda de Goblins  ¦  100% (6.9s)  ¦  100% (3.6s)  ¦  100% (1.8s)  ¦ <br> ¦  Elite: Horda de Goblins  ¦  99% (10.1s)  ¦  100% (5.0s)  ¦  100% (2.2s)  ¦ <br> ¦  Câmara dos Esqueletos  ¦  100% (11.5s)  ¦  100% (5.7s)  ¦  100% (2.5s)  ¦ <br> ¦  Elite: Câmara dos Esqueletos  ¦  99% (17.7s)  ¦  100% (8.5s)  ¦  100% (3.4s)  ¦ <br> ¦  Ninho de Cubos Gelatinosos  ¦  100% (13.9s)  ¦  100% (7.0s)  ¦  100% (2.9s)  ¦ <br> ¦  Elite: Ninho de Cubos Gelatinosos  ¦  74% (29.6s)  ¦  96% (16.7s)  ¦  100% (5.0s)  ¦ <br><br>Testes (não aplicados): **(A) dano x fator de nível** → normais seguem ~100%, Elite de Cubos 55 / 70 / 90%. **(B) dano x fator x1.5 e HP x2** → normais 78–100%, Elites 0–4% na sala 3 e 43–73% na sala 18 (difícil cedo, fácil tarde) | (a) monstros ganham itens extras por sala, como o gerador dos ghosts (pool temático: goblins = adagas/venenos/gazuas, esqueletos = espadas/broquéis/arcos, cubos = núcleos/pseudópodes), mais dano x fator · (b) multiplicadores fixos como o teste B, calibrados por sala · (c) meta de vitória da party: normal ~70–80%, Elite ~45–55% |
+Nenhuma pergunta nova nesta rodada (ver P-55 na seção 3).
 
-**Pausadas até o fim da fase de mecânicas** (o resultado muda com bolsa, venda e economia):
+**Despausadas (2026-11-19):** a Fase 3 começa pelo Q-18 (uma mudança por vez, cada opção medida sozinha contra o painel):
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-18 | P-03 | ⏸ **Com o gerador com afinidade, o Mago domina a sala 18** | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
-| Q-19 | P-03 | ⏸ **Paladino e Patrulheiro não respondem aos buffs** | Sala 18 (rodada 14 → 15): Paladino 40 → 41%, Patrulheiro 39 → 38%. **Paladino:** escudo/luta subiu 222 → 1003 com o fator, mas o dano continua 54/s; a mochila (cruz de 11 casas) já começa com 6 itens, então o gerador consegue pôr só ~1 arma. **Patrulheiro:** é quem mais causa dano depois do Mago (190/s, **50% do dano da party**), mas vence 32%; morre primeiro em 20% das lutas e a party dele cura pouco | Paladino: (a) kit inicial menor (tirar Pedra de Amolar e Gibão; abre 3 casas) · (b) Égide da Fé também dá +10% de dano às armas por armadura encostada. Patrulheiro: (c) HP 90 → 110 · (d) mascote alimentado também dá 3 de escudo (x fator) ao Patrulheiro |
-| Q-20 | P-04 / P-31 | ⏸ **Resíduos depois da afinidade** | A linha de base da sala 3 caiu de 30% para 25% (ghosts mais fortes), e todos os deltas de encantamento subiram: Flamejante e Armazenador +40.7 (no teto), Vorpal **+19.3** e Vampírico **+17.7** (abaixo da faixa). Fusão no mesmo herói: Maça +1 **−6.0**, Cajado de Aprendiz +1 **−7.7** (o Cajado dá mana ao Mago por ativação: 2 cópias = 2 ativações; o +1 dá 1.5x de mana com 13% menos recarga ≈ 1.72x). Erro da medição ±2.2 a ±2.8pp | (a) Vorpal 12% → 14% e Vampírico 25% → 30% · (b) mana do Cajado por ativação x1.75 por nível de fusão (em vez de +50%) · (c) esperar a próxima rodada: a linha de base vai mudar de novo com o Q-18 |
+| Q-18 | P-03 | 🔴 **Com o gerador com afinidade, o Mago domina a sala 18** | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
+| Q-19 | P-03 | 🔴 **Paladino e Patrulheiro não respondem aos buffs** | Sala 18 (rodada 14 → 15): Paladino 40 → 41%, Patrulheiro 39 → 38%. **Paladino:** escudo/luta subiu 222 → 1003 com o fator, mas o dano continua 54/s; a mochila (cruz de 11 casas) já começa com 6 itens, então o gerador consegue pôr só ~1 arma. **Patrulheiro:** é quem mais causa dano depois do Mago (190/s, **50% do dano da party**), mas vence 32%; morre primeiro em 20% das lutas e a party dele cura pouco | Paladino: (a) kit inicial menor (tirar Pedra de Amolar e Gibão; abre 3 casas) · (b) Égide da Fé também dá +10% de dano às armas por armadura encostada. Patrulheiro: (c) HP 90 → 110 · (d) mascote alimentado também dá 3 de escudo (x fator) ao Patrulheiro |
+| Q-20 | P-04 / P-31 | 🔴 **Resíduos depois da afinidade** | A linha de base da sala 3 caiu de 30% para 25% (ghosts mais fortes), e todos os deltas de encantamento subiram: Flamejante e Armazenador +40.7 (no teto), Vorpal **+19.3** e Vampírico **+17.7** (abaixo da faixa). Fusão no mesmo herói: Maça +1 **−6.0**, Cajado de Aprendiz +1 **−7.7** (o Cajado dá mana ao Mago por ativação: 2 cópias = 2 ativações; o +1 dá 1.5x de mana com 13% menos recarga ≈ 1.72x). Erro da medição ±2.2 a ±2.8pp | (a) Vorpal 12% → 14% e Vampírico 25% → 30% · (b) mana do Cajado por ativação x1.75 por nível de fusão (em vez de +50%) · (c) esperar a próxima rodada: a linha de base vai mudar de novo com o Q-18 |
 
 ### Respostas recebidas
 
@@ -88,6 +86,9 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-34** · 2026-11-19 · (c) aceitar os 7.4s da sala 18 na Fase 1 e resolver na Fase 3 junto com o Q-18 (Mago) · registrado
 - **P-38 a P-48** · 2026-11-19 · todas as 11 interpretações de Feats confirmadas
 - **Q-30 / Q-31** · implementados em 2026-11-19 (ver P-49 a P-54)
+- **Q-35** · 2026-11-19 · (a) + (c): monstros com gerador de itens paralelo (pool temático) e dano x fator de nível; meta ~75% nas normais e ~50% nas Elites nas salas 3/9/18 · aplicado (F1.5) → médias 81 / 72 / 73% (normal) e 59 / 46 / 48% (Elite); ver P-55
+- **P-49 a P-54** · 2026-11-19 · todas as 6 interpretações dos eventos e da Emboscada confirmadas · registrado
+- **Fase 2/3** · 2026-11-19 · conteúdo congelado; P-21 (receitas) ✅; despausar Q-18 a Q-20 e começar a Fase 3 pelo Q-18 (Mago na sala 18) junto com a duração das lutas da sala 18 (Q-34)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
 ## 1. Balanceamento — problemas abertos
@@ -109,15 +110,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 
 | Código | Status | Interpretação | Validar |
 |---|---|---|---|
-
-| Código | Status | Interpretação | Validar |
-|---|---|---|---|
-| P-49 | 🟡 | **Corredor Armadilhado saiu do baralho**: a lista dos 12 eventos (Q-30) não o inclui | Confirmar |
-| P-50 | 🟡 | **Fonte de Mana**, opção "mana cheia": todos já começam com a mana cheia, então virou **+40 de mana máxima (começa cheia)** no próximo duelo PvP | Confirmar ou definir outro efeito |
-| P-51 | 🟡 | **Alquimista Louco**: os 3 tônicos são Vigor (+25% HP máximo), Fúria (+20% de dano das armas) e Celeridade (−12% de recarga); o Frasco Pesado vai para a mochila do herói (ou para o baú, se não couber) | Confirmar os 3 tônicos e números |
-| P-52 | 🟡 | **Santuário**: item do baú também pode ser oferecido (só dá o ouro, sem XP); +2 XP só para o herói portador | Confirmar |
-| P-53 | 🟡 | **Baú Trancado / Fonte**: os efeitos de "próximo duelo" valem só para o próximo **duelo PvP** (não para emboscadas) e somem depois dele | Confirmar |
-| P-54 | 🟡 | **Emboscada**: os monstros usam o XP médio da party; o encontro é sorteado entre os 3; Elite repete o mesmo encontro com +35% HP e +1 fusão; o saque normal sai de básicos+avançados da sala | Confirmar |
+| P-55 | 🟡 | **Q-35, Elite com multiplicador abaixo de 1**: com +1 de fusão, a Elite ficava 40–60pp abaixo da normal (meta: 25pp). A calibragem por encontro chegou a HP e dano da Elite **x0.58 a x0.69** (por cima do +35% de HP), ou seja, a Elite tem **menos HP que a normal** (x0.78–0.93) e é mais forte só pela fusão | Confirmar, ou trocar o +1 de fusão da Elite por HP/dano (ver BALANCO.md, F1.5) |
 
 P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
@@ -126,9 +119,9 @@ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 | Código | Status | Funcionalidade |
 |---|---|---|
 | P-20 | ✅ | **Bolsa de expansão** — implementada (Q-21). de mochila (item fora da loja até existir a mecânica). Resolveria o Lobo Cinzento (P-05) e o Alaúde (P-06) |
-| P-21 | 🔴 | **Receitas mágicas** — faltam ingredientes e efeitos (**Q-29**). (Fase 2): combinações de itens encostados viram itens novos |
+| P-21 | ✅ | **Receitas mágicas** — implementadas (Q-29): 8 receitas de 2 ingredientes encostados |
 | P-22 | ⚪ | **PvP assíncrono real**: backend para salvar builds de jogadores; hoje o ghost é gerado localmente |
-| P-23 | ✅ | **Emboscada PvE** — implementada (Q-31); dificuldade em **Q-35**. com combate de verdade (hoje só dá ouro) |
+| P-23 | ✅ | **Emboscada PvE** — implementada (Q-31) e calibrada (Q-35): ~75% normal, ~50% Elite |
 | P-24 | ⚪ | **Telas de fim de run** (vitória com 10 duelos / derrota sem tochas); hoje volta para a Taverna |
 | P-25 | ⚪ | **Arte final** (retratos, ilustrações de eventos, ícones). Os ícones atuais são de game-icons.net (CC BY 3.0): se o jogo for publicado, os créditos precisam aparecer no jogo |
 | P-26 | ⚪ | Ao arrastar, o "fantasma" do item usa o tamanho de célula da origem, não o da mochila de destino (só visual) |
@@ -145,6 +138,8 @@ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 |---|---|---|---|
 | R-14 | Rodada 15 | Veneno/Queimadura e escudos fixos não escalavam com o HP (Q-15) | Fator de profundidade 1.23 / 2.47 / 6.28 |
 | R-15 | Rodada 15 | Gerador sorteava itens sem olhar a classe (Q-16) | 60% dos itens com afinidade de classe |
+| R-18 | F1.5 | Emboscada PvE fácil demais (Q-35) | Itens extras do pool temático (0.5x os do ghost) + dano x fator de nível + calibragem por encontro → 81 / 72 / 73% normal, 59 / 46 / 48% Elite |
+| R-17 | 2026-11-19 | Interpretações dos eventos e da Emboscada P-49 a P-54 | Todas confirmadas |
 | R-16 | 2026-11-19 | Interpretações de Feats P-38 a P-48 | Todas confirmadas |
 | R-12 | Rodada 14 | Encantamentos desiguais (P-04) | 10 de 10 na faixa +20 a +40pp (Vampírico +19.7, no limite) |
 | R-13 | Rodada 14 | Fundir pior que 2 cópias (P-31) | Teste no mesmo herói + 1 instrumento por herói: fusão empatada ou melhor |
