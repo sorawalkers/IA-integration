@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-19 · **Fase 3, rodada F3.2**: HP por nível x1.35 (Q-34). Pergunta nova: Q-36 (curva do HP).
+**Última atualização:** 2026-11-19 · **Fase 3, rodadas F3.4 e F3.5**: área 45% (Q-18 b) entrou sem efeito medido; escudo do mascote (Q-19 d) **não entrou**. Perguntas novas: Q-38 e Q-39.
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -54,6 +54,87 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Fase 3, rodada F3.5 — mascote alimentado dá 3 de escudo x fator ao Patrulheiro (Q-19 d) · ❌ não entrou
+
+| Classe (melhor posição) | Sala 3 F3.4 → F3.5 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Patrulheiro** | **34 → 45%** | 29 → 33% | 30 → 32% |
+| Guerreiro | 37 → 36% | 41 → 40% | 40 → 40% |
+| Paladino | 39 → 38% | 40 → 40% | 42 → 41% |
+| Bárbaro | 39 → 39% | 47 → 46% | 50 → 49% |
+| Bardo | 31 → 32% | 41 → 41% | 42 → 42% |
+| Ladino | 48 → 47% | 57 → 57% | 43 → 43% |
+| Mago | 29 → 29% | 38 → 38% | 54 → 54% |
+| Alquimista | 33 → 34% | 45 → 45% | 50 → 50% |
+| **Duração da luta** | 19.3 → 20.7s | **17.1 → 18.0s** (sai da meta) | 11.4 → 11.8s |
+| Classes na faixa 40–60% | 1 → 2 | 6 → 6 | 7 → 7 |
+| Emboscada (normal / Elite) | 80 / 60% → **85 / 65%** | 69 / 42% → 71 / 43% | 72 / 43% → 73 / 43% |
+
+- **Não entra** (regra da Fase 3): tirou da meta a duração da sala 9 (17.1 → 18.0s) e o efeito caiu onde o Patrulheiro **não** era o
+  problema (sala 3: +11pp). Nas salas 9 e 18, onde ele está abaixo de 40%, subiu só 3–4pp e continua fora. Código desfeito → **Q-38**.
+- O escudo é proporcional ao HP em todos os níveis (≈5% do HP do Patrulheiro por ataque de mascote), então a diferença entre as salas
+  vem de outra coisa: na sala 18 as lutas são curtas (11s) e o gerador põe menos comida encostada nos mascotes quando a mochila enche.
+
+## Fase 3, rodada F3.4 — `magic_aoe` 60% → 45% (Q-18 b)
+
+**Mudança única:** magia em área causa 45% do dano em cada alvo (era 60%). O Feat Explosão Rúnica mantém o ganho de +15pp: 60% (era 75%) (P-58).
+
+| Medida | Sala 3 F3.3 → F3.4 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Mago (melhor posição) | 29 → 29% | 39 → 38% | **55 → 54%** |
+| Diferença | 19 → 20pp | 28 → 28pp | 25 → 24pp |
+| Duração da luta | 19.3 → 19.3s | 17.0 → 17.1s | 11.3 → 11.4s |
+| Classes na faixa 40–60% | 1 → 1 | 6 → 6 | 7 → 7 |
+| Melhor composição | 85 → 85% | 89 → 90% | 90 → 91% |
+| Mais frequente no top 10 | Ladino 10 → 10 | Ladino 10 → 9 | Alquimista 8 → 9 (Mago 8) |
+
+- **Entra sem efeito medido** (todas as diferenças dentro do erro; nada saiu da meta). O dano em área **não** é o que sustenta o Mago:
+  ele segue em 8 das 10 melhores composições da sala 18, quase sempre com o Alquimista → **Q-39**.
+- Emboscada: normal 80 / 69 / 72%, Elite 60 / 42 / 43%.
+
+## Fase 3, rodada F3.3 — curva de HP 0.62 x 1.50 (Q-36 b) e nova régua (Q-37 a)
+
+**Mudança única (curva):** HP = classe x **0.62 x 1.50^(nível − 1)** e o fator dos efeitos fixos (Veneno, Queimadura, escudos fixos,
+cura do mascote) também **1.50^(nível − 1)** (P-56). **Régua nova (Q-37 a):** classes **40–60%** na melhor posição; a melhor composição
+≤ 68%; nenhuma classe em mais de 6 das 10 melhores composições; lutas 14–18s. O relatório agora traz o **top 10 de composições** por sala.
+
+| Classe (melhor posição) | Sala 3 F3.2 → F3.3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Guerreiro | 37 → 37% | 43 → 41% | 44 → 41% |
+| Paladino | 39 → 39% | 43 → 40% | 43 → 42% |
+| Bárbaro | 41 → 39% | 52 → 47% | 57 → 49% |
+| Bardo | 32 → 32% | 42 → 41% | 42 → 42% |
+| Ladino | 47 → 48% | 51 → **57%** | 38 → 43% |
+| Patrulheiro | 35 → 34% | 30 → **28%** | 34 → **30%** |
+| Mago | 30 → 29% | 44 → 39% | 58 → 55% |
+| Alquimista | 35 → 33% | 49 → 45% | 49 → 50% |
+| Diferença | 17 → 19pp | 21 → 28pp | 24 → 25pp |
+| **Duração da luta** | 21.7 → **19.3s** | 16.7 → **17.0s** ✅ | 9.1 → **11.3s** |
+| Classes na faixa 40–60% | — → 1/8 | — → 6/8 | — → **7/8** |
+| Melhor composição (meta ≤ 68%) | 85% ❌ | 89% ❌ | 90% ❌ |
+| Classe mais frequente no top 10 (meta ≤ 6) | **Ladino 10/10** ❌ | **Ladino 10/10** ❌ | Alquimista 8/10 ❌ |
+
+- **Entra.** Sala 18 com 7/8 classes na faixa e lutas de 11.3s (o teste exploratório da F3.2, com efeitos fixos em 1.30, dava 12.3s:
+  efeitos fixos mais fortes encurtam a luta). O Mago ficou em **55%** na sala 18 (a previsão era 60%).
+- **Top 10:** nas salas 3 e 9 **todas** as 10 melhores composições têm um **Ladino** (quase sempre no Meio), em geral com o **Alquimista**
+  na Retaguarda. Na sala 18 o top 10 é **Alquimista + Mago** (8 e 7 de 10). A melhor composição passa de 85% em todas as salas
+  (com 80 lutas por composição o erro é ±5pp, e o máximo de 512 sai inflado; mesmo assim fica bem acima de 68%).
+- **Patrulheiro** caiu para 28–30% nas salas 9 e 18 (abaixo da faixa) → Q-19 (d) na F3.5.
+- **Emboscada recalibrada:** o dano dos monstros seguia o fator de nível, que passou a 1.50 → a party caiu para 38 / 32% (normal).
+  Agora cada encontro tem um crescimento de dano próprio (`MONSTER.tune[id].growth`): Goblins e Esqueletos **1.40**, Cubos **1.10**
+  (a regeneração deles já cresce com a fusão). HP/dano: Goblins x1.79, Esqueletos x1.47, Cubos x1.63; Elite (HP/dano): x0.93/0.69, x0.89/0.66, x0.74/0.55.
+
+| Encontro | Sala 3 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Horda de Goblins | 80% (12.9s) | 72% (7.8s) | 74% (4.4s) |
+| Elite: Horda de Goblins | 52% (11.7s) | 44% (6.4s) | 55% (3.4s) |
+| Câmara dos Esqueletos | 85% (17.4s) | 68% (10.8s) | 70% (5.6s) |
+| Elite: Câmara dos Esqueletos | 65% (16.9s) | 46% (9.3s) | 38% (4.6s) |
+| Ninho de Cubos Gelatinosos | 77% (25.4s) | 69% (23.2s) | 75% (20.6s) |
+| Elite: Ninho de Cubos Gelatinosos | 65% (26.8s) | 37% (29.4s) | 38% (30.8s) |
+| **Média normal** (meta ~75%) | **81%** | **70%** | **73%** |
+| **Média Elite** (meta ~50%) | **61%** | **42%** | **44%** |
 
 ## Fase 3, rodada F3.2 — HP por nível 1.30 → 1.35 (Q-34)
 
@@ -606,6 +687,9 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F3.5 | ❌ Mascote alimentado dá escudo (Q-19 d) — desfeito | Patrulheiro 45 / 33 / 32%; sala 9 em 18.0s (sai da meta) |
+| F3.4 | `magic_aoe` 45% (Q-18 b) | 20 / 28 / 24 pp · lutas 19.3 / 17.1 / 11.4s · sem efeito medido |
+| F3.3 | HP 0.62 x 1.50, efeitos fixos x1.50, régua 40–60% + top 10 | 19 / 28 / 25 pp · lutas 19.3 / 17.0 / 11.3s · faixa 1 / 6 / 7 de 8 |
 | F3.2 | HP por nível x1.35 (Q-34) | 17 / 21 / 24 pp · lutas 21.7 / 16.7 / 9.1s |
 | F3.1 | Sobrecarga 1x a cada 3s (Q-18 a) | 18 / 21 / 23 pp · lutas 21.0 / 15.2 / 7.6s · Mago 30 / 44 / 56% |
 | F1.5 | Emboscada calibrada (Q-35): itens temáticos, dano x fator, ajuste por encontro | duelos iguais · PvE 81 / 72 / 73% normal, 59 / 46 / 48% Elite |
