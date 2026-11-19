@@ -1,6 +1,6 @@
 # OSR Battler — Relatório da simulação
 
-> Gerado por `npm run balance --rooms 3,9,18 --fights 500 --out relatorio-solo.md` em 2026-11-19T19:22:43.678Z · commit `535ed49`
+> Gerado por `npm run balance --rooms 3,9,18 --fights 500 --out relatorio-solo.md` em 2026-11-19T19:28:33.856Z · commit `1b56a97`
 > Resumo e histórico das rodadas: `docs/BALANCO.md` (https://osr.valiran.party).
 
 ## Escalonamento das classes (sala 3, sala 9, sala 18)
@@ -11,28 +11,28 @@
 |---|---|---|---|
 | 3 | 2 | +0 | 0 |
 | 9 | 4 | +1 | 1 |
-| 18 | 8 | +2 (10% +3) | 3 |
+| 18 | 8 | +1 (20% +2) | 3 |
 
 Vitória média de cada classe contra as 4 classes (inclui o espelho, que deve ficar perto de 50%)
 
 | Classe | Sala 3 | Sala 9 | Sala 18 |
 |---|---|---|---|
-| Guerreiro | 41% | 42% | 41% |
-| Ladino | 76% | 83% | 70% |
-| Patrulheiro | 45% | 37% | 38% |
-| Mago | 39% | 38% | 50% |
-| **Diferença** | **37 pp** | **45 pp** | **31 pp** |
-| **Duração média da luta** | 17.4s | 13.0s | 8.2s |
+| Guerreiro | 44% | 46% | 36% |
+| Ladino | 71% | 75% | 74% |
+| Patrulheiro | 48% | 39% | 41% |
+| Mago | 41% | 41% | 52% |
+| **Diferença** | **30 pp** | **37 pp** | **38 pp** |
+| **Duração média da luta** | 18.0s | 14.4s | 19.0s |
 
 ### Painel de metas (modo solo)
 
 | Meta | Sala 3 | Sala 9 | Sala 18 |
 |---|---|---|---|
-| Classes entre 40% e 60% | ❌ 2/4 | ❌ 1/4 | ❌ 2/4 |
-| Confrontos extremos (um lado vence > 80%), de 6 | ❌ 2 | ❌ 3 | ❌ 2 |
-| Espelhos entre 45% e 55% | ✅ 4/4 (55 / 51 / 47 / 50) | ✅ 4/4 (49 / 54 / 50 / 51) | ✅ 4/4 (48 / 52 / 47 / 47) |
-| Duração média 14–18s | ✅ 17.4s | ❌ 13.0s | ❌ 8.2s |
-| Absurdos (classe > 70% ou < 25%, luta < 8s) | ⚠ Ladino | ⚠ Ladino | ✅ nenhum |
+| Classes entre 40% e 60% | ❌ 3/4 | ❌ 2/4 | ❌ 2/4 |
+| Confrontos extremos (um lado vence > 80%), de 6 | ❌ 1 | ❌ 1 | ❌ 2 |
+| Espelhos entre 45% e 55% | ✅ 4/4 (55 / 51 / 47 / 50) | ✅ 4/4 (49 / 53 / 51 / 51) | ✅ 4/4 (50 / 53 / 50 / 49) |
+| Duração média 14–18s | ✅ 18.0s | ✅ 14.4s | ❌ 19.0s |
+| Absurdos (classe > 70% ou < 25%, luta < 8s) | ⚠ Ladino | ⚠ Ladino | ⚠ Ladino |
 
 ### Confrontos — sala 3
 
@@ -40,10 +40,10 @@ Linha = sua classe, coluna = oponente; % de vitória da linha.
 
 |  | Guerr | Ladin | Patru | Mago |
 |---|---|---|---|---|
-| **Guerreiro** | 55 | 11 | 48 | 51 |
-| **Ladino** | 87 | 51 | 89 | 78 |
-| **Patrulheiro** | 54 | 13 | 47 | 65 |
-| **Mago** | 51 | 21 | 36 | 50 |
+| **Guerreiro** | 55 | 20 | 48 | 52 |
+| **Ladino** | 80 | 51 | 80 | 72 |
+| **Patrulheiro** | 54 | 23 | 47 | 66 |
+| **Mago** | 50 | 28 | 35 | 50 |
 
 ### Confrontos — sala 9
 
@@ -51,10 +51,10 @@ Linha = sua classe, coluna = oponente; % de vitória da linha.
 
 |  | Guerr | Ladin | Patru | Mago |
 |---|---|---|---|---|
-| **Guerreiro** | 49 | 7 | 56 | 55 |
-| **Ladino** | 93 | 54 | 96 | 89 |
-| **Patrulheiro** | 44 | 3 | 50 | 52 |
-| **Mago** | 46 | 12 | 45 | 51 |
+| **Guerreiro** | 49 | 23 | 57 | 57 |
+| **Ladino** | 80 | 53 | 91 | 78 |
+| **Patrulheiro** | 42 | 9 | 51 | 53 |
+| **Mago** | 44 | 24 | 45 | 51 |
 
 ### Confrontos — sala 18
 
@@ -62,9 +62,9 @@ Linha = sua classe, coluna = oponente; % de vitória da linha.
 
 |  | Guerr | Ladin | Patru | Mago |
 |---|---|---|---|---|
-| **Guerreiro** | 48 | 16 | 53 | 47 |
-| **Ladino** | 84 | 52 | 85 | 58 |
-| **Patrulheiro** | 46 | 14 | 47 | 46 |
-| **Mago** | 54 | 46 | 53 | 47 |
+| **Guerreiro** | 50 | 15 | 37 | 43 |
+| **Ladino** | 85 | 53 | 84 | 72 |
+| **Patrulheiro** | 67 | 14 | 50 | 32 |
+| **Mago** | 57 | 31 | 70 | 49 |
 
-_Tempo de simulação: 39.5s._
+_Tempo de simulação: 41.6s._

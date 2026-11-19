@@ -4,7 +4,7 @@
 > (4 classes solo, Jaula do Patrulheiro, 24 Feats de classe em 2 métodos + 10 genéricos, matriz 4x4 com iniciativa alternada).
 > Simulação completa: `relatorio-solo.md`. Primeira versão do experimento (8 classes): histórico no fim.
 
-**Data:** 2026-11-19 · **Rodada S-2** (respostas S-Q4, S-Q5, S-Q6). HP = classe x **0.88** x 1.50^(nível − 1); efeitos fixos x1.50^(nível − 1).
+**Data:** 2026-11-19 · **Rodada S-3** (respostas S-Q7, S-Q8). HP = classe x **0.88** x 1.50^(nível − 1); efeitos fixos x1.50^(nível − 1), exceto Veneno/Queimadura: **x1.25^(nível − 1)**.
 
 ## 1. As 4 classes do lançamento
 
@@ -58,7 +58,79 @@ Subida de nível: 3 opções = 2 Feats da classe + 1 genérico (Sinergia de Bord
 | Mago | **Sobrecarga:** Sobrecarga Contínua (3s → 2s), Foco de Cristal (gemas +30%), Reserva Arcana (+40 mana) | **Elementalista:** Chama Arcana (magia aplica 2 Queimaduras, teto 8), Toque Glacial (atrasa 0.35s o item mais rápido do alvo), Barreira Elemental (30% da mana gasta vira escudo) |
 | Patrulheiro | **Feras:** Vínculo Natural (cura 4 HP), Toca Farta (3 comidas por mascote), Chamado da Matilha (cada outro mascote +10% velocidade) | **Atirador:** Olho de Águia (arcos +25% crítico e +20% dano), Flechas Envenenadas (crítico à distância: 3 Venenos), Caçador Solitário (1 mascote: arcos +25% velocidade e 15% roubo de vida) |
 
-## 3. Rodada S-2 — respostas S-Q4 e S-Q5 (matriz 4x4, 500 lutas por confronto, iniciativa alternada)
+## 3. Rodada S-3 — respostas S-Q7 e S-Q8 (matriz 4x4, 500 lutas por confronto, iniciativa alternada)
+
+**Mudanças:** Veneno e Queimadura escalam **x1.25** por nível do alvo (era x1.50, o fator de nível) e o Veneno cai **1 stack a cada 2s**
+(era 3s) (S-Q7 b+c); gerador solo com fusão **+1** a partir da sala 6 e só **20%** dos itens em +2 na sala 18 (era +2 em todos e 10% em +3)
+(S-Q8 b); a crônica da Arena mostra os ticks no formato "Guerreiro sofre N de dano contínuo (Veneno 14)".
+
+| Classe | Sala 3 (S-2 → S-3) | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Guerreiro | 41 → **44%** | 42 → **46%** | 41 → **36%** |
+| **Ladino** | 76 → **71%** | 83 → **75%** | 70 → **74%** |
+| Patrulheiro | 45 → **48%** | 37 → **39%** | 38 → **41%** |
+| Mago | 39 → **41%** | 38 → **41%** | 50 → **52%** |
+| Diferença | 37 → 30pp | 45 → 37pp | 31 → 38pp |
+| **Duração da luta** | 17.4 → **18.0s** ✅ | 13.0 → **14.4s** ✅ | 8.2 → **19.0s** (1s acima) |
+| Classes na faixa 40–60% | 2 → **3** de 4 | 1 → **2** de 4 | 2 → 2 de 4 |
+| Espelhos entre 45% e 55% | ✅ 55 / 51 / 47 / 50 | ✅ 49 / 53 / 51 / 51 | ✅ 50 / 53 / 50 / 49 |
+
+- **A duração resolveu:** 18.0 / 14.4 / 19.0s (a sala 18 saiu de 8.2s; agora 1s acima da faixa).
+- **Guerreiro, Patrulheiro e Mago** subiram 2–5pp e ficam entre si em 32–70% (sala 18: Mago vence o Patrulheiro 70%, o Patrulheiro vence o Guerreiro 67%).
+- **O Ladino caiu pouco** (71 / 75 / 74%). Contra o Guerreiro 80 / 80 / 85%, contra o Patrulheiro 80 / 91 / 84%.
+
+**Diagnóstico do Ladino depois da S-3 (contra o Guerreiro, 150 lutas):**
+
+| Medida | Sala 9 | Sala 18 |
+|---|---|---|
+| Vitória do Ladino | 79% | 84% |
+| Veneno médio no Guerreiro | 14.1 stacks | 17.0 stacks (Mestre dos Venenos: teto 22) |
+| Dano de Veneno por luta | 446 | 1198 |
+| Dano de golpes por luta | 596 | 1352 |
+
+- O Veneno continua **no teto** e ainda é ~45% do dano: cada stack bate menos (x1.25), mas a luta ficou mais longa e as adagas recolocam
+  stacks mais rápido do que eles caem (crítico em 65% dos golpes na sala 18).
+- **Nova causa achada — poções:** na sala 18 o Ladino se cura **450 HP por luta** (Guerreiro 320, Patrulheiro 71, Mago 111), quase tudo de
+  Poções de Vida (364 de Menores, 84 de Maiores). O gerador dá "afinidade" ao Ladino com **todo item 1x1** (`AFFINITY` em `ghost.ts`), então a
+  mochila dele enche de poções, que se fundem e ganham usos. Pode ser viés do gerador ou uma build real (poções são baratas e cabem no 4x6).
+- Feats mais escolhidos pelo gerador no Ladino (de 150): Mestre dos Venenos 92, Bolso Alquímico 91, Execução 79, Toxina Corrosiva 75.
+
+Matrizes (linha = sua classe, % de vitória contra a coluna):
+
+### Confrontos — sala 3
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 55 | 20 | 48 | 52 |
+| **Ladino** | 80 | 51 | 80 | 72 |
+| **Patrulheiro** | 54 | 23 | 47 | 66 |
+| **Mago** | 50 | 28 | 35 | 50 |
+
+### Confrontos — sala 9
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 49 | 23 | 57 | 57 |
+| **Ladino** | 80 | 53 | 91 | 78 |
+| **Patrulheiro** | 42 | 9 | 51 | 53 |
+| **Mago** | 44 | 24 | 45 | 51 |
+
+### Confrontos — sala 18
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 50 | 15 | 37 | 43 |
+| **Ladino** | 85 | 53 | 84 | 72 |
+| **Patrulheiro** | 67 | 14 | 50 | 32 |
+| **Mago** | 57 | 31 | 70 | 49 |
+
+### Rodada S-2 — respostas S-Q4 e S-Q5
 
 **Mudanças:** Ladino com esquiva base 15% → **8%**, Frasco de Veneno fora do kit (entra o Gibão) e Veneno por crítico 3 → **2** (S-Q4 b+c+d);
 HP = classe x **0.88** x 1.50^(nível − 1) (era 0.62) e gerador solo com **2 / 4 / 8** itens extras nas salas 3 / 9 / 18 (eram 2 / 6 / 12),
@@ -141,20 +213,22 @@ Linha = sua classe, coluna = oponente; % de vitória da linha.
 
 Teste de economia da S-1 (não aplicado; `--items`): com 50% / 33% dos itens extras a sala 18 ia para 6.3 / 7.1s e o Ladino continuava em 67–85%.
 
-## 4. Emboscada PvE (recalibrada na S-2)
+## 4. Emboscada PvE (recalibrada na S-3)
 
 |---|---|---|---|
-| Horda de Goblins | 78% (9.4s) | 72% (5.9s) | 77% (2.8s) |
-| Elite: Horda de Goblins | 64% (8.4s) | 47% (4.9s) | 54% (2.3s) |
-| Câmara dos Esqueletos | 79% (22.0s) | 69% (12.4s) | 86% (6.1s) |
-| Elite: Câmara dos Esqueletos | 54% (18.6s) | 40% (10.2s) | 67% (5.6s) |
-| Ninho de Cubos Gelatinosos | 92% (27.6s) | 76% (32.0s) | 67% (32.4s) |
-| Elite: Ninho de Cubos Gelatinosos | 66% (43.6s) | 42% (43.4s) | 49% (36.5s) |
-| **Média normal** (meta ~75%) | **83%** | **72%** | **77%** |
-| **Média Elite** (meta ~50%) | **61%** | **43%** | **57%** |
+| Horda de Goblins | 74% (10.3s) | 82% (6.9s) | 74% (6.9s) |
+| Elite: Horda de Goblins | 55% (9.1s) | 48% (5.8s) | 50% (5.5s) |
+| Câmara dos Esqueletos | 73% (23.1s) | 75% (14.4s) | 82% (17.3s) |
+| Elite: Câmara dos Esqueletos | 43% (19.1s) | 44% (12.1s) | 70% (15.0s) |
+| Ninho de Cubos Gelatinosos | 94% (18.5s) | 83% (25.0s) | 60% (40.0s) |
+| Elite: Ninho de Cubos Gelatinosos | 77% (36.0s) | 47% (41.2s) | 30% (47.8s) |
+| **Média normal** (meta ~75%) | **80%** | **80%** | **72%** |
+| **Média Elite** (meta ~50%) | **58%** | **46%** | **50%** |
 
-Calibragem (`MONSTER.tune`): Goblins HP/dano x0.53, crescimento 1.75; Esqueletos x0.70, 1.40; Cubos x0.32, 1.10; Elite (HP/dano):
-x0.93/0.69, x0.87/0.65, x0.89/0.66. Os Cubos variam bastante entre as salas (92 → 67%; crescimento 1.30 testado, quase igual).
+Calibragem (`MONSTER.tune`): Goblins HP/dano x0.59, crescimento 1.60; Esqueletos x0.75, 1.30; Cubos x0.23, 1.10; Elite (HP/dano):
+x0.97/0.72, x0.87/0.65, x0.96/0.71. Os Cubos ganharam 3 Pseudópodes para cada Núcleo no pool (os Núcleos somam regeneração).
+**Cubos seguem desiguais entre as salas** (94 → 60%; Elite 77 → 30%): lutas de 40–48s na sala 18, a regeneração deles empata com o dano
+do herói com fusão +1. Médias na meta.
 
 ## 5. Interpretações (S-06 a S-14 confirmadas em 2026-11-19 ✅)
 
@@ -176,13 +250,15 @@ x0.93/0.69, x0.87/0.65, x0.89/0.66. Os Cubos variam bastante entre as salas (92 
 - **S-Q5** · 2026-11-19 · (c) HP base 0.62 → 0.88 + gerador solo 2 / 4 / 8 itens extras e no máximo 10% de +3 na sala 18 · aplicado (S-2) → lutas 17.4 / 13.0 / 8.2s
 - **S-Q6** · 2026-11-19 · reavaliar Mago e Patrulheiro depois de S-Q4/S-Q5 · Mago 39 / 38 / 50%, Patrulheiro 45 / 37 / 38%: os dois ficam perto de 50% contra Guerreiro e entre si; o que os derruba é o Ladino
 - **S-06 a S-14** · 2026-11-19 · todas confirmadas
+- **S-Q7** · 2026-11-19 · (b) Veneno e Queimadura x1.25 por nível + (c) Veneno −1 stack a cada 2s; teto 15 e "ignora escudo" mantidos · aplicado (S-3) → Ladino 71 / 75 / 74%
+- **S-Q8** · 2026-11-19 · (b) gerador da sala 18 com fusão +1 e 20% em +2 + mostrar os ticks de Veneno/Queimadura na crônica · aplicado (S-3) → lutas 18.0 / 14.4 / 19.0s
 
 ## 7. Perguntas para o agente de análise
 
 | Código | Pergunta | Dados | Opções |
 |---|---|---|---|
-| S-Q7 | **O Veneno do Ladino ainda decide a luta** | S-2: Ladino 76 / 83 / 70%; contra Guerreiro 87 / 93 / 84%, contra Patrulheiro 89 / 96 / 85%. Na sala 9 o alvo passa a luta com 13.4 stacks (teto 15): 488 de dano de Veneno por luta contra 477 de golpes. Veneno = 1 dano/s por stack x fator de nível do alvo (x3.4 no Nv4, x7.6 no Nv6), ignora escudo, −1 stack a cada 3s. As 2 adagas critam 56% (1.2s de recarga) | (a) teto de Veneno 15 → 8 (Mestre dos Venenos: 8 → 12) · (b) Veneno escala com o fator de nível **do atacante** em x1.25 por nível (não x1.50) · (c) Veneno cai 1 stack a cada 1.5s (era 3s) · (d) Veneno passa a ser absorvido pelo escudo (perde "ignora escudo") |
-| S-Q8 | Duração na sala 18 (8.2s, meta 14–18s) | Sala 3 17.4s ✅, sala 9 13.0s | (a) esperar o S-Q7 (o Ladino encurta as lutas dele) · (b) fusão do gerador na sala 18: +2 → +1 (só 10% em +2) |
+| S-Q9 | **Ladino ainda em 71 / 75 / 74%** depois de S-Q4 e S-Q7 | Veneno no teto (14 stacks na sala 9, 17 na 18 com Mestre dos Venenos) e ~45% do dano; crítico em 65% dos golpes (2 adagas, Gazuas +22%, Combo +16–24%); cura de **450 HP/luta** na sala 18 vinda de Poções de Vida (o gerador trata todo item 1x1 como afinidade do Ladino). Contra Guerreiro 80 / 80 / 85%, contra Patrulheiro 80 / 91 / 84% | (a) **gerador:** afinidade do Ladino só com armas pequenas e catalisadores de crítico (tira poções e itens 1x1 genéricos) — mede se é viés da régua · (b) teto de Veneno 15 → 10 (Mestre dos Venenos 10 → 15) · (c) Veneno só nos críticos de armas 1x1/1x2 encostadas em Gazuas ou itens diferentes (hoje qualquer arma do Ladino) · (d) Combo +8% → +5% de crítico por item diferente |
+| S-Q10 | Cubos da Emboscada desiguais (94 → 60% normal; Elite 77 → 30%) | Regeneração do Núcleo (3% do HP/s, x fusão) contra o dano com fusão +1; lutas de 40–48s na sala 18 | (a) Núcleo 3% → 2% do HP/s · (b) Cubos sem fusão extra na Elite · (c) aceitar (média na meta) |
 
 ## Histórico do experimento
 
@@ -190,6 +266,7 @@ x0.93/0.69, x0.87/0.65, x0.89/0.66. Os Cubos variam bastante entre as salas (92 
 |---|---|---|---|
 | 2026-11-19 | 8 classes solo, 8x8, sem alternar iniciativa | 62 / 50 / 37pp | 17.6 / 14.0 / 12.2s |
 | 2026-11-19 | S-1 · SPEC-SOLO: 4 classes, 4x4, iniciativa alternada | 50 / 44 / 21pp | 12.4 / 8.3 / 4.7s |
-| 2026-11-19 | **S-2 · Ladino (esquiva 8%, sem Frasco, 2 Venenos), HP 0.88, gerador 2/4/8** | 37 / 45 / 31pp | 17.4 / 13.0 / 8.2s |
+| 2026-11-19 | S-2 · Ladino (esquiva 8%, sem Frasco, 2 Venenos), HP 0.88, gerador 2/4/8 | 37 / 45 / 31pp | 17.4 / 13.0 / 8.2s |
+| 2026-11-19 | **S-3 · Veneno/Queimadura x1.25 e −1 stack a cada 2s; sala 18 com fusão +1 (20% +2)** | 30 / 37 / 38pp | 18.0 / 14.4 / 19.0s |
 
 As lutas encurtaram de uma versão para a outra porque a média de 8 classes incluía classes lentas (Paladino, Bárbaro, Bardo, Alquimista) e porque Mago e Patrulheiro ganharam itens exclusivos fortes e mochilas novas (altar em cruz, Jaula).
