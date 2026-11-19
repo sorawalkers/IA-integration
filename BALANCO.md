@@ -5,7 +5,7 @@
 > Última simulação completa (gerada por `npm run balance`): `https://osr.valiran.party/simulacao.md`
 > Fonte no repositório: `docs/BALANCO.md` (branch `claude/awesome-fermi-2g5woc`). Regras completas: `CLAUDE.md`.
 
-**Última atualização:** 2026-11-19 · **Fase 1 encerrada**: Emboscada PvE calibrada (Q-35). Próximo: Fase 3 pelo Q-18.
+**Última atualização:** 2026-11-19 · **Fase 3, rodada F3.2**: HP por nível x1.35 (Q-34). Pergunta nova: Q-36 (curva do HP).
 
 > **Fase atual: construção de mecânicas.** O balanceamento fino está pausado até as mecânicas fecharem (bolsa de expansão,
 > venda/troca, economia, receitas, emboscada PvE e o que mais for decidido — ver `PENDENCIAS.md`, perguntas Q-21 a Q-27).
@@ -54,6 +54,69 @@ Melhor posição de cada classe · taxa de vitória nela · (média geral nas 51
 | Patrulheiro | Cada mascote aproveita no máximo **2 comidas/ervas** (+50%) | Sala 18: 58% → 57% (sem efeito) |
 | Bardo | Palco: **−14% e −0.25s** de recarga no Meio (−8% e −0.15s fora do Meio); um instrumento só | Sala 3: 34% → 41% ✅ · Sala 18: 51% → 57% ❌ |
 | Ladino | Crítico por item diferente encostado **12% → 8%**; crítico acima de 100% vira dano crítico (+15% por 10% excedente) | Sala 3: 47% → 42% ✅ · Sala 18: 42% → 41% |
+
+## Fase 3, rodada F3.2 — HP por nível 1.30 → 1.35 (Q-34)
+
+**Mudança única:** HP = HP da classe x 0.80 x **1.35**^(nível − 1). O fator dos efeitos fixos (Veneno, Queimadura, escudos fixos, cura do
+mascote, dano dos monstros) continua 1.30^(nível − 1): a decisão falava do expoente do HP (P-56).
+
+| Classe (melhor posição) | Sala 3 F3.1 → F3.2 | Sala 9 | Sala 18 |
+|---|---|---|---|
+| Guerreiro | 37 → 37% | 44 → 43% | 45 → 44% |
+| Paladino | 39 → 39% | 42 → 43% | 42 → 43% |
+| Bárbaro | 41 → 41% | 52 → 52% | 59 → 57% |
+| Bardo | 32 → 32% | 42 → 42% | 42 → 42% |
+| Ladino | 47 → 47% | 51 → 51% | 37 → 38% |
+| Patrulheiro | 35 → 35% | 31 → 30% | 36 → 34% |
+| Mago | 30 → 30% | 44 → 44% | 56 → 58% |
+| Alquimista | 35 → 35% | 49 → 49% | 48 → 49% |
+| Diferença | 18 → 17pp | 21 → 21pp | 23 → 24pp |
+| **Duração da luta** | 21.0 → **21.7s** | 15.2 → **16.7s** ✅ | 7.6 → **9.1s** |
+| Classes na faixa 44–56% | 1/8 → 1/8 | 4/8 → 4/8 | 3/8 → 1/8 |
+
+- **Entra:** acabou o absurdo da Fase 1 (luta < 8s). Mago (56 → 58%) e Guerreiro (45 → 44%, arredondado) saíram da faixa por 1–2pp, dentro do erro (±2–3pp).
+- **Não resolve o Q-34:** a sala 18 continua abaixo de 13s (9.1s) e a sala 3 ficou **mais longa** (21.7s). Subir só o expoente estica as
+  duas pontas juntas, porque a sala 3 já é Nv2.
+- **Emboscada PvE** (300 lutas): normal 78 / 69 / 73%, Elite 57 / 42 / 48% (sem mudança relevante).
+
+**Testes exploratórios (não aplicados, 160 lutas por composição):** curva mais íngreme com HP inicial menor.
+
+| Curva de HP | Lutas (salas 3 / 9 / 18) | Diferença | Mago | Patrulheiro | Classes na faixa |
+|---|---|---|---|---|---|
+| Atual F3.2: 0.80 x 1.35^(nível−1) | 21.7 / 16.7 / 9.1s | 17 / 21 / 24pp | 30 / 44 / 58% | 35 / 30 / 34% | 1 / 4 / 1 |
+| B: 0.62 x 1.50^(nível−1) | 19.8 / 17.3 / **12.3s** | 19 / 24 / 27pp | 32 / 44 / **60%** | 38 / 29 / 33% | 1 / 4 / **5** |
+| A: 0.55 x 1.60^(nível−1) | 19.0 / 18.3 / **14.7s** ✅ | 18 / 23 / 29pp | 32 / 43 / **61%** | 38 / 30 / 32% | 1 / 3 / 4 |
+
+Com lutas mais longas, o Mago (dano em área ao longo do tempo) volta a subir e o Patrulheiro segue fraco → **Q-36**.
+
+## Fase 3, rodada F3.1 — Sobrecarga 1 vez a cada 3s (Q-18 a)
+
+**Mudança única:** a Sobrecarga (tomo dispara 2x com mais de 70% da mana máxima) vale só para o **primeiro tomo** que disparar a cada **3s**
+(`PASSIVE.mageOverloadCooldown`). Antes, com 3–4 tomos e mana cheia, todos disparavam em dobro.
+Painel antes/depois com os mesmos seeds (`npm run balance -- --rooms 3,9,18 --fights 320`, 512 composições x 80 lutas):
+
+| Classe (melhor posição) | Sala 3 antes → depois | Sala 9 antes → depois | Sala 18 antes → depois |
+|---|---|---|---|
+| Guerreiro | 37 → 37% | 43 → 44% | 44 → 45% |
+| Paladino | 39 → 39% | 42 → 42% | 42 → 42% |
+| Bárbaro | 42 → 41% | 51 → 52% | 58 → 59% |
+| Bardo | 32 → 32% | 42 → 42% | 42 → 42% |
+| Ladino | 47 → 47% | 49 → 51% | 37 → 37% |
+| Patrulheiro | 36 → 35% | 30 → 31% | 35 → 36% |
+| **Mago** | **32 → 30%** (Ret) | **53 (Meio) → 44% (Ret)** | **58 → 56%** (Meio) ✅ |
+| Alquimista | 36 → 35% | 47 → 49% | 48 → 48% |
+| Diferença | 15 → 18pp | 22 → 21pp | 23 → 23pp |
+| Duração da luta | 20.9 → 21.0s | 14.7 → 15.2s | 7.4 → 7.6s |
+| Classes na faixa 44–56% | 1/8 → 1/8 | 4/8 → 4/8 | 2/8 → 3/8 |
+
+- **Entra** (regra da Fase 3): o Mago entra na faixa na sala 18 e nada que estava dentro saiu (sala 9: 53 → 44%, no limite).
+- O dado do Q-18 (Mago 68% na sala 18) era da rodada 15; depois das mudanças da Fase 1 a base já era **58%**.
+- Efeito colateral: o Mago da sala 3 caiu 2pp (32 → 30%), já fora da faixa antes.
+- **Duração da sala 18 quase não mudou** (7.4 → 7.6s): o Mago não era a causa das lutas curtas. Pela decisão do Q-34, a próxima
+  rodada sobe o expoente do HP por nível (1.30 → 1.35).
+- **Emboscada PvE** (Q-35 + P-55, 300 lutas): normal 81 / 70 / 72%, Elite 58 / 43 / 47% (−1 a −3pp por causa do Mago na party).
+- **P-55 aplicado:** a Elite não usa mais "+35% de HP x multiplicador"; cada encontro tem HP e dano próprios da Elite em relação ao normal
+  (Goblins HP x0.93 / dano x0.69 · Esqueletos x0.88 / x0.65 · Cubos x0.78 / x0.58) + 1 nível de fusão. Mesmo resultado numérico.
 
 ## Fase 1, passo 5 — Emboscada PvE calibrada (Q-35)
 
@@ -543,6 +606,8 @@ Bárbaro 7.7 (79%), Bardo 7.6 (79%), Ladino 7.6 (82%), Patrulheiro 9.4 (87%), Ma
 | 8 | Gerador de progressão (jogador e ghost evoluem igual); Palco não acumula; Coordenado 1x/s | 14 / 18 / 21 pp (salas 3 / 9 / 18) |
 | 9 | Seis ajustes de escalonamento (tabela acima) | 11 / 18 / 22 pp |
 | 10 | Flamejante (1 dano/s, máx. 5); Poção de Mana a 50%; teste de itens com 3 parties, troca e sala 9 evoluída | classes não medidas nesta rodada |
+| F3.2 | HP por nível x1.35 (Q-34) | 17 / 21 / 24 pp · lutas 21.7 / 16.7 / 9.1s |
+| F3.1 | Sobrecarga 1x a cada 3s (Q-18 a) | 18 / 21 / 23 pp · lutas 21.0 / 15.2 / 7.6s · Mago 30 / 44 / 56% |
 | F1.5 | Emboscada calibrada (Q-35): itens temáticos, dano x fator, ajuste por encontro | duelos iguais · PvE 81 / 72 / 73% normal, 59 / 46 / 48% Elite |
 | F1.4 | 12 eventos e Emboscada PvE (Q-30, Q-31) | duelos iguais · PvE ~100% de vitória (Q-35) |
 | F1.3 | 42 Feats (modal, gerador, referência) | 15 / 22 / 23 pp · lutas 20.9 / 14.7 / 7.4s |

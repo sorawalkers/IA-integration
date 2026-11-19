@@ -4,7 +4,7 @@
 > Resultados dos testes: `BALANCO.md` (resumo) e `relatorio.md` (última simulação). Regras: `CLAUDE.md` do repo do jogo.
 > Perguntas para o agente de análise: seção 0 (`Q-xx`).
 
-**Última atualização:** 2026-11-19 · **Fase 1 encerrada**: Q-35 aplicado (Emboscada calibrada), P-49 a P-54 confirmadas. Q-18 a Q-20 despausadas.
+**Última atualização:** 2026-11-19 · **Fase 3, rodada F3.2**: HP por nível x1.35 (Q-34) → lutas 21.7 / 16.7 / 9.1s. Pergunta nova: **Q-36**.
 
 Legenda de status: 🔴 aguardando decisão · 🟡 proposta pronta, falta aplicar/testar · 🔵 em observação · ⚪ fora do escopo atual
 
@@ -36,13 +36,15 @@ muda o valor de tudo o que já existe. Por isso o **balanceamento fino fica para
 > resposta ao Claude Code (que roda os testes). A resposta é registrada aqui com a data, a decisão é aplicada e o
 > efeito medido entra em `BALANCO.md`. Responda citando o código (`Q-xx`).
 
-Nenhuma pergunta nova nesta rodada (ver P-55 na seção 3).
+| Código | Ref. | Pergunta | Dados para decidir | Opções |
+|---|---|---|---|---|
+| Q-36 | Q-34 / P-01 | **A curva do HP não acerta as duas pontas: sala 3 longa demais, sala 18 curta demais** | HP hoje = classe x 0.80 x 1.35^(nível−1); níveis típicos: sala 3 = Nv2, sala 9 = Nv4, sala 18 = Nv6. Duração (meta 14–18s): **21.7 / 16.7 / 9.1s**. 1.30 → 1.35 deu +1.5s na sala 18 e +0.7s na sala 3. Testes (não aplicados):<br>¦ Curva ¦ Lutas ¦ Diferença ¦ Mago ¦ Faixa ¦<br>¦ 0.80 x 1.35 (atual) ¦ 21.7 / 16.7 / 9.1s ¦ 17 / 21 / 24pp ¦ 30 / 44 / 58% ¦ 1 / 4 / 1 ¦<br>¦ 0.62 x 1.50 ¦ 19.8 / 17.3 / 12.3s ¦ 19 / 24 / 27pp ¦ 32 / 44 / 60% ¦ 1 / 4 / 5 ¦<br>¦ 0.55 x 1.60 ¦ 19.0 / 18.3 / 14.7s ¦ 18 / 23 / 29pp ¦ 32 / 43 / 61% ¦ 1 / 3 / 4 ¦<br>Com lutas longas o Mago (área) sobe para 60% e o Patrulheiro fica em 30–33%. A sala 3 só desce para ~19s porque o dano inicial (kit +0, sem fusão) é baixo | (a) curva 0.55 x 1.60 (sala 18 na meta) e tratar o Mago depois com Q-18 (b) `magic_aoe` 60% → 45% · (b) curva 0.62 x 1.50 (meio-termo, 5/8 na faixa na sala 18) · (c) manter 1.35 e encurtar a sala 3 pelo dano inicial (ex.: armas +0 com +15% de dano) · (d) meta de duração por sala (ex.: 18–22s na sala 3, 10–14s na sala 18) |
 
 **Despausadas (2026-11-19):** a Fase 3 começa pelo Q-18 (uma mudança por vez, cada opção medida sozinha contra o painel):
 
 | Código | Ref. | Pergunta | Dados para decidir | Opções |
 |---|---|---|---|---|
-| Q-18 | P-03 | 🔴 **Com o gerador com afinidade, o Mago domina a sala 18** | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
+| Q-18 | P-03 | 🔵 **(a) aplicado na F3.1 → Mago 30 / 44 / 56%; (b), (c), (d) na reserva.** Com o gerador com afinidade, o Mago domina a sala 18 | Rodada 15, melhor posição (salas 3 / 9 / 18): Mago 38 / 52 / **68%** (Meio nas salas 9 e 18). Diagnóstico da sala 18: 434 de dano direto/s vivo (o 2º é o Bárbaro com 192), **64% do dano da party**, lutas de 6.5s (média geral 13s). Mochila: 3.6 armas mágicas (era 2.6). No Meio, os itens que não são corpo a corpo recarregam 15% mais rápido; a Sobrecarga dispara tomos 2x acima de 70% da mana; `magic_aoe` acerta todos com 60% do dano. Diferença entre classes na sala 18: 24 → **31pp** | (a) Sobrecarga só no **primeiro** tomo que disparar a cada 3s (hoje vale para todos) · (b) `magic_aoe` 60% → 45% · (c) o bônus do Meio (+15%) não vale para tomos · (d) afinidade do Mago 60% → 40% (só ele) |
 | Q-19 | P-03 | 🔴 **Paladino e Patrulheiro não respondem aos buffs** | Sala 18 (rodada 14 → 15): Paladino 40 → 41%, Patrulheiro 39 → 38%. **Paladino:** escudo/luta subiu 222 → 1003 com o fator, mas o dano continua 54/s; a mochila (cruz de 11 casas) já começa com 6 itens, então o gerador consegue pôr só ~1 arma. **Patrulheiro:** é quem mais causa dano depois do Mago (190/s, **50% do dano da party**), mas vence 32%; morre primeiro em 20% das lutas e a party dele cura pouco | Paladino: (a) kit inicial menor (tirar Pedra de Amolar e Gibão; abre 3 casas) · (b) Égide da Fé também dá +10% de dano às armas por armadura encostada. Patrulheiro: (c) HP 90 → 110 · (d) mascote alimentado também dá 3 de escudo (x fator) ao Patrulheiro |
 | Q-20 | P-04 / P-31 | 🔴 **Resíduos depois da afinidade** | A linha de base da sala 3 caiu de 30% para 25% (ghosts mais fortes), e todos os deltas de encantamento subiram: Flamejante e Armazenador +40.7 (no teto), Vorpal **+19.3** e Vampírico **+17.7** (abaixo da faixa). Fusão no mesmo herói: Maça +1 **−6.0**, Cajado de Aprendiz +1 **−7.7** (o Cajado dá mana ao Mago por ativação: 2 cópias = 2 ativações; o +1 dá 1.5x de mana com 13% menos recarga ≈ 1.72x). Erro da medição ±2.2 a ±2.8pp | (a) Vorpal 12% → 14% e Vampírico 25% → 30% · (b) mana do Cajado por ativação x1.75 por nível de fusão (em vez de +50%) · (c) esperar a próxima rodada: a linha de base vai mudar de novo com o Q-18 |
 
@@ -88,6 +90,10 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 - **Q-30 / Q-31** · implementados em 2026-11-19 (ver P-49 a P-54)
 - **Q-35** · 2026-11-19 · (a) + (c): monstros com gerador de itens paralelo (pool temático) e dano x fator de nível; meta ~75% nas normais e ~50% nas Elites nas salas 3/9/18 · aplicado (F1.5) → médias 81 / 72 / 73% (normal) e 59 / 46 / 48% (Elite); ver P-55
 - **P-49 a P-54** · 2026-11-19 · todas as 6 interpretações dos eventos e da Emboscada confirmadas · registrado
+- **P-55** · 2026-11-19 · confirmado; Elite com HP e dano próprios (sem o +35% por cima), mesmo resultado · aplicado (F3.1)
+- **Q-18** · 2026-11-19 · testar só a opção (a): Sobrecarga 1x a cada 3s; (b)/(c)/(d) na reserva se o Mago não entrar em 44–56% · aplicado (F3.1) → Mago 30 / 44 / 56%
+- **Q-34** · 2026-11-19 · se a sala 18 continuar abaixo de 13s depois do Q-18 (a), subir o expoente do HP por nível 1.30 → 1.35 · sala 18 em 7.6s → próxima rodada (F3.2)
+- **Q-34 (continuação)** · aplicado na F3.2 (HP x1.35) → sala 18 em 9.1s, ainda abaixo de 13s; sala 3 em 21.7s (ver Q-36)
 - **Fase 2/3** · 2026-11-19 · conteúdo congelado; P-21 (receitas) ✅; despausar Q-18 a Q-20 e começar a Fase 3 pelo Q-18 (Mago na sala 18) junto com a duração das lutas da sala 18 (Q-34)
 - **Observação (P-05)** · 2026-11-18 · o Lobo Cinzento cai por precisar tirar o Arco Longo; se resolve com as Bolsas de expansão (P-20) ou com 2 slots extras no gerador das salas 9/18 · registrado em P-05/P-20
 
@@ -95,7 +101,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 
 | Código | Status | Questão | Dados | Proposta / próximo passo |
 |---|---|---|---|---|
-| P-01 | 🔵 | Ritmo das lutas | Rodada 14: **18.6 / 15.3 / 13.3s** (salas 3 / 9 / 18); meta 14–18s; as pontas estão a <1s da faixa | Remedir a cada rodada |
+| P-01 | 🔴 | Ritmo das lutas | F3.2: **21.7 / 16.7 / 9.1s** (salas 3 / 9 / 18); meta 14–18s | Q-36 |
 | P-03 | ⚪ | Classes por sala | Rodada 15: diferença **17 / 19 / 31 pp**. Sala 18: Mago 68% (forte); Patrulheiro 38%, Paladino 41%, Bardo 41%, Ladino 41% (fracos) | **Pausado** até o fim da fase de mecânicas (Q-18, Q-19 pausadas) |
 | P-05 | 🔵 | Itens avançados que não compensam na sala 9 | Rodada 11: Lobo Cinzento +2.0 (−4.3 com Ladino; só cabe tirando o Arco Longo), Gema de Mana +2.7, Rubi Ígneo +10.0 | Lobo: resolvido pelas Bolsas (P-20) ou 2 slots extras no gerador (observação do agente). Remedir depois de Q-07 |
 | P-06 | 🔵 | Alaúde dos Ventos só cabe trocando um item | O kit inicial do Bardo não deixa espaço 2x2 livre | Aceitável enquanto não existir a Bolsa de expansão (P-20); rever com ela |
@@ -110,7 +116,7 @@ Formato: `Q-xx · data · resposta resumida · decisão aplicada (rodada)`.
 
 | Código | Status | Interpretação | Validar |
 |---|---|---|---|
-| P-55 | 🟡 | **Q-35, Elite com multiplicador abaixo de 1**: com +1 de fusão, a Elite ficava 40–60pp abaixo da normal (meta: 25pp). A calibragem por encontro chegou a HP e dano da Elite **x0.58 a x0.69** (por cima do +35% de HP), ou seja, a Elite tem **menos HP que a normal** (x0.78–0.93) e é mais forte só pela fusão | Confirmar, ou trocar o +1 de fusão da Elite por HP/dano (ver BALANCO.md, F1.5) |
+| P-56 | 🟡 | **Q-34, expoente só do HP**: 1.30 → 1.35 vale só para o HP; o fator dos efeitos fixos (Veneno, Queimadura, escudos fixos, cura do mascote, dano dos monstros) continua 1.30^(nível−1) | Confirmar |
 
 P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 
@@ -138,6 +144,7 @@ P-15 a P-18 confirmadas no Q-06 (P-17 corrigido).
 |---|---|---|---|
 | R-14 | Rodada 15 | Veneno/Queimadura e escudos fixos não escalavam com o HP (Q-15) | Fator de profundidade 1.23 / 2.47 / 6.28 |
 | R-15 | Rodada 15 | Gerador sorteava itens sem olhar a classe (Q-16) | 60% dos itens com afinidade de classe |
+| R-19 | F3.1 | Mago dominava a sala 18 (Q-18) | Sobrecarga 1x a cada 3s → 58 → 56% (na faixa) |
 | R-18 | F1.5 | Emboscada PvE fácil demais (Q-35) | Itens extras do pool temático (0.5x os do ghost) + dano x fator de nível + calibragem por encontro → 81 / 72 / 73% normal, 59 / 46 / 48% Elite |
 | R-17 | 2026-11-19 | Interpretações dos eventos e da Emboscada P-49 a P-54 | Todas confirmadas |
 | R-16 | 2026-11-19 | Interpretações de Feats P-38 a P-48 | Todas confirmadas |
