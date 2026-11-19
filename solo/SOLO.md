@@ -4,7 +4,7 @@
 > (4 classes solo, Jaula do Patrulheiro, 24 Feats de classe em 2 métodos + 10 genéricos, matriz 4x4 com iniciativa alternada).
 > Simulação completa: `relatorio-solo.md`. Primeira versão do experimento (8 classes): histórico no fim.
 
-**Data:** 2026-11-19 · **Rodada S-4** (respostas S-Q9, S-Q10). HP = classe x **0.88** x 1.50^(nível − 1); efeitos fixos x1.50^(nível − 1), exceto Veneno/Queimadura: **x1.25^(nível − 1)**.
+**Data:** 2026-11-19 · **Rodada S-5: SPEC-RUNIC-FLOW** (canais de fluxo rúnico, expansão na loja, 4 motores por classe). HP = classe x **0.88** x 1.50^(nível − 1); efeitos fixos x1.50^(nível − 1), exceto Veneno/Queimadura: **x1.25^(nível − 1)**.
 
 ## 1. As 4 classes do lançamento
 
@@ -58,7 +58,99 @@ Subida de nível: 3 opções = 2 Feats da classe + 1 genérico (Sinergia de Bord
 | Mago | **Sobrecarga:** Sobrecarga Contínua (3s → 2s), Foco de Cristal (gemas +30%), Reserva Arcana (+40 mana) | **Elementalista:** Chama Arcana (magia aplica 2 Queimaduras, teto 8), Toque Glacial (atrasa 0.35s o item mais rápido do alvo), Barreira Elemental (30% da mana gasta vira escudo) |
 | Patrulheiro | **Feras:** Vínculo Natural (cura 4 HP), Toca Farta (3 comidas por mascote), Chamado da Matilha (cada outro mascote +10% velocidade) | **Atirador:** Olho de Águia (arcos +25% crítico e +20% dano), Flechas Envenenadas (crítico à distância: 3 Venenos), Caçador Solitário (1 mascote: arcos +25% velocidade e 15% roubo de vida) |
 
-## 3. Rodada S-4 — respostas S-Q9 e S-Q10 (matriz 4x4, 500 lutas por confronto, iniciativa alternada)
+## 3. Rodada S-5 — SPEC-RUNIC-FLOW (matriz 4x4, 500 lutas por confronto, iniciativa alternada)
+
+### O que mudou
+
+**Canais de Fluxo Rúnico** (`src/game/flow.ts`, substitui a adjacência genérica):
+- Cada item tem **saídas** (setas ▶ ▼ ◀ ▲) e **entradas** nas bordas, com tipo de fluxo: `steel` (âmbar), `venom` e `nature` (verde),
+  `arcane` (azul safira) ou `universal`. A rotação agora tem **4 passos** (R / botão direito / roda: 0°, 90°, 180°, 270°) e as setas giram junto.
+- Uma saída liga no item vizinho na direção dela se ele tiver entrada na borda oposta e o fluxo for compatível (igual ou `universal`).
+  A Arena e o Acampamento desenham as setas e um **fio luminoso** da cor do fluxo em cada ligação ativa.
+- **O bônus de um catalisador só chega no item para onde a seta aponta** (antes: em todos os vizinhos encostados). Mesmo tipo soma,
+  tipos diferentes multiplicam, como antes. **Condutores** (Pedra de Amolar, Estandarte, Prisma) retransmitem o bônus recebido pela própria
+  seta (circuito em série). O alcance extra da fusão de catalisadores (diagonal/2 casas) saiu; a fusão continua multiplicando o bônus.
+- **Padrões (S-16):** sem portas definidas, catalisadores, metais, gemas, cajados, comidas e ervas saem pela **direita** (fluxo pelo tipo do item);
+  todo item recebe por **qualquer borda** (universal). Portas explícitas: Aljava (◀ e ▶), Estandarte (▲ e ▼), Prisma (entra ◀, sai ▲ ▶ ▼),
+  Mangual Pesado (4 entradas, uma por lado), Bolsa de Moedas, Flechas Tóxicas.
+- **Passivas pelo fluxo:** Guerreiro — cada item metálico transmite **+12%** de dano (arma) ou de escudo (armadura) pela seta; Mago — gemas e
+  cajados lançam **feixes** em linha reta (atravessam casas vazias) e o tomo atingido ganha +20%; Patrulheiro — comida/erva alimenta o mascote
+  para onde a seta aponta (Erva Ancestral também é feixe); Ladino — **Mãos Rápidas**: itens 1x1 recarregam 15% mais rápido e cada ativação manda um
+  pulso pela seta que adianta 0.25s o item ligado. O Ladino **não** aplica mais Veneno por crítico nem tem Combo/crítico excedente (o Veneno vem dos itens).
+- Kits iniciais já vêm apontados (ex.: Guerreiro com Broquel ◀ e Pedra ▲ na Espada; Mago com as gemas ◀ no Tomo).
+
+**Expansão na loja:** o Mercador tem **6 slots**: 5 itens + 1 expansão sempre presente (renova no reroll): **Bolso Simples** 1x1 (+1 casa, 3 PO, 50%),
+**Alforje Duplo** 1x2 (+2, 5 PO, 35%), **Compartimento Reforçado** 2x2 (+4, 9 PO, 15%). Solta no herói, a expansão vira casas para clicar na borda
+(o Patrulheiro escolhe Mochila ou Jaula). Níveis 3/6/9: **+1 casa** (eram +2). A Bolsa de Couro saiu da loja. A loja solo só oferece itens que o herói usa.
+
+**4 motores por classe + itens-ponte (19 itens novos; números propostos — S-17):**
+
+| Classe | Itens novos | Mecânicas novas |
+|---|---|---|
+| Guerreiro | Machado Serrilhado (1x2, 6-8, 1 Sangramento, +8% velocidade a cada 20% de HP perdido), Escudo Cravado (2x1, +12 escudo; 10 de escudo gerado = 1 Sangramento no inimigo), Cota de Sangue (2x2, +16 escudo; 0.5 de escudo por ponto de Sangramento causado) | **Sangramento**: DOT físico, 1/s por stack x1.25 por nível, máx. 10, −1 a cada 2s |
+| Ladino | Seringa Tóxica (1x2, 3-5, 2 Veneno + 1 Ácido), Adaga Dourada (1x2, 4-6, +1 por 5 PO), Bolsa de Moedas (1x1, +1 PO por combate; arma ligada +1% crítico por 3 PO, máx. 15%), Bomba de Fumaça (1x1, +6% esquiva, contra-ataque 6 x fator), Lâmina do Contrabandista (1x2, 5-7; ao esquivar, 2 Veneno no atacante), Moeda Tóxica (1x1, gasta 1 PO: 4 Veneno, 3s) | Contra-ataque e Veneno ao esquivar; **ouro em combate** (o bolso da run; o gerador usa 8 + sala); Capa das Sombras ganhou contra-ataque 3 |
+| Mago | Pergaminho de Bola de Fogo (1x2, área 12-16 + 2 Queimaduras, 15 mana), Orbe Glacial (1x1, magia ligada: Gélido 0.25s), Cajado de Gelo (1x3, 9-12, Gélido 0.35s), Runa de Escudo (1x1, 25% da mana gasta vira escudo; a cada 5s, 50% do escudo explode em dano), Prisma Elemental (condutor 1x1, divide o feixe em 3), Cajado do Fogo Frio (1x2, 8-11, Queimadura + Gélido) | Rubi Ígneo: o item ligado aplica +1 Queimadura |
+| Patrulheiro | Urso Pardo (pet 2x2, 12-16, +15 escudo), Aranha Gigante (pet 1x2, 4-6 + 2 Veneno), Flechas Tóxicas (1x1, arco ligado +1 Veneno), Berrante da Caçada (1x2, crítico do arco dispara todos os mascotes, 1x a cada 3s) | Aljava virou 1x2 (◀ ▶); Erva Ancestral é feixe |
+
+Gazuas Mestras: +25% de crítico na arma ligada (era +20%). Ícones dos itens novos: provisórios.
+
+### Resultado
+
+| Classe | Sala 3 (S-4 → S-5) | Sala 9 | Sala 18 |
+|---|---|---|---|
+| **Guerreiro** | 45 → **62%** | 52 → **69%** | 42 → **63%** |
+| **Ladino** | 71 → **38%** | 67 → **41%** | 61 → **38%** |
+| Patrulheiro | 47 → **57%** | 40 → **50%** | 45 → **51%** |
+| Mago | 40 → **43%** | 41 → **40%** | 55 → **48%** |
+| Diferença | 31 → **24pp** | 27 → 29pp | 19 → 25pp |
+| Duração da luta | 17.9 → **18.8s** | 14.7 → **16.3s** ✅ | 20.3 → **22.7s** |
+| Classes na faixa 40–60% | 2 → 2 de 4 | 3 → 2 de 4 | 3 → 2 de 4 |
+| Espelhos entre 45% e 55% | 50 / 52 / 45 / 56 | ✅ 51 / 52 / 51 / 51 | ✅ 49 / 49 / 51 / 49 |
+
+- **Inverteu:** o Ladino perdeu o Veneno por crítico (o motor dele) e caiu para 38–41%; o **Guerreiro** passou a dominar (62–69%), principalmente
+  contra o Ladino (**85 / 90 / 80%**). Patrulheiro e Mago ficaram perto de 50% entre si.
+- **Por quê (diagnóstico, sala 9 contra o Guerreiro):** Ladino causa 23 de dano por segundo (Guerreiro 29, Patrulheiro 38, Mago 66) com 447 de
+  HP + escudo contra 745 do Guerreiro. O gerador monta, na sala 18, **12.6 ligações úteis** no Guerreiro (todo metal transmite +12%), 9.8 no Ladino,
+  7.7 no Mago e **6.0 no Patrulheiro** (as comidas só alimentam o mascote se apontarem para a Jaula).
+- **Mochilas maiores:** com 1 expansão por duelo, o herói da sala 18 tem ~37 casas para ~13 itens (Mago ~30 no altar). Sobra espaço.
+- Sala 18 em 22.7s (meta 14–18s): as lutas alongaram com o Guerreiro mais forte em defesa.
+
+Matrizes (linha = sua classe, % de vitória contra a coluna):
+
+### Confrontos — sala 3
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 50 | 85 | 56 | 57 |
+| **Ladino** | 15 | 52 | 32 | 52 |
+| **Patrulheiro** | 49 | 63 | 45 | 72 |
+| **Mago** | 38 | 47 | 30 | 56 |
+
+### Confrontos — sala 9
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 51 | 90 | 69 | 65 |
+| **Ladino** | 10 | 52 | 41 | 62 |
+| **Patrulheiro** | 38 | 50 | 51 | 59 |
+| **Mago** | 31 | 39 | 38 | 51 |
+
+### Confrontos — sala 18
+
+Linha = sua classe, coluna = oponente; % de vitória da linha.
+
+|  | Guerr | Ladin | Patru | Mago |
+|---|---|---|---|---|
+| **Guerreiro** | 49 | 80 | 52 | 69 |
+| **Ladino** | 22 | 49 | 37 | 45 |
+| **Patrulheiro** | 45 | 63 | 51 | 45 |
+| **Mago** | 32 | 52 | 57 | 49 |
+
+### Rodada S-4 — respostas S-Q9 e S-Q10
 
 **Mudanças:** Combo do Ladino conta só **armas, frascos e ferramentas/catalisadores de arma** encostados (Gazuas, Gazuas Mestras, Pedra de
 Amolar, Estandarte) — poções, armaduras e comidas não dão mais crítico; afinidade do gerador do Ladino = armas pequenas, frascos e
@@ -275,23 +367,37 @@ Linha = sua classe, coluna = oponente; % de vitória da linha.
 
 Teste de economia da S-1 (não aplicado; `--items`): com 50% / 33% dos itens extras a sala 18 ia para 6.3 / 7.1s e o Ladino continuava em 67–85%.
 
-## 4. Emboscada PvE (recalibrada na S-4)
+## 4. Emboscada PvE (recalibrada na S-5)
 
 |---|---|---|---|
-| Horda de Goblins | 85% (10.5s) | 84% (6.9s) | 76% (6.9s) |
-| Elite: Horda de Goblins | 71% (9.4s) | 51% (5.7s) | 49% (5.5s) |
-| Câmara dos Esqueletos | 72% (22.8s) | 74% (14.4s) | 81% (17.6s) |
-| Elite: Câmara dos Esqueletos | 46% (18.9s) | 41% (12.1s) | 69% (15.2s) |
-| Ninho de Cubos Gelatinosos | 75% (32.3s) | 87% (22.8s) | 70% (34.3s) |
-| Elite: Ninho de Cubos Gelatinosos | 35% (25.8s) | 67% (19.9s) | 55% (28.4s) |
-| **Média normal** (meta ~75%) | **78%** | **82%** | **75%** |
-| **Média Elite** (meta ~50%) | **51%** | **53%** | **57%** |
+| Horda de Goblins | 73% (11.8s) | 81% (9.1s) | 78% (10.2s) |
+| Elite: Horda de Goblins | 47% (10.3s) | 57% (7.8s) | 58% (8.4s) |
+| Câmara dos Esqueletos | 78% (23.9s) | 68% (16.1s) | 80% (17.3s) |
+| Elite: Câmara dos Esqueletos | 45% (20.1s) | 40% (13.2s) | 64% (14.9s) |
+| Ninho de Cubos Gelatinosos | 72% (33.2s) | 81% (27.4s) | 73% (35.7s) |
+| Elite: Ninho de Cubos Gelatinosos | 40% (29.3s) | 57% (23.6s) | 57% (32.0s) |
+| **Média normal** (meta ~75%) | **74%** | **77%** | **77%** |
+| **Média Elite** (meta ~50%) | **44%** | **51%** | **60%** |
 
-Calibragem (`MONSTER.tune`): Goblins HP/dano x0.59, crescimento 1.60; Esqueletos x0.75, 1.30; **Cubos x0.68**, 1.10; Elite (HP/dano):
-x0.97/0.72, x0.87/0.65, **x0.99/0.74**. Com o Núcleo a 2% sem escalar, os Cubos ficaram estáveis entre as salas (normal 75 / 87 / 70%;
-antes 94 → 60%). Pool dos Cubos: 3 Pseudópodes para cada Núcleo.
+Calibragem (`MONSTER.tune`): Goblins HP/dano x0.69, crescimento **1.45**; Esqueletos x0.68, 1.30; Cubos x0.52, 1.10; Elite (HP/dano):
+x0.99/0.73, x0.90/0.67, x1.15/0.85.
 
-## 5. Interpretações (S-06 a S-14 confirmadas em 2026-11-19 ✅)
+## 5. Interpretações
+
+**SPEC-RUNIC-FLOW (validar):**
+
+| Código | Interpretação |
+|---|---|
+| S-15 | Gerador: compra 1 expansão no slot fixo a cada duelo (média 1.8 casas) e leva **8 + sala** PO no bolso para a luta (Adaga Dourada, Bolsa de Moedas, Moeda Tóxica) |
+| S-16 | Portas padrão: saídas pela direita em catalisadores, metais, gemas, cajados, comidas e ervas; entradas universais em todas as bordas. "Universal" casa com qualquer fluxo |
+| S-17 | Números dos 19 itens novos (tabela da seção 3) e das mecânicas: Sangramento 1/s por stack x1.25 por nível, máx. 10, −1 a cada 2s; contra-ataque x fator de nível; Runa explode 50% do escudo a cada 5s |
+| S-18 | Expansão solta no herói vira casas para clicar na borda (Bolso 1, Alforje 2, Compartimento 4), não uma peça com forma; o Patrulheiro escolhe Mochila ou Jaula |
+| S-19 | Ladino: "Mãos Rápidas" substitui a passiva inteira (sem Veneno por crítico, sem Combo, sem crítico excedente); o pulso vale para qualquer item que ativa |
+| S-20 | Passiva do Guerreiro: o +12% vai só para o item na ponta da seta do metal (não é retransmitido por condutores) |
+| S-21 | A loja solo só oferece itens que o herói pode usar (gerais + exclusivos da classe) |
+| S-22 | A fusão de catalisadores não dá mais alcance (diagonal/2 casas); continua multiplicando o bônus |
+
+**S-06 a S-14:** confirmadas em 2026-11-19 ✅
 
 | Código | Interpretação |
 |---|---|
@@ -320,9 +426,10 @@ antes 94 → 60%). Pool dos Cubos: 3 Pseudópodes para cada Núcleo.
 
 | Código | Pergunta | Dados | Opções |
 |---|---|---|---|
-| S-Q11 | **Ladino na sala 3 (71%)** e acima do teto na 9 (67%) | S-4: contra Patrulheiro 83 / 83 / 66%, Mago 76 / 77 / 60%, Guerreiro 76 / 58 / 66%. Sala 3 (Nv2, kit + 2 itens): 2 Adagas + Gazuas dão +10% + Combo 16% de crítico; 135 HP (Guerreiro 160, Mago 125, Patrulheiro 130) | (a) HP do Ladino 135 → 120 · (b) Combo +8% → +6% por item · (c) aceitar: salas 9 e 18 já perto da faixa; reavaliar quando a economia real (loja/ouro) entrar no gerador |
-| S-Q12 | **Cura por poções** (~400 HP/luta do Ladino na sala 18) | Kit com 1 Poção; o gerador compra poções nos 40% sem afinidade e funde as repetidas (+2 = 4 usos e +50% de cura). Guerreiro ~320, Mago ~110, Patrulheiro ~70 HP/luta | (a) aceitar (é uma build possível) · (b) fusão de consumíveis +1 só +1 uso (hoje usos x2) · (c) cura das poções não escala com a fusão (só os usos) |
-| S-Q13 | Sala 18 em 20.3s (meta 14–18s) e Mago 40% na sala 3 | Salas 3 e 9 na meta | (a) aceitar por enquanto · (b) HP base 0.88 → 0.84 só para a curva acima do Nv4 |
+| S-Q14 | **Guerreiro dominante com o fluxo** (62 / 69 / 63%) | Contra o Ladino 85 / 90 / 80%. O gerador monta 12.6 ligações úteis no Guerreiro (todo metal transmite +12% de dano/escudo), contra 6–10 nas outras. HP + escudo 745 (sala 9) | (a) +12% só de **armas** metálicas (armaduras não transmitem) · (b) +12% → +8% · (c) o +12% exige fluxo `steel` dos dois lados (entrada de aço no alvo) |
+| S-Q15 | **Ladino sem motor** (38 / 41 / 38%) | Sem Veneno por crítico, o dano dele caiu para 23/s (sala 9). O Veneno agora vem só da loja (Frasco, Seringa, Moeda Tóxica, Lâmina do Contrabandista) | (a) Mãos Rápidas: pulso 0.25s → 0.4s · (b) devolver 1 Veneno por crítico só em armas 1x1/1x2 · (c) HP 135 → 150 · (d) kit com Frasco de Veneno de novo |
+| S-Q16 | **Mochilas com espaço sobrando** (~37 casas para ~13 itens na sala 18) | 1 expansão por duelo no gerador (S-15) + níveis | (a) gerador compra expansão só em 1 de cada 2 duelos · (b) expansões mais caras (Bolso 4, Alforje 7, Compartimento 12) · (c) aceitar (espaço livre ajuda a montar circuitos) |
+| S-Q17 | Sala 18 em 22.7s (meta 14–18s) | Salas 3 e 9: 18.8 / 16.3s | Reavaliar depois de S-Q14 |
 
 ## Histórico do experimento
 
@@ -332,6 +439,7 @@ antes 94 → 60%). Pool dos Cubos: 3 Pseudópodes para cada Núcleo.
 | 2026-11-19 | S-1 · SPEC-SOLO: 4 classes, 4x4, iniciativa alternada | 50 / 44 / 21pp | 12.4 / 8.3 / 4.7s |
 | 2026-11-19 | S-2 · Ladino (esquiva 8%, sem Frasco, 2 Venenos), HP 0.88, gerador 2/4/8 | 37 / 45 / 31pp | 17.4 / 13.0 / 8.2s |
 | 2026-11-19 | S-3 · Veneno/Queimadura x1.25 e −1 stack a cada 2s; sala 18 com fusão +1 (20% +2) | 30 / 37 / 38pp | 18.0 / 14.4 / 19.0s |
-| 2026-11-19 | **S-4 · Combo só armas/frascos/ferramentas, teto de Veneno 10, Núcleo 2%** | 31 / 27 / 19pp | 17.9 / 14.7 / 20.3s |
+| 2026-11-19 | S-4 · Combo só armas/frascos/ferramentas, teto de Veneno 10, Núcleo 2% | 31 / 27 / 19pp | 17.9 / 14.7 / 20.3s |
+| 2026-11-19 | **S-5 · SPEC-RUNIC-FLOW: fluxo rúnico, expansão na loja, 4 motores + pontes** | 24 / 29 / 25pp | 18.8 / 16.3 / 22.7s |
 
 As lutas encurtaram de uma versão para a outra porque a média de 8 classes incluía classes lentas (Paladino, Bárbaro, Bardo, Alquimista) e porque Mago e Patrulheiro ganharam itens exclusivos fortes e mochilas novas (altar em cruz, Jaula).
